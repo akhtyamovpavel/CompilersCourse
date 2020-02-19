@@ -4,6 +4,7 @@
     #include <cstdlib>
     #include <cstring> // strerror
     #include <string>
+    #include <iostream>
     #include "driver.hh"
     #include "parser.hh"
 %}
@@ -12,8 +13,10 @@
 
 %{
   // A number symbol corresponding to the value in S.
-  yy::parser::symbol_type
-  make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
+  yy::parser::symbol_type make_NUMBER(
+    const std::string &s,
+    const yy::parser::location_type& loc
+  );
 %}
 
 id    [a-zA-Z][a-zA-Z_0-9]*
@@ -29,13 +32,16 @@ blank [ \t\r]
   // A handy shortcut to the location held by the driver.
   yy::location& loc = drv.location;
   // Code run each time yylex is called.
-  loc.step ();
+  loc.step();
 %}
 
 {blank}+   loc.step ();
 \n+        loc.lines (yyleng); loc.step ();
 
-"-"        return yy::parser::make_MINUS  (loc);
+"-"        {
+              std::cout << loc.begin.line << " " << loc.end.line << std::endl;
+              return yy::parser::make_MINUS  (loc);
+           }
 "+"        return yy::parser::make_PLUS   (loc);
 "*"        return yy::parser::make_STAR   (loc);
 "/"        return yy::parser::make_SLASH  (loc);
@@ -43,8 +49,8 @@ blank [ \t\r]
 ")"        return yy::parser::make_RPAREN (loc);
 ":="       return yy::parser::make_ASSIGN (loc);
 
-{int}      return make_NUMBER (yytext, loc);
-{id}       return yy::parser::make_IDENTIFIER (yytext, loc);
+{int}      return make_NUMBER(yytext, loc);
+{id}       return yy::parser::make_IDENTIFIER(yytext, loc);
 .          {
                 throw yy::parser::syntax_error(loc, "invalid character: " + std::string(yytext));
            }

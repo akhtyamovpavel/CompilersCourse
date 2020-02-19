@@ -5,3 +5,4 @@ find_package(FLEX REQUIRED)
 find_package(BISON REQUIRED)
 
 add_subdirectory(01-scanners)
+add_subdirectory(02-parsers)
