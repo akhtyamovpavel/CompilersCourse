@@ -8,18 +8,30 @@
 
 %code requires {
     #include <string>
+    class Scanner;
     class Driver;
 }
 
-%param { Driver &drv }
-%locations
+// %param { Driver &drv }
 
 %define parse.trace
 %define parse.error verbose
 
 %code {
     #include "driver.hh"
+    #include "location.hh"
+
+    static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
+        return scanner.ScanToken();
+    }
 }
+
+%lex-param { Scanner &scanner }
+%lex-param { Driver &driver }
+%parse-param { Scanner &scanner }
+%parse-param { Driver &driver }
+
+%locations
 
 %define api.token.prefix {TOK_}
 
@@ -42,21 +54,24 @@
 
 %%
 %start unit;
-unit: assignments exp { drv.result = $2; };
+unit: assignments exp { driver.result = $2; };
 
 assignments:
     %empty {}
     | assignments assignment {};
 
 assignment:
-    "identifier" ":=" exp { drv.variables[$1] = $3; };
+    "identifier" ":=" exp {
+        driver.variables[$1] = $3;
+        // std::cout << drv.location.begin.line << "-" << drv.location.end.line << std::endl;
+    };
 
 %left "+" "-";
 %left "*" "/";
 
 exp:
     "number"
-    | "identifier" {$$ = drv.variables[$1];}
+    | "identifier" {$$ = driver.variables[$1];}
     | exp "+" exp {$$ = $1 + $3; }
     | exp "-" exp {$$ = $1 - $3; }
     | exp "*" exp {$$ = $1 * $3; }

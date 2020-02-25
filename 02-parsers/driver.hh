@@ -2,12 +2,9 @@
 
 #include <map>
 #include <string>
+#include <fstream>
+#include "scanner.h"
 #include "parser.hh"
-
-
-#define YY_DECL yy::parser::symbol_type yylex(Driver& drv)
-
-YY_DECL;
 
 
 class Driver {
@@ -24,5 +21,11 @@ class Driver {
 
     bool trace_scanning;
     yy::location location;
+
+    friend class Scanner;
+    Scanner scanner;
+    yy::parser parser;
+ private:
+    std::ifstream stream;
 
 };

@@ -3,7 +3,7 @@ project(Lexer)
 
 find_package(FLEX REQUIRED)
 
-FLEX_TARGET(MyScanner lexer.ll ${Lexer_SOURCE_DIR}/lexer.cpp)
+FLEX_TARGET(MyScanner lexer.l ${Lexer_SOURCE_DIR}/lexer.cpp)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 

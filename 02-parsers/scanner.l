@@ -11,6 +11,9 @@
 
 %option noyywrap nounput noinput batch debug
 
+%option c++
+%option yyclass="Scanner"
+
 %{
   // A number symbol corresponding to the value in S.
   yy::parser::symbol_type make_NUMBER(
@@ -30,7 +33,7 @@ blank [ \t\r]
 %%
 %{
   // A handy shortcut to the location held by the driver.
-  yy::location& loc = drv.location;
+  yy::location& loc = driver.location;
   // Code run each time yylex is called.
   loc.step();
 %}
@@ -66,19 +69,4 @@ yy::parser::symbol_type make_NUMBER(
   if (! (INT_MIN <= n && n <= INT_MAX && errno != ERANGE))
     throw yy::parser::syntax_error(loc, "integer is out of range: " + s);
   return yy::parser::make_NUMBER((int) n, loc);
-}
-
-void Driver::scan_begin() {
-  yy_flex_debug = trace_scanning;
-  if (file.empty () || file == "-") {
-    yyin = stdin;
-  } else if (!(yyin = fopen(file.c_str (), "r"))) {
-    std::cerr << "cannot open " << file << ": " << strerror(errno) << '\n';
-    exit (EXIT_FAILURE);
-  }
-}
-
-void Driver::scan_end()
-{
-  fclose(yyin);
 }
