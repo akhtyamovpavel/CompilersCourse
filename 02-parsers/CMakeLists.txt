@@ -1,8 +1,8 @@
 project(ParserExample)
 set(
     HEADERS
-    driver.hh
-    parser.hh
+    ${ParserExample_SOURCE_DIR}/driver.hh
+    ${ParserExample_SOURCE_DIR}/parser.hh
     )
 
 BISON_TARGET(

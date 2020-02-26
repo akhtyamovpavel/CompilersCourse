@@ -6,3 +6,4 @@ find_package(BISON REQUIRED)
 
 add_subdirectory(01-scanners)
 add_subdirectory(02-parsers)
+add_subdirectory(03-parsers-with-ast)
