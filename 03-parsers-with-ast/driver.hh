@@ -6,6 +6,8 @@
 #include "scanner.h"
 #include "parser.hh"
 
+#include "Program.h"
+
 
 
 class Driver {
@@ -26,6 +28,7 @@ class Driver {
     friend class Scanner;
     Scanner scanner;
     yy::parser parser;
+    Program* program;
  private:
     std::ifstream stream;
 

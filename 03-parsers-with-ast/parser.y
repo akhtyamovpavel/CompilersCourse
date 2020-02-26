@@ -14,6 +14,12 @@
     class NumberExpression;
     class AddExpression;
     class SubstractExpression;
+    class DivExpression;
+    class IdentExpression;
+    class Assignment;
+    class AssignmentList;
+
+    class Program;
 }
 
 // %param { Driver &drv }
@@ -30,6 +36,10 @@
     #include "expressions/MulExpression.h"
     #include "expressions/DivExpression.h"
     #include "expressions/SubstractExpression.h"
+    #include "expressions/IdentExpression.h"
+    #include "assignments/Assignment.h"
+    #include "assignments/AssignmentList.h"
+    #include "Program.h"
 
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
         return scanner.ScanToken();
@@ -59,20 +69,27 @@
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <Expression*> exp
+%nterm <Assignment*> assignment
+%nterm <AssignmentList*> assignments
+%nterm <Program*> unit
 
-%printer { yyo << $$; } <*>;
+// %printer { yyo << $$; } <*>;
 
 %%
 %start unit;
-unit: assignments exp { driver.result = $2->eval(); };
+
+unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
 
 assignments:
-    %empty {}
-    | assignments assignment {};
+    %empty { $$ = new AssignmentList(); /* A -> eps */}
+    | assignments assignment {
+        $1->AddAssignment($2); $$ = $1;
+    };
 
 assignment:
     "identifier" ":=" exp {
-        driver.variables[$1] = $3->eval();
+        $$ = new Assignment($1, $3);
+        // driver.variables[$1] = $3->eval();
     };
 
 %left "+" "-";
@@ -80,7 +97,7 @@ assignment:
 
 exp:
     "number" {$$ = new NumberExpression($1); }
-    | "identifier" {$$ = new NumberExpression(driver.variables[$1]) ;}
+    | "identifier" {$$ = new IdentExpression($1); }
     | exp "+" exp { $$ = new AddExpression($1, $3); }
     | exp "-" exp { $$ = new SubstractExpression($1, $3); }
     | exp "*" exp { $$ = new MulExpression($1, $3); }

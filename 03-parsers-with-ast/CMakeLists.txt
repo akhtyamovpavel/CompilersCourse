@@ -31,8 +31,15 @@ add_executable(
     expressions/AddExpression.cpp
     expressions/SubstractExpression.cpp
     expressions/DivExpression.cpp
+    expressions/IdentExpression.cpp
+    assignments/Assignment.cpp
+    assignments/AssignmentList.cpp
+    Program.cpp
 )
-target_include_directories(ParserExampleWithAst PRIVATE ${ParserExampleWithAst_SOURCE_DIR})
+
+target_include_directories(
+    ParserExampleWithAst PRIVATE ${ParserExampleWithAst_SOURCE_DIR}
+)
 
 
 
