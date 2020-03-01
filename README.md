@@ -1,2 +1,3 @@
 # CompilersCourse
-Theory of compilation course, MIPT
+
+Курс "Языки программирования и теории компиляции" ФПМИ МФТИ, 2 курс
