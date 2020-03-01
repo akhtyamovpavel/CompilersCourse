@@ -34,39 +34,57 @@ The syntax given below does not specify the precedence of operators. However, Mi
  
 ```
 <program> ::=	<main class> <class declaration>*
+
 <main class> ::=	class <identifier> "{" public static void main "(" ")" "{" <statement>* "}"   "}"
+
 <class declaration> ::=	class <identifier> [ extends <identifier> ] "{" <declaration>* "}"
+
 <declaration> ::=	<variable declaration> | <method declaration>
+
 <method declaration> ::=	public <type> <identifier> "(" [ <formals> ] ")" "{" <statement>* "}"
+
 <variable declaration> ::=	<type> <identifier> ";"
+
 <formals> ::=	<type> <identifier> ( "," <type> <identifier> )*
+
 <type> ::=	<simple type> | <array type>
+
 <simple type> ::=	int | boolean | void | <type identifier>
+
 <array type> ::=	<simple type> "[" "]"
+
 <type identifier> ::=	<identifier>
+
 <statement> ::=	assert "(" expr ")"  | 
-<local variable declaration>  | 
-"{" <statement>* "}"  | 
-if  "(" <expr> ")" <statement>  | 
-if  "(" <expr> ")" <statement> else <statement>  | 
-while  "(" <expr> ")" <statement>  | 
-System.out.println "(" <expr> ")" ";"  | 
-<lvalue> "=" <expr> ";"  | 
-return <expr> ";"  | 
-<method invocation> ";"
+                <local variable declaration>  | 
+                "{" <statement>* "}"  | 
+                if  "(" <expr> ")" <statement>  | 
+                if  "(" <expr> ")" <statement> else <statement>  | 
+                while  "(" <expr> ")" <statement>  | 
+                System.out.println "(" <expr> ")" ";"  | 
+                <lvalue> "=" <expr> ";"  | 
+                return <expr> ";"  | 
+                <method invocation> ";"
+
+
 <local variable declaration> ::=	<variable declaration>
+
 <method invocation> ::=	<expr> "." <identifier> "(" [ <expr> ("," <expr>)* ] ")"
-<lvalue> ::=	<expr>
+
+<lvalue> ::=	<identifier> | <identifier> "[" <expr> "]"
+
 <expr> ::=	<expr> <binary operator> <expr>  | 
-<expr> "[" <expr> "]"  | 
-<expr> "." length  | 
-new <simple type> "[" <expr> "]"  | 
-new <type identifier> "(" ")"  | 
-"!" <expr>  | 
-"(" <expr> ")"  | 
-<identifier>  | <integer literal>  | 
-this  | true  | false  | 
-<method invocation>
+            <expr> "[" <expr> "]"  | 
+            <expr> "." length  | 
+            new <simple type> "[" <expr> "]"  | 
+            new <type identifier> "(" ")"  | 
+            "!" <expr>  | 
+            "(" <expr> ")"  | 
+            <identifier>  | <integer literal>  | 
+            this  | true  | false  | 
+            <method invocation>
+
+
 <binary operator> ::=	"&&"   |  "||"   |  "<"   | ">"   |  "=="   | "+"   |  "-"   | "*"  | "/"  | "%"
 ```
 
