@@ -13,3 +13,16 @@
 * Список чекпоинтов
     - [01. Наивный интерпретатор](/milestones/01-naive-interpreter.md)
     - [02. AST-дерево](/milestones/02-ast-tree.md)
+
+
+## Сборка Docker контейнера
+Ссылка на image - https://hub.docker.com/r/akhtyamovpavel/compilers_course_image
+
+Скачивание образа:
+```
+docker pull akhtyamovpavel/compilers_course_image
+```
+Сборка образа:
+```
+docker build -t akhtyamovpavel/compilers_course_image .
+```
