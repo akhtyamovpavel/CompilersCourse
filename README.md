@@ -1,5 +1,7 @@
 # CompilersCourse
 
+![Docker build](https://img.shields.io/docker/cloud/build/akhtyamovpavel/compilers_course_image) ![Docker Pulls](https://img.shields.io/docker/pulls/akhtyamovpavel/compilers_course_image)
+
 Курс "Языки программирования и теории компиляции" ФПМИ МФТИ, 2 курс.
 
 ## Содержание
