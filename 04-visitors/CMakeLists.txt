@@ -9,6 +9,7 @@ BISON_TARGET(
     ParserVisitor
     parser.y
     ${Visitor_SOURCE_DIR}/parser.cpp
+    COMPILE_FLAGS --graph
     DEFINES_FILE ${Visitor_SOURCE_DIR}/parser.hh
 )
 
@@ -41,6 +42,15 @@ add_executable(
 target_include_directories(
     VisitorExecutable PRIVATE ${Visitor_SOURCE_DIR}
 )
+
+add_custom_target(
+    VisitorTree
+    COMMAND dot -Tpng ${Visitor_SOURCE_DIR}/parser.gv -o ${Visitor_SOURCE_DIR}/parser.png
+    
+    DEPENDS ${Visitor_SOURCE_DIR}/parser.cpp
+)
+
+add_dependencies(VisitorExecutable VisitorTree)
 
 
 

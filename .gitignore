@@ -2,6 +2,8 @@
 */parser.hh
 */parser.cpp
 */scanner.cpp
+*.gv
+*.png
 
 build/
 # Prerequisites
