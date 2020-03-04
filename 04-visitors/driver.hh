@@ -13,10 +13,10 @@
 class Driver {
  public:
     Driver();
-    std::map<std::string, int> variables;
     int result;
     int parse(const std::string& f);
     int Evaluate();
+    void PrintTree(const std::string& filename);
     std::string file;
     bool trace_parsing;
 

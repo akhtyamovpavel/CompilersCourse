@@ -36,6 +36,7 @@ add_executable(
     assignments/Assignment.cpp
     assignments/AssignmentList.cpp
     visitors/Interpreter.cpp
+    visitors/PrintVisitor.cpp
     Program.cpp
 )
 

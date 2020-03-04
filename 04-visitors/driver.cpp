@@ -2,6 +2,7 @@
 #include "parser.hh"
 
 #include "visitors/Interpreter.h"
+#include "visitors/PrintVisitor.h"
 
 
 
@@ -9,8 +10,6 @@ Driver::Driver() :
     trace_parsing(false),
     trace_scanning(false),
     scanner(*this), parser(scanner, *this) {
-    variables["one"] = 1;
-    variables["two"] = 2;
 }
 
 
@@ -43,5 +42,10 @@ void Driver::scan_begin() {
 void Driver::scan_end()
 {
     stream.close();
+}
+
+void Driver::PrintTree(const std::string& filename) {
+    PrintVisitor visitor(filename);
+    visitor.Visit(program);
 }
 

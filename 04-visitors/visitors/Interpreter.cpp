@@ -21,7 +21,6 @@ void Interpreter::Visit(AddExpression* expression) {
     value += tos_value_;
 
     expression->second->Accept(this);
-    
     value += tos_value_;
     SetTosValue(value);
 }
