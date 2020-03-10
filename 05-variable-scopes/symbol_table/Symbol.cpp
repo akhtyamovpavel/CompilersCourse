@@ -10,13 +10,16 @@ bool Symbol::operator==(const Symbol& other) const {
     return name_ == other.name_;
 }
 
+bool Symbol::operator!=(const Symbol& other) const {
+    return name_ != other.name_;
+}
+
 
 
 std::string Symbol::GetName() const {
     return name_;
 }
 
-// std::unordered_map<std::string, std::shared_ptr<Symbol>> Symbol::dict_;
 
 
 

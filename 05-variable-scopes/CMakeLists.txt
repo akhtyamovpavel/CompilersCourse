@@ -48,6 +48,7 @@ add_executable(
     symbol_table/Table.cpp
     objects/Integer.cpp
     objects/Object.cpp
+    objects/UninitObject.cpp
     Program.cpp
 )
 

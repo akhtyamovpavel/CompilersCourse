@@ -8,10 +8,12 @@
 
 
 Interpreter::Interpreter() {
-    table_.Put(table_.GetSymbol("one"), std::make_shared<Integer>(1));
-    table_.Put(table_.GetSymbol("two"), std::make_shared<Integer>(2));
+    table_.CreateVariable(Symbol("one"));
+    table_.CreateVariable(Symbol("two"));
+    table_.Put(Symbol("one"), std::make_shared<Integer>(1));
+    table_.Put(Symbol("two"), std::make_shared<Integer>(2));
 
-    std::cout << table_.Get(table_.GetSymbol("one"))->ToInt() << std::endl;
+    std::cout << table_.Get(Symbol("one"))->ToInt() << std::endl;
     tos_value_ = 0;
 }
 
@@ -42,7 +44,7 @@ void Interpreter::Visit(IdentExpression* expression) {
 void Interpreter::Visit(Assignment* assignment) {
     int value = Accept(assignment->expression_);
 
-    table_.Put(table_.GetSymbol(assignment->variable_), std::make_shared<Integer>(value));
+    table_.Put(Symbol(assignment->variable_), std::make_shared<Integer>(value));
 }
 
 void Interpreter::Visit(PrintStatement* statement) {
@@ -58,7 +60,7 @@ void Interpreter::Visit(AssignmentList* assignment_list) {
 }
 
 void Interpreter::Visit(VarDecl* var_decl) {
-    table_.GetSymbol(var_decl->variable_);
+    table_.CreateVariable(var_decl->variable_);
 }
 
 void Interpreter::Visit(ScopeAssignmentList* list) {
