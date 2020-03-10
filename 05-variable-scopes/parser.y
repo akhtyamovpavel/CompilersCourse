@@ -50,6 +50,10 @@
     LPAREN "("
     RPAREN ")"
     PRINT "print"
+    VAR "var"
+    LEFTSCOPE "{"
+    RIGHTSCOPE "}"
+    SEMICOLON ";"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -73,8 +77,10 @@ statements:
     };
 
 statement:
-    "identifier" ":=" exp { $$ = new Assignment($1, $3);}
-    | "print" "(" exp ")" { $$ = new PrintStatement($3); }
+    "identifier" ":=" exp ";" { $$ = new Assignment($1, $3);}
+    | "print" "(" exp ")" ";" { $$ = new PrintStatement($3); }
+    | "var" "identifier" ";" { $$ = new VarDecl($2); }
+    | "{" statements "}" { $$ = new ScopeAssignmentList($2); }
     ;
 
 %left "+" "-";

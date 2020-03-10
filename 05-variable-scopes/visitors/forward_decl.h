@@ -11,6 +11,8 @@ class DivExpression;
 class IdentExpression;
 class Statement;
 class PrintStatement;
+class VarDecl;
 class Assignment;
 class AssignmentList;
+class ScopeAssignmentList;
 class Program;

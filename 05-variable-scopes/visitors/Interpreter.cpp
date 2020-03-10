@@ -4,10 +4,14 @@
 
 #include <iostream>
 
+#include "objects/Integer.h"
+
 
 Interpreter::Interpreter() {
-    variables_["one"] = 1;
-    variables_["two"] = 2;
+    table_.Put(table_.GetSymbol("one"), std::make_shared<Integer>(1));
+    table_.Put(table_.GetSymbol("two"), std::make_shared<Integer>(2));
+
+    std::cout << table_.Get(table_.GetSymbol("one"))->ToInt() << std::endl;
     tos_value_ = 0;
 }
 
@@ -32,11 +36,13 @@ void Interpreter::Visit(DivExpression* expression) {
 }
 
 void Interpreter::Visit(IdentExpression* expression) {
-    tos_value_ = variables_[expression->ident_];
+    tos_value_ = table_.Get(table_.GetSymbol(expression->ident_))->ToInt();
 }
 
 void Interpreter::Visit(Assignment* assignment) {
-    variables_[assignment->variable_] = Accept(assignment->expression_);
+    int value = Accept(assignment->expression_);
+
+    table_.Put(table_.GetSymbol(assignment->variable_), std::make_shared<Integer>(value));
 }
 
 void Interpreter::Visit(PrintStatement* statement) {
@@ -49,6 +55,16 @@ void Interpreter::Visit(AssignmentList* assignment_list) {
     for (Statement* assignment: assignment_list->statements_) {
         assignment->Accept(this);
     }
+}
+
+void Interpreter::Visit(VarDecl* var_decl) {
+    table_.GetSymbol(var_decl->variable_);
+}
+
+void Interpreter::Visit(ScopeAssignmentList* list) {
+    table_.BeginScope();
+    list->statement_list->Accept(this);
+    table_.EndScope();
 }
 
 void Interpreter::Visit(Program* program) {

@@ -17,7 +17,9 @@ class PrintVisitor: public Visitor {
     void Visit(IdentExpression* expression) override;
     void Visit(PrintStatement* statement) override;
     void Visit(Assignment* assignment) override;
+    void Visit(VarDecl* var_decl) override;
     void Visit(AssignmentList* assignment_list) override;
+    void Visit(ScopeAssignmentList* list) override;
     void Visit(Program* program) override;
  private:
 

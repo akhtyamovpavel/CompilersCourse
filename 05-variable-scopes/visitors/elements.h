@@ -8,7 +8,9 @@
 #include "expressions/NumberExpression.h"
 
 #include "statements/PrintStatement.h"
+#include "statements/VarDecl.h"
 #include "statements/Statement.h"
 #include "statements/Assignment.h"
 #include "statements/AssignmentList.h"
+#include "statements/ScopeAssignmentList.h"
 #include "Program.h"

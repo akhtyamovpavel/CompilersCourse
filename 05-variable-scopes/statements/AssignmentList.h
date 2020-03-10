@@ -4,7 +4,7 @@
 #include "base_elements/BaseElement.h"
 #include <vector>
 
-class AssignmentList : public BaseElement {
+class AssignmentList : public Statement {
  public:
     void AddStatement(Statement* assignment);
     void Accept(Visitor* visitor);

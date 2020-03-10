@@ -65,6 +65,11 @@ void PrintVisitor::Visit(Assignment* assignment) {
     --num_tabs_;
 }
 
+void PrintVisitor::Visit(VarDecl* var_decl) {
+    PrintTabs();
+    stream_ << "VarDecl: " << var_decl->variable_ << std::endl;
+}
+
 void PrintVisitor::Visit(PrintStatement* statement) {
     PrintTabs();
     stream_ << "PrintStatement: " << std::endl;
@@ -84,6 +89,13 @@ void PrintVisitor::Visit(AssignmentList* assignment_list) {
     --num_tabs_;
 }
 
+void PrintVisitor::Visit(ScopeAssignmentList* list) {
+    stream_ << "ScopeAssignmentList:" << std::endl;
+    ++num_tabs_;
+
+    list->statement_list->Accept(this);
+    --num_tabs_;
+}
 void PrintVisitor::Visit(Program* program) {
     stream_ << "Program:" << std::endl;
 

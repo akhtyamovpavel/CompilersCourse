@@ -39,9 +39,15 @@ add_executable(
     statements/Assignment.cpp
     statements/AssignmentList.cpp
     statements/PrintStatement.cpp
+    statements/VarDecl.cpp
+    statements/ScopeAssignmentList.cpp
     visitors/Interpreter.cpp
     visitors/TemplateVisitor.cpp
     visitors/PrintVisitor.cpp
+    symbol_table/Symbol.cpp
+    symbol_table/Table.cpp
+    objects/Integer.cpp
+    objects/Object.cpp
     Program.cpp
 )
 

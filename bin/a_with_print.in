@@ -1,5 +1,10 @@
-three := 3
-print(three)
-seven := one + two * three
-print(seven * seven)
-two * two
+var three;
+{
+    three := 3;
+    print(three);
+    var seven;
+    seven := one + two * three;
+    print(seven * seven);
+}
+print(three);
+three * three

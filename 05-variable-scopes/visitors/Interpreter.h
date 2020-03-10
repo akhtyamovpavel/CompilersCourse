@@ -1,5 +1,6 @@
 #include "TemplateVisitor.h"
 
+#include "symbol_table/Table.h"
 #include <map>
 
 
@@ -13,13 +14,15 @@ class Interpreter : public TemplateVisitor<int> {
     void Visit(DivExpression* expression) override;
     void Visit(IdentExpression* expression) override;
     void Visit(Assignment* assignment) override;
+    void Visit(VarDecl* var_decl) override;
     void Visit(PrintStatement* statement) override;
     void Visit(AssignmentList* assignment_list) override;
+    void Visit(ScopeAssignmentList* list) override;
     void Visit(Program* program) override;
 
     int GetResult(Program* program);
 
  private:
-    std::map<std::string, int> variables_;
+    Table table_;
     
 };
