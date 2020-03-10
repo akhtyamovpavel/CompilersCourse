@@ -11,6 +11,7 @@ class Visitor {
     virtual void Visit(DivExpression* expression) = 0;
     virtual void Visit(IdentExpression* expression) = 0;
     virtual void Visit(Assignment* assignment) = 0;
+    virtual void Visit(PrintStatement* statement) = 0;
     virtual void Visit(AssignmentList* assignment_list) = 0;
     virtual void Visit(Program* program) = 0;
 };

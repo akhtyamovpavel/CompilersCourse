@@ -65,12 +65,20 @@ void PrintVisitor::Visit(Assignment* assignment) {
     --num_tabs_;
 }
 
+void PrintVisitor::Visit(PrintStatement* statement) {
+    PrintTabs();
+    stream_ << "PrintStatement: " << std::endl;
+    ++num_tabs_;
+    statement->expression_->Accept(this);
+    --num_tabs_;
+}
+
 void PrintVisitor::Visit(AssignmentList* assignment_list) {
     PrintTabs();
     stream_ << "AssignmentList: " << std::endl;
 
     ++num_tabs_;
-    for (Assignment* assignment : assignment_list->assignments_) {
+    for (Statement* assignment : assignment_list->statements_) {
         assignment->Accept(this);
     }
     --num_tabs_;

@@ -7,6 +7,8 @@
 #include "expressions/MulExpression.h"
 #include "expressions/NumberExpression.h"
 
-#include "assignments/Assignment.h"
-#include "assignments/AssignmentList.h"
+#include "statements/PrintStatement.h"
+#include "statements/Statement.h"
+#include "statements/Assignment.h"
+#include "statements/AssignmentList.h"
 #include "Program.h"

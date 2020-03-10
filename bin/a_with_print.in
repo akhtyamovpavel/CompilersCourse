@@ -1,0 +1,5 @@
+three := 3
+print(three)
+seven := one + two * three
+print(seven * seven)
+two * two

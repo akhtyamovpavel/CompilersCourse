@@ -1,8 +1,8 @@
 #include "AssignmentList.h"
 
 
-void AssignmentList::AddAssignment(Assignment* assignment) {
-    assignments_.push_back(assignment);
+void AssignmentList::AddStatement(Statement* assignment) {
+    statements_.push_back(assignment);
 }
 
 void AssignmentList::Accept(Visitor* visitor) {

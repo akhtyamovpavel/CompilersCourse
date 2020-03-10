@@ -35,8 +35,10 @@ add_executable(
     expressions/SubstractExpression.cpp
     expressions/DivExpression.cpp
     expressions/IdentExpression.cpp
-    assignments/Assignment.cpp
-    assignments/AssignmentList.cpp
+    statements/Statement.cpp
+    statements/Assignment.cpp
+    statements/AssignmentList.cpp
+    statements/PrintStatement.cpp
     visitors/Interpreter.cpp
     visitors/TemplateVisitor.cpp
     visitors/PrintVisitor.cpp
@@ -54,7 +56,7 @@ add_custom_target(
     DEPENDS ${Scopes_SOURCE_DIR}/parser.cpp
 )
 
-add_dependencies(ScopesExecutable VisitorTree)
+add_dependencies(ScopesExecutable ScopesTree)
 
 
 

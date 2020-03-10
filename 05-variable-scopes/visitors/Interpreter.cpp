@@ -39,8 +39,14 @@ void Interpreter::Visit(Assignment* assignment) {
     variables_[assignment->variable_] = Accept(assignment->expression_);
 }
 
+void Interpreter::Visit(PrintStatement* statement) {
+    int value = Accept(statement->expression_);
+
+    std::cout << value << std::endl;
+}
+
 void Interpreter::Visit(AssignmentList* assignment_list) {
-    for (Assignment* assignment: assignment_list->assignments_) {
+    for (Statement* assignment: assignment_list->statements_) {
         assignment->Accept(this);
     }
 }

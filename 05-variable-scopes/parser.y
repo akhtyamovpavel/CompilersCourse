@@ -23,14 +23,7 @@
     #include "driver.hh"
     #include "location.hh"
 
-    #include "expressions/NumberExpression.h"
-    #include "expressions/AddExpression.h"
-    #include "expressions/MulExpression.h"
-    #include "expressions/DivExpression.h"
-    #include "expressions/SubstractExpression.h"
-    #include "expressions/IdentExpression.h"
-    #include "assignments/Assignment.h"
-    #include "assignments/AssignmentList.h"
+    #include "visitors/elements.h"
     #include "Program.h"
 
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
@@ -56,13 +49,14 @@
     SLASH "/"
     LPAREN "("
     RPAREN ")"
+    PRINT "print"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <Expression*> exp
-%nterm <Assignment*> assignment
-%nterm <AssignmentList*> assignments
+%nterm <Statement*> statement
+%nterm <AssignmentList*> statements
 %nterm <Program*> unit
 
 // %printer { yyo << $$; } <*>;
@@ -70,19 +64,18 @@
 %%
 %start unit;
 
-unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
+unit: statements exp { $$ = new Program($1, $2); driver.program = $$; };
 
-assignments:
+statements:
     %empty { $$ = new AssignmentList(); /* A -> eps */}
-    | assignments assignment {
-        $1->AddAssignment($2); $$ = $1;
+    | statements statement {
+        $1->AddStatement($2); $$ = $1;
     };
 
-assignment:
-    "identifier" ":=" exp {
-        $$ = new Assignment($1, $3);
-        // driver.variables[$1] = $3->eval();
-    };
+statement:
+    "identifier" ":=" exp { $$ = new Assignment($1, $3);}
+    | "print" "(" exp ")" { $$ = new PrintStatement($3); }
+    ;
 
 %left "+" "-";
 %left "*" "/";
