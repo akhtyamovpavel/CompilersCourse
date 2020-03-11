@@ -3,6 +3,8 @@
 #include "symbol_table/Table.h"
 #include <map>
 
+#include "symbol_table/ScopeLayerTree.h"
+
 
 class Interpreter : public TemplateVisitor<int> {
  public:
@@ -23,6 +25,8 @@ class Interpreter : public TemplateVisitor<int> {
     int GetResult(Program* program);
 
  private:
-    Table table_;
+   //  Table table_;
+    ScopeLayerTree tree_;
+    std::shared_ptr<ScopeLayer> current_layer_;
     
 };

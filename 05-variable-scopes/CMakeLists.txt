@@ -23,9 +23,8 @@ FLEX_TARGET(
 
 ADD_FLEX_BISON_DEPENDENCY(ScannerScopes ParserScopes)
 
-add_executable(
-    ScopesExecutable
-    main.cpp
+set(
+    SOURCES
     driver.cpp
     ${BISON_ParserScopes_OUTPUTS}
     ${FLEX_ScannerScopes_OUTPUTS}
@@ -46,10 +45,28 @@ add_executable(
     visitors/PrintVisitor.cpp
     symbol_table/Symbol.cpp
     symbol_table/Table.cpp
+    symbol_table/ScopeLayer.cpp
+    symbol_table/ScopeLayerTree.cpp
     objects/Integer.cpp
     objects/Object.cpp
     objects/UninitObject.cpp
     Program.cpp
+)
+
+add_executable(
+    ScopesExecutable
+    main.cpp
+    ${SOURCES}
+)
+
+add_executable(
+    TestScopes
+    tests/test_scope_layer.cpp
+    ${SOURCES}
+)
+
+target_include_directories(
+    TestScopes PRIVATE ${Scopes_SOURCE_DIR}
 )
 
 target_include_directories(
