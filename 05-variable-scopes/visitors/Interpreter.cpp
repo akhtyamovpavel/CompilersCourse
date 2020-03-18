@@ -7,12 +7,11 @@
 #include "objects/Integer.h"
 
 
-Interpreter::Interpreter(std::shared_ptr<ScopeLayerTree> tree): tree_(tree) {
+Interpreter::Interpreter(ScopeLayer* root): current_layer_(root) {
 
-    tree_->root_->Put(Symbol("one"), std::make_shared<Integer>(1));
-    tree_->root_->Put(Symbol("two"), std::make_shared<Integer>(2));
+    current_layer_->Put(Symbol("one"), std::make_shared<Integer>(1));
+    current_layer_->Put(Symbol("two"), std::make_shared<Integer>(2));
     offsets_.push(0);
-    current_layer_ = tree_->root_;
     tos_value_ = 0;
 }
 
@@ -42,13 +41,8 @@ void Interpreter::Visit(IdentExpression* expression) {
 
 void Interpreter::Visit(Assignment* assignment) {
     int value = Accept(assignment->expression_);
-
-    std::cout << "Before put" << std::endl;
-
-    std::cout << current_layer_ << " " << assignment->variable_ << " " << value << std::endl;
     
     current_layer_->Put(Symbol(assignment->variable_), std::make_shared<Integer>(value));
-    std::cout << "After put" << std::endl;
 }
 
 void Interpreter::Visit(PrintStatement* statement) {
@@ -78,7 +72,6 @@ void Interpreter::Visit(ScopeAssignmentList* list) {
     offsets_.pop();
     size_t index = offsets_.top();
 
-    std::cout << "index " << index << std::endl;
     offsets_.pop();
     offsets_.push(index + 1);
 

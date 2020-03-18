@@ -23,8 +23,8 @@ class SymbolTreeVisitor: public Visitor {
     void Visit(ScopeAssignmentList* list) override;
     void Visit(Program* program) override;
 
-    std::shared_ptr<ScopeLayerTree> GetTree();
+    ScopeLayer* GetRoot();
  private:
     ScopeLayerTree tree_;
-    std::shared_ptr<ScopeLayer> current_layer_;
+    ScopeLayer* current_layer_;
 };

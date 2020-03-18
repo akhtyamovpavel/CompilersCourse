@@ -32,8 +32,8 @@ int Driver::Evaluate() {
 
     std::cout << "Symbol tree built" << std::endl;
 
-    std::shared_ptr<ScopeLayerTree> tree = visitor.GetTree();
-    Interpreter interpreter(tree);
+    ScopeLayer* root = visitor.GetRoot();
+    Interpreter interpreter(root);
     return interpreter.GetResult(program);
 }
 

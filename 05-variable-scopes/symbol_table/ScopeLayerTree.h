@@ -4,7 +4,7 @@
 
 class ScopeLayerTree {
  public:
-    explicit ScopeLayerTree(std::shared_ptr<ScopeLayer> root);
+    explicit ScopeLayerTree(ScopeLayer* root);
  public:
-    std::shared_ptr<ScopeLayer> root_;
+    ScopeLayer* root_;
 };
