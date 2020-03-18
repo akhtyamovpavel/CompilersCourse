@@ -28,10 +28,16 @@ void ScopeLayer::DeclareVariable(Symbol symbol) {
     }
 
     values_[symbol] = std::make_shared<UninitObject>();
+    offsets_[symbol] = symbols_.size();
+    symbols_.push_back(symbol);
 }
 
 void ScopeLayer::Put(Symbol symbol, std::shared_ptr<Object> value) {
+
+    std::cout << Has(symbol) << std::endl;
     std::shared_ptr<ScopeLayer> current_layer = shared_from_this();
+
+    std::cout << current_layer->Has(symbol) << std::endl;
 
     while (!current_layer->Has(symbol) && current_layer->parent_.lock() != nullptr) {
         current_layer = current_layer->parent_.lock();
@@ -44,6 +50,7 @@ void ScopeLayer::Put(Symbol symbol, std::shared_ptr<Object> value) {
 }
 
 bool ScopeLayer::Has(Symbol symbol) {
+    std::cout << values_.size() << std::endl;
     return values_.find(symbol) != values_.end();
 }
 
@@ -59,8 +66,11 @@ std::shared_ptr<Object> ScopeLayer::Get(Symbol symbol) {
     } else {
         throw std::runtime_error("Variable not declared");
     }
+}
 
-
+std::shared_ptr<ScopeLayer> ScopeLayer::GetChild(size_t index) {
+    std::cout << "Children of scope: " << children_.size() << std::endl;
+    return children_[index];
 }
 
 void ScopeLayer::AddChild(std::shared_ptr<ScopeLayer> child) {

@@ -8,7 +8,7 @@
 
 class Interpreter : public TemplateVisitor<int> {
  public:
-    Interpreter();
+    explicit Interpreter(std::shared_ptr<ScopeLayerTree> tree);
     void Visit(NumberExpression* expression) override;
     void Visit(AddExpression* expression) override;
     void Visit(SubstractExpression* expression) override;
@@ -26,7 +26,9 @@ class Interpreter : public TemplateVisitor<int> {
 
  private:
    //  Table table_;
-    ScopeLayerTree tree_;
+    std::shared_ptr<ScopeLayerTree> tree_;
     std::shared_ptr<ScopeLayer> current_layer_;
+
+    std::stack<int> offsets_;
     
 };

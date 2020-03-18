@@ -4,6 +4,8 @@
 #include "visitors/Interpreter.h"
 #include "visitors/PrintVisitor.h"
 
+#include "visitors/SymbolTreeVisitor.h"
+
 
 
 Driver::Driver() :
@@ -25,7 +27,13 @@ int Driver::parse(const std::string& f) {
 }
 
 int Driver::Evaluate() {
-    Interpreter interpreter;
+    SymbolTreeVisitor visitor;
+    visitor.Visit(program);
+
+    std::cout << "Symbol tree built" << std::endl;
+
+    std::shared_ptr<ScopeLayerTree> tree = visitor.GetTree();
+    Interpreter interpreter(tree);
     return interpreter.GetResult(program);
 }
 

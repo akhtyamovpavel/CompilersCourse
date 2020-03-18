@@ -51,6 +51,7 @@ set(
     objects/Object.cpp
     objects/UninitObject.cpp
     Program.cpp
+    visitors/SymbolTreeVisitor.cpp
 )
 
 add_executable(
