@@ -1,0 +1,10 @@
+func main() {
+    var three;
+    three := 3;
+    {
+        var three;
+        three := 4;
+        print(three);
+    }
+    print(three);
+}

@@ -1,7 +1,7 @@
-*/location.hh
-*/parser.hh
-*/parser.cpp
-*/scanner.cpp
+**/location.hh
+**/parser.hh
+**/parser.cpp
+**/scanner.cpp
 *.gv
 *.png
 
