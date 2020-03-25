@@ -92,4 +92,10 @@ void SymbolTreeVisitor::Visit(Function *function) {
 
   current_layer_ = current_layer_->GetParent();
 
+  functions_[Symbol(function->name_)] = function;
+
+}
+
+std::unordered_map<Symbol, Function *> SymbolTreeVisitor::GetFunctions() const {
+  return functions_;
 }

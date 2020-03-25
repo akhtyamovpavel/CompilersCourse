@@ -19,7 +19,7 @@ set(
     types/PrimitiveType.h
     types/FunctionType.cpp
     types/FunctionType.h
-)
+        visitors/FunctionCallVisitor.cpp visitors/FunctionCallVisitor.h Frame.cpp Frame.h)
 
 add_subdirectory(grammar)
 

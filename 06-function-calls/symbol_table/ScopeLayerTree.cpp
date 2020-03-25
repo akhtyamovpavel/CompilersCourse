@@ -16,6 +16,7 @@ void ScopeLayerTree::PrintTree(const std::string& filename) {
 }
 ScopeLayerTree::ScopeLayerTree(const ScopeLayerTree &other) {
   root_ = other.root_;
+  layer_mapping_ = other.layer_mapping_;
 }
 
 void ScopeLayerTree::AddMapping(Symbol name, ScopeLayer *layer) {
@@ -30,4 +31,8 @@ ScopeLayer *ScopeLayerTree::GetFunctionScopeByName(Symbol name) {
     throw std::runtime_error("No such function");
   }
   return layer_mapping_[name];
+}
+
+std::shared_ptr<Type> ScopeLayerTree::Get(Symbol symbol) {
+  return root_->Get(symbol);
 }

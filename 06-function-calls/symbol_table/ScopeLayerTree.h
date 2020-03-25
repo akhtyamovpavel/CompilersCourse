@@ -11,6 +11,8 @@ class ScopeLayerTree {
     explicit ScopeLayerTree(ScopeLayer* root);
     ScopeLayerTree(const ScopeLayerTree &other);
     void PrintTree(const std::string& filename);
+
+    std::shared_ptr<Type> Get(Symbol symbol);
     ScopeLayer* root_;
     ~ScopeLayerTree();
 

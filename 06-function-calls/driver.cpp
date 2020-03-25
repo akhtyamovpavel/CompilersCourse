@@ -1,3 +1,4 @@
+#include <visitors/FunctionCallVisitor.h>
 #include "driver.hh"
 #include "parser.hh"
 
@@ -33,6 +34,19 @@ int Driver::Evaluate() {
     std::cout << "Symbol tree built" << std::endl;
 
     ScopeLayerTree root = visitor.GetRoot();
+
+    auto functions = visitor.GetFunctions();
+
+    Function* main_function = functions[Symbol("main")];
+
+    std::shared_ptr<FunctionType> function_type = std::dynamic_pointer_cast<FunctionType>(root.Get(Symbol("main")));
+
+    FunctionCallVisitor function_visitor(
+        root.GetFunctionScopeByName(Symbol("main")),
+        function_type
+      );
+
+    function_visitor.Visit(main_function);
 
     root.PrintTree("symbol_tree.txt");
     Interpreter interpreter(root);
