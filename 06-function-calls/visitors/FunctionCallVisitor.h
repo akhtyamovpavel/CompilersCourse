@@ -6,7 +6,8 @@
 
 #include <symbol_table/ScopeLayer.h>
 #include <stack>
-#include <Frame.h>
+#include <function-mechanisms/Frame.h>
+#include <function-mechanisms/FunctionTable.h>
 #include "TemplateVisitor.h"
 
 class FunctionCallVisitor: public TemplateVisitor<int> {
@@ -33,6 +34,7 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
   ScopeLayer* current_layer_;
   std::stack<int> offsets_;
   Frame frame;
+  FunctionTable table_;
 
 };
 

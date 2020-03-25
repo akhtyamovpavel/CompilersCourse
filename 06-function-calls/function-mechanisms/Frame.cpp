@@ -26,7 +26,9 @@ size_t Frame::AllocVariable() {
 void Frame::DeallocScope() {
   size_t new_size = offsets_.top();
   offsets_.pop();
-  params_.resize(new_size);
+
+  // TODO(@akhtyamovpavel) - Call destructors
+  variables_.resize(new_size);
 }
 
 void Frame::AllocScope() {

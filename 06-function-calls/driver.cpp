@@ -39,7 +39,9 @@ int Driver::Evaluate() {
 
     Function* main_function = functions[Symbol("main")];
 
-    std::shared_ptr<FunctionType> function_type = std::dynamic_pointer_cast<FunctionType>(root.Get(Symbol("main")));
+    std::shared_ptr<FunctionType> function_type = std::dynamic_pointer_cast<FunctionType>(
+        root.Get(Symbol("main"))
+    );
 
     FunctionCallVisitor function_visitor(
         root.GetFunctionScopeByName(Symbol("main")),

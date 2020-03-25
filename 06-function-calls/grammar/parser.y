@@ -81,15 +81,15 @@ function_def:
     "func" "identifier" "(" param_list ")" "{" statements "}" { $$ = new Function($2, $4, $7); };
 
 param_list:
-    empty_param_list {$$ = $1;}
-    | complex_param_list {$$ = $1;}
+    empty_param_list {$$ = $1;} /* func foo () {}*/
+    | complex_param_list {$$ = $1;} /* func foo(a, b, c) {} */
     ;
 
 empty_param_list:
     %empty { $$ = new ParamList();}
     ;
 
-complex_param_list:
+complex_param_list: /* a, b, c */
     | "identifier" {$$ = new ParamList($1);}
     | complex_param_list "," "identifier" { $1->AddParam($3); $$ = $1; }
     ;

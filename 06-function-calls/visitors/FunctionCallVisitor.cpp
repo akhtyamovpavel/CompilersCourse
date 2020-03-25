@@ -29,17 +29,21 @@ void FunctionCallVisitor::Visit(DivExpression *expression) {
 }
 
 void FunctionCallVisitor::Visit(IdentExpression *expression) {
-  tos_value_ = current_layer_->Get(Symbol(expression->ident_))->ToInt();
+  int index = table_.Get(Symbol(expression->ident_));
+  tos_value_ = frame.Get(index);
 }
 
 void FunctionCallVisitor::Visit(Assignment *assignment) {
   int value = Accept(assignment->expression_);
 
-  current_layer_->Put(Symbol(assignment->variable_), std::make_shared<Integer>(value));
+  int index = table_.Get(Symbol(assignment->variable_));
+  frame.Set(index, value);
 }
 
 void FunctionCallVisitor::Visit(VarDecl *var_decl) {
   size_t index = frame.AllocVariable();
+  table_.CreateVariable(Symbol(var_decl->variable_));
+  table_.Put(Symbol(var_decl->variable_), index);
 
 }
 
@@ -62,6 +66,7 @@ void FunctionCallVisitor::Visit(ScopeAssignmentList *list) {
 
   offsets_.push(0);
   frame.AllocScope();
+  table_.BeginScope();
   list->statement_list->Accept(this);
 
   offsets_.pop();
@@ -72,6 +77,7 @@ void FunctionCallVisitor::Visit(ScopeAssignmentList *list) {
 
   current_layer_ = current_layer_->GetParent();
   frame.DeallocScope();
+  table_.EndScope();
 }
 
 void FunctionCallVisitor::Visit(Program *program) {
@@ -90,8 +96,6 @@ FunctionCallVisitor::FunctionCallVisitor(
     ScopeLayer* function_scope, std::shared_ptr<FunctionType> function
     ) : root_layer(function_scope), frame(function) {
   current_layer_ = root_layer;
-  current_layer_->Put(Symbol("one"), std::make_shared<Integer>(1));
-  current_layer_->Put(Symbol("two"), std::make_shared<Integer>(2));
   offsets_.push(0);
   tos_value_ = 0;
 }
