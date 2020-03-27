@@ -16,7 +16,14 @@
 * Список чекпоинтов
     - [01. Наивный интерпретатор](/milestones/01-naive-interpreter.md)
     - [02. AST-дерево](/milestones/02-ast-tree.md)
+    - [03. Визиторы](/milestones/03-visitors.md)
+    - [04. Scope-ы и системы типов](/milestones/04-scopes.md)
+    - [05. Функции](/milestones/05-functions.md)
+    
 
+### Сдача заданий
+
+В таблице akht.pl/compilers2020-checkpoint необходимо записать фамилию, имя и пометить ячейку (вставить комментарий) с соответствующим чекпоинтом.
 
 ## Сборка Docker контейнера
 Ссылка на image - https://hub.docker.com/r/akhtyamovpavel/compilers_course_image
