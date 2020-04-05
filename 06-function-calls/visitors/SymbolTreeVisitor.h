@@ -26,10 +26,17 @@ class SymbolTreeVisitor: public Visitor {
     void Visit(ParamList* param_list) override;
 
     ScopeLayerTree GetRoot();
-  void Visit(FunctionCallStatement *statement) override;
+  void Visit(FunctionCallExpression *statement) override;
 
   std::unordered_map<Symbol, Function*> GetFunctions() const;
- private:
+
+    void Visit(FunctionList *function_list) override;
+
+    void Visit(ParamValueList *value_list) override;
+
+    void Visit(ReturnStatement *return_statement) override;
+
+private:
     ScopeLayerTree tree_;
     ScopeLayer* current_layer_;
     std::unordered_map<Symbol, Function*> functions_;

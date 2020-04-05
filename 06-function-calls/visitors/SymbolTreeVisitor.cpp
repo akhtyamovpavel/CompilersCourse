@@ -24,25 +24,37 @@ void SymbolTreeVisitor::Visit(NumberExpression* expression) {
 }
 
 void SymbolTreeVisitor::Visit(AddExpression* expression) {
+    expression->first->Accept(this);
+    expression->second->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(SubstractExpression* expression) {
+    expression->first->Accept(this);
+    expression->second->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(MulExpression* expression) {
+    expression->first->Accept(this);
+    expression->second->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(DivExpression* expression) {
+    expression->first->Accept(this);
+    expression->second->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(IdentExpression* expression) {
+    current_layer_->Get(Symbol(expression->ident_)); // check that element exists
 }
 
 void SymbolTreeVisitor::Visit(Assignment* assignment) {
+    current_layer_->Get(assignment->variable_);
 
+    assignment->expression_->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(PrintStatement* statement) {
+    statement->expression_->Accept(this);
 }
 
 void SymbolTreeVisitor::Visit(AssignmentList* assignment_list) {
@@ -65,7 +77,8 @@ void SymbolTreeVisitor::Visit(ScopeAssignmentList* list) {
 }
 
 void SymbolTreeVisitor::Visit(Program* program) {
-    program->function_->Accept(this);
+    program->function_list_->Accept(this);
+
 }
 
 ScopeLayerTree SymbolTreeVisitor::GetRoot() {
@@ -100,4 +113,23 @@ std::unordered_map<Symbol, Function *> SymbolTreeVisitor::GetFunctions() const {
   return functions_;
 }
 
-void SymbolTreeVisitor::Visit(FunctionCallStatement *statement) {}
+void SymbolTreeVisitor::Visit(FunctionCallExpression *statement) {
+    // We don't check function name because function could be created after
+    statement->param_list_->Accept(this);
+}
+
+void SymbolTreeVisitor::Visit(FunctionList *function_list) {
+    for (auto* function : function_list->functions_) {
+        function->Accept(this);
+    }
+}
+
+void SymbolTreeVisitor::Visit(ParamValueList *value_list) {
+    for (Expression* value : value_list->params_) {
+        value->Accept(this);
+    }
+}
+
+void SymbolTreeVisitor::Visit(ReturnStatement *return_statement) {
+    return_statement->return_expression_->Accept(this);
+}

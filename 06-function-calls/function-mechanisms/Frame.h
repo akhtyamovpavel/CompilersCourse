@@ -7,6 +7,8 @@
 #include <types/FunctionType.h>
 #include <stack>
 #include <grammar/functions/Function.h>
+
+#include <memory>
 class Frame {
  public:
   explicit Frame(std::shared_ptr<FunctionType> function);

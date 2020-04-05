@@ -104,7 +104,7 @@ void FunctionCallVisitor::SetParams(const std::vector<int> &params) {
   frame.SetParams(params);
 }
 
-void FunctionCallVisitor::Visit(FunctionCallStatement *statement) {
+void FunctionCallVisitor::Visit(FunctionCallExpression *statement) {
   auto function_type = current_layer_->Get(statement->name_);
 
   std::shared_ptr<FunctionType> func_converted = std::dynamic_pointer_cast<FunctionType>(function_type);
@@ -115,5 +115,13 @@ void FunctionCallVisitor::Visit(FunctionCallStatement *statement) {
 }
 
 void FunctionCallVisitor::Visit(FunctionList *function_list) {
+
+}
+
+void FunctionCallVisitor::Visit(ParamValueList *value_list) {
+
+}
+
+void FunctionCallVisitor::Visit(ReturnStatement *return_statement) {
 
 }

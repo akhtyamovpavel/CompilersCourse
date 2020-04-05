@@ -96,6 +96,18 @@ void Interpreter::Visit(Function *function) {
 
 }
 
-void Interpreter::Visit(FunctionCallStatement *statement) {
+void Interpreter::Visit(FunctionCallExpression *statement) {
+
+}
+
+void Interpreter::Visit(FunctionList *function_list) {
+
+}
+
+void Interpreter::Visit(ParamValueList *value_list) {
+
+}
+
+void Interpreter::Visit(ReturnStatement *return_statement) {
 
 }

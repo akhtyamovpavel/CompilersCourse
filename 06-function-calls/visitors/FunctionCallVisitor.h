@@ -25,13 +25,18 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
   void Visit(VarDecl *var_decl) override;
   void Visit(PrintStatement *statement) override;
   void Visit(AssignmentList *assignment_list) override;
-  void Visit(FunctionCallStatement *statement) override;
+  void Visit(FunctionCallExpression *statement) override;
   void Visit(ScopeAssignmentList *list) override;
   void Visit(Program *program) override;
   void Visit(ParamList *param_list) override;
   void Visit(Function *function) override;
   void Visit(FunctionList *function_list) override;
- private:
+
+    void Visit(ParamValueList *value_list) override;
+
+    void Visit(ReturnStatement *return_statement) override;
+
+private:
   ScopeLayer* root_layer;
   ScopeLayer* current_layer_;
   std::stack<int> offsets_;

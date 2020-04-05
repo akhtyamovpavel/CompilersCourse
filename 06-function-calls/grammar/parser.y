@@ -26,6 +26,8 @@
     #include "visitors/elements.h"
     #include "Program.h"
 
+    #include <iostream>
+
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
         return scanner.ScanToken();
     }
@@ -56,16 +58,22 @@
     SEMICOLON ";"
     COMMA ","
     FUNC "func"
+    RETURN "return"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
+
+%nterm <FunctionList*> function_list
 
 %nterm <Function*> function_def
 
 %nterm <ParamList*> param_list
 %nterm <ParamList*> empty_param_list
 %nterm <ParamList*> complex_param_list
+%nterm <ParamValueList*> param_value_list
+%nterm <ParamValueList*> empty_param_value_list
+%nterm <ParamValueList*> complex_param_value_list
 %nterm <Expression*> exp
 %nterm <Statement*> statement
 %nterm <AssignmentList*> statements
@@ -75,7 +83,13 @@
 %%
 %start unit;
 
-unit: function_def { $$ = new Program($1); driver.program = $$; };
+unit: function_list { $$ = new Program($1); driver.program = $$; };
+
+function_list:
+    %empty { $$ = new FunctionList(); }
+    | function_list function_def {
+        $1->AddFunction($2); $$ = $1;
+    };
 
 function_def:
     "func" "identifier" "(" param_list ")" "{" statements "}" { $$ = new Function($2, $4, $7); };
@@ -105,7 +119,7 @@ statement:
     | "print" "(" exp ")" ";" { $$ = new PrintStatement($3); }
     | "var" "identifier" ";" { $$ = new VarDecl($2); }
     | "{" statements "}" { $$ = new ScopeAssignmentList($2); }
-    | "identifier" "(" param_list ")" ";" {$$ = new FunctionCallStatement($1, $3); }
+    | "return" exp ";" { $$ = new ReturnStatement($2); }
     ;
 
 %left "+" "-";
@@ -118,7 +132,29 @@ exp:
     | exp "-" exp { $$ = new SubstractExpression($1, $3); }
     | exp "*" exp { $$ = new MulExpression($1, $3); }
     | exp "/" exp { $$ = new DivExpression($1, $3); }
+    | "identifier" "(" param_value_list ")"  {
+        std::cout << "Function call found" << std::endl;
+        $$ = new FunctionCallExpression($1, $3);
+    }
     | "(" exp ")" { $$ = $2; };
+
+
+param_value_list:
+    empty_param_value_list {$$ = $1;} /* foo () {}*/
+    | complex_param_value_list {
+        std::cout << "Complex param found" << std::endl;
+        $$ = $1;
+      } /* foo(a, b, c) {} */
+    ;
+
+empty_param_value_list:
+    %empty { $$ = new ParamValueList();}
+    ;
+
+complex_param_value_list: /* a, b, c */
+    | exp {$$ = new ParamValueList($1);}
+    | complex_param_value_list "," exp { $1->AddParam($3); $$ = $1; }
+    ;
 
 %%
 

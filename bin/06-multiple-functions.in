@@ -4,16 +4,17 @@ func main() {
     {
         var three;
         three := 4;
-        foo(three);
+        three := foo(three);
         print(three);
     }
 
-    foo(three);
+    var five;
+    five := foo(three);
     print(three);
 }
 
 func foo(a) {
     var three;
     three := 3;
-    print(a * three);
+    return a * three;
 }

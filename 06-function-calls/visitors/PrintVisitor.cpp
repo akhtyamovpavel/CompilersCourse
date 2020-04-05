@@ -141,11 +141,12 @@ void PrintVisitor::Visit(Function *function) {
 
 }
 
-void PrintVisitor::Visit(FunctionCallStatement *statement) {
+void PrintVisitor::Visit(FunctionCallExpression *statement) {
   PrintTabs();
   stream_ << "CallStatement:" << std::endl;
   ++num_tabs_;
 
+  PrintTabs();
   stream_ << "Name: " << statement->name_ << std::endl;
   statement->param_list_->Accept(this);
   --num_tabs_;
@@ -159,4 +160,32 @@ PrintVisitor::~PrintVisitor() {
 void PrintVisitor::Visit(FunctionList *function_list) {
   PrintTabs();
   stream_ << "FunctionList:" << std::endl;
+
+  ++num_tabs_;
+  for (auto* function: function_list->functions_) {
+      function->Accept(this);
+  }
+  --num_tabs_;
+}
+
+void PrintVisitor::Visit(ParamValueList *value_list) {
+    PrintTabs();
+    stream_ << "ParamValueList:" << std::endl;
+
+    ++num_tabs_;
+
+    for (Expression* param: value_list->params_) {;
+        param->Accept(this);
+//        stream_ << param << std::endl;
+    }
+    --num_tabs_;
+}
+
+void PrintVisitor::Visit(ReturnStatement *return_statement) {
+    PrintTabs();
+    stream_ << "ReturnStatement:" << std::endl;
+
+    ++num_tabs_;
+    return_statement->return_expression_->Accept(this);
+    --num_tabs_;
 }

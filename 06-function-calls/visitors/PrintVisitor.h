@@ -7,7 +7,7 @@
 
 class PrintVisitor: public Visitor {
  public:
-    PrintVisitor(const std::string& filename);
+    explicit PrintVisitor(const std::string& filename);
     ~PrintVisitor();
     void Visit(NumberExpression* expression) override;
     void Visit(AddExpression* expression) override;
@@ -23,9 +23,14 @@ class PrintVisitor: public Visitor {
     void Visit(Program* program) override;
     void Visit(ParamList* param_list) override;
     void Visit(Function *function) override;
-  void Visit(FunctionList *function_list) override;
-  void Visit(FunctionCallStatement *statement) override;
- private:
+    void Visit(FunctionList *function_list) override;
+    void Visit(FunctionCallExpression *statement) override;
+
+    void Visit(ParamValueList *value_list) override;
+
+    void Visit(ReturnStatement *return_statement) override;
+
+private:
 
     void PrintTabs();
     std::ofstream stream_;

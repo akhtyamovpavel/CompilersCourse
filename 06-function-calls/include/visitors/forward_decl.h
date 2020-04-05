@@ -17,5 +17,7 @@ class ScopeAssignmentList;
 class Program;
 class ParamList;
 class Function;
-class FunctionCallStatement;
+class FunctionCallExpression;
 class FunctionList;
+class ParamValueList;
+class ReturnStatement;

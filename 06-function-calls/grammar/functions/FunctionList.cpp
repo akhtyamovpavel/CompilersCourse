@@ -8,8 +8,7 @@ void FunctionList::Accept(Visitor *visitor) {
   visitor->Visit(this);
 }
 
-FunctionList::FunctionList(Function *function) {
-  functions_.push_back(function);
+FunctionList::FunctionList() {
 }
 
 void FunctionList::AddFunction(Function *function) {

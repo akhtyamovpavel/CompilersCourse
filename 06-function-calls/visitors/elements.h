@@ -17,5 +17,7 @@
 #include "grammar/functions/Function.h"
 #include "grammar/Program.h"
 
-#include "grammar/statements/FunctionCallStatement.h"
+#include "grammar/expressions/FunctionCallExpression.h"
+#include "grammar/functions/ParamValueList.h"
 #include "grammar/functions/FunctionList.h"
+#include "grammar/statements/ReturnStatement.h"

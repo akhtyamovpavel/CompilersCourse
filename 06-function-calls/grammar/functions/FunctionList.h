@@ -12,7 +12,7 @@ class FunctionList : public BaseElement {
  public:
   void Accept(Visitor *visitor) override;
 
-  explicit FunctionList(Function* function);
+  FunctionList();
 
   void AddFunction(Function* function);
   std::vector<Function*> functions_;

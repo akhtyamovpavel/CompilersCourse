@@ -58,6 +58,7 @@ blank [ \t\r]
 "print"    return yy::parser::make_PRINT(loc);
 "var"      return yy::parser::make_VAR(loc);
 "func"     return yy::parser::make_FUNC(loc);
+"return"   return yy::parser::make_RETURN(loc);
 
 {int}      return make_NUMBER(yytext, loc);
 {id}       return yy::parser::make_IDENTIFIER(yytext, loc);

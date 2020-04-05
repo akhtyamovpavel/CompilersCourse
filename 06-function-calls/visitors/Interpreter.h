@@ -16,7 +16,7 @@ class Interpreter : public TemplateVisitor<int> {
     void Visit(MulExpression* expression) override;
     void Visit(DivExpression* expression) override;
     void Visit(IdentExpression* expression) override;
-  void Visit(FunctionCallStatement *statement) override;
+  void Visit(FunctionCallExpression *statement) override;
   void Visit(Assignment* assignment) override;
     void Visit(VarDecl* var_decl) override;
     void Visit(PrintStatement* statement) override;
@@ -27,7 +27,13 @@ class Interpreter : public TemplateVisitor<int> {
 
     int GetResult(Program* program);
 
- private:
+    void Visit(FunctionList *function_list) override;
+
+    void Visit(ParamValueList *value_list) override;
+
+    void Visit(ReturnStatement *return_statement) override;
+
+private:
     ScopeLayerTree tree_;
     ScopeLayer* current_layer_;
 
