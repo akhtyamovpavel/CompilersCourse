@@ -16,3 +16,6 @@
 #include "grammar/functions/ParamList.h"
 #include "grammar/functions/Function.h"
 #include "grammar/Program.h"
+
+#include "grammar/statements/FunctionCallStatement.h"
+#include "grammar/functions/FunctionList.h"

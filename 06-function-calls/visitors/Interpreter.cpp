@@ -80,7 +80,7 @@ void Interpreter::Visit(ScopeAssignmentList* list) {
 }
 
 void Interpreter::Visit(Program* program) {
-    program->function_->Accept(this);
+    program->function_list_->Accept(this);
 }
 
 int Interpreter::GetResult(Program *program) {
@@ -93,5 +93,9 @@ void Interpreter::Visit(ParamList *param_list) {
 }
 
 void Interpreter::Visit(Function *function) {
+
+}
+
+void Interpreter::Visit(FunctionCallStatement *statement) {
 
 }

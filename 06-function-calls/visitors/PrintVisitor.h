@@ -23,6 +23,8 @@ class PrintVisitor: public Visitor {
     void Visit(Program* program) override;
     void Visit(ParamList* param_list) override;
     void Visit(Function *function) override;
+  void Visit(FunctionList *function_list) override;
+  void Visit(FunctionCallStatement *statement) override;
  private:
 
     void PrintTabs();

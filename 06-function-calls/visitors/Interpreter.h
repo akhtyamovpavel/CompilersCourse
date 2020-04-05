@@ -16,7 +16,8 @@ class Interpreter : public TemplateVisitor<int> {
     void Visit(MulExpression* expression) override;
     void Visit(DivExpression* expression) override;
     void Visit(IdentExpression* expression) override;
-    void Visit(Assignment* assignment) override;
+  void Visit(FunctionCallStatement *statement) override;
+  void Visit(Assignment* assignment) override;
     void Visit(VarDecl* var_decl) override;
     void Visit(PrintStatement* statement) override;
     void Visit(AssignmentList* assignment_list) override;

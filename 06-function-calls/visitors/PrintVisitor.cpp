@@ -103,7 +103,7 @@ void PrintVisitor::Visit(Program* program) {
 
     ++num_tabs_;
 
-    program->function_->Accept(this);
+    program->function_list_->Accept(this);
 
     --num_tabs_;
 }
@@ -141,6 +141,22 @@ void PrintVisitor::Visit(Function *function) {
 
 }
 
+void PrintVisitor::Visit(FunctionCallStatement *statement) {
+  PrintTabs();
+  stream_ << "CallStatement:" << std::endl;
+  ++num_tabs_;
+
+  stream_ << "Name: " << statement->name_ << std::endl;
+  statement->param_list_->Accept(this);
+  --num_tabs_;
+
+}
+
 PrintVisitor::~PrintVisitor() {
     stream_.close();
+}
+
+void PrintVisitor::Visit(FunctionList *function_list) {
+  PrintTabs();
+  stream_ << "FunctionList:" << std::endl;
 }

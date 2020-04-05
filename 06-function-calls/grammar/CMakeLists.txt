@@ -53,7 +53,7 @@ set(
         functions/ParamList.h
         functions/Function.cpp
         functions/Function.h
-)
+        statements/FunctionCallStatement.cpp statements/FunctionCallStatement.h functions/FunctionList.cpp functions/FunctionList.h)
 
 add_library(
         GrammarLib

@@ -18,4 +18,6 @@ class Visitor {
     virtual void Visit(Program* program) = 0;
     virtual void Visit(ParamList* param_list) = 0;
     virtual void Visit(Function* function) = 0;
+    virtual void Visit(FunctionCallStatement* statement) = 0;
+    virtual void Visit(FunctionList* function_list) = 0;
 };

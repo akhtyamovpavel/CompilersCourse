@@ -1,5 +1,5 @@
 #include "Program.h"
 
 Program::Program(
-    Function* function
-): function_(function) {}
+    FunctionList* function_list
+): function_list_(function_list) {}

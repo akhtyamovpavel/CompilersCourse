@@ -99,3 +99,5 @@ void SymbolTreeVisitor::Visit(Function *function) {
 std::unordered_map<Symbol, Function *> SymbolTreeVisitor::GetFunctions() const {
   return functions_;
 }
+
+void SymbolTreeVisitor::Visit(FunctionCallStatement *statement) {}

@@ -105,6 +105,7 @@ statement:
     | "print" "(" exp ")" ";" { $$ = new PrintStatement($3); }
     | "var" "identifier" ";" { $$ = new VarDecl($2); }
     | "{" statements "}" { $$ = new ScopeAssignmentList($2); }
+    | "identifier" "(" param_list ")" ";" {$$ = new FunctionCallStatement($1, $3); }
     ;
 
 %left "+" "-";

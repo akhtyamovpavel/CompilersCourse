@@ -103,3 +103,17 @@ FunctionCallVisitor::FunctionCallVisitor(
 void FunctionCallVisitor::SetParams(const std::vector<int> &params) {
   frame.SetParams(params);
 }
+
+void FunctionCallVisitor::Visit(FunctionCallStatement *statement) {
+  auto function_type = current_layer_->Get(statement->name_);
+
+  std::shared_ptr<FunctionType> func_converted = std::dynamic_pointer_cast<FunctionType>(function_type);
+
+  if (func_converted == nullptr) {
+    throw std::runtime_error("Function not defined");
+  }
+}
+
+void FunctionCallVisitor::Visit(FunctionList *function_list) {
+
+}

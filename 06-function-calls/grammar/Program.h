@@ -2,10 +2,10 @@
 
 #include "statements/AssignmentList.h"
 #include "expressions/Expression.h"
-#include <functions/Function.h>
+#include <functions/FunctionList.h>
 
 class Program {
  public:
-  explicit Program(Function* function);
-  Function* function_;
+  explicit Program(FunctionList* function_list);
+  FunctionList* function_list_;
 };
