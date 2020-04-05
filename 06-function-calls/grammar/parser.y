@@ -133,7 +133,6 @@ exp:
     | exp "*" exp { $$ = new MulExpression($1, $3); }
     | exp "/" exp { $$ = new DivExpression($1, $3); }
     | "identifier" "(" param_value_list ")"  {
-        std::cout << "Function call found" << std::endl;
         $$ = new FunctionCallExpression($1, $3);
     }
     | "(" exp ")" { $$ = $2; };
@@ -142,7 +141,6 @@ exp:
 param_value_list:
     empty_param_value_list {$$ = $1;} /* foo () {}*/
     | complex_param_value_list {
-        std::cout << "Complex param found" << std::endl;
         $$ = $1;
       } /* foo(a, b, c) {} */
     ;

@@ -8,11 +8,15 @@
 #include <stack>
 #include <function-mechanisms/Frame.h>
 #include <function-mechanisms/FunctionTable.h>
+#include <symbol_table/ScopeLayerTree.h>
 #include "TemplateVisitor.h"
 
 class FunctionCallVisitor: public TemplateVisitor<int> {
  public:
-  FunctionCallVisitor(ScopeLayer* function_scope, std::shared_ptr<FunctionType> function);
+  FunctionCallVisitor(
+          ScopeLayer* function_scope, std::shared_ptr<FunctionType> function);
+
+  void SetTree(ScopeLayerTree* tree);
 
   void SetParams(const std::vector<int>& params);
   void Visit(NumberExpression *expression) override;
@@ -36,12 +40,16 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
 
     void Visit(ReturnStatement *return_statement) override;
 
+  Frame& GetFrame();
+
 private:
   ScopeLayer* root_layer;
   ScopeLayer* current_layer_;
   std::stack<int> offsets_;
   Frame frame;
   FunctionTable table_;
+  ScopeLayerTree* tree_;
+  bool returned_ = false;
 
 };
 

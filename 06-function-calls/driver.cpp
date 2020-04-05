@@ -1,4 +1,5 @@
 #include <visitors/FunctionCallVisitor.h>
+#include <function-mechanisms/FunctionStorage.h>
 #include "driver.hh"
 #include "parser.hh"
 
@@ -37,7 +38,12 @@ int Driver::Evaluate() {
 
     auto functions = visitor.GetFunctions();
 
-    Function* main_function = functions[Symbol("main")];
+    FunctionStorage& storage = FunctionStorage::GetInstance();
+    for (auto it : functions) {
+        storage.Set(it.first, it.second);
+    }
+
+    Function* main_function = storage.Get(Symbol("main"));
 
     std::shared_ptr<FunctionType> function_type = std::dynamic_pointer_cast<FunctionType>(
         root.Get(Symbol("main"))
@@ -47,6 +53,8 @@ int Driver::Evaluate() {
         root.GetFunctionScopeByName(Symbol("main")),
         function_type
       );
+
+    function_visitor.SetTree(&root);
 
     function_visitor.Visit(main_function);
 

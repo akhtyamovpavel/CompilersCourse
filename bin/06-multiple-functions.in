@@ -1,19 +1,21 @@
 func main() {
+    return 0;
     var three;
-    three := 3;
+    three := 555;
     {
         var three;
-        three := 4;
+        three := 1000;
         three := foo(three);
         print(three);
     }
 
     var five;
     five := foo(three);
-    print(three);
+    print(five);
 }
 
 func foo(a) {
+    print(a);
     var three;
     three := 3;
     return a * three;

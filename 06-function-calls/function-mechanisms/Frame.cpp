@@ -50,3 +50,25 @@ void Frame::Set(int index, int value) {
     params_.at(-index - 1) = value;
   }
 }
+
+void Frame::SetReturnValue(int value) {
+    return_value_ = value;
+}
+
+void Frame::SetParentFrame(Frame *frame) {
+    parent_frame = frame;
+
+}
+
+void Frame::SetParentReturnValue(int value) {
+    parent_frame->return_value_ = value;
+
+}
+
+bool Frame::HasParent() {
+    return parent_frame != nullptr;
+}
+
+int Frame::GetReturnValue() const {
+    return return_value_;
+}

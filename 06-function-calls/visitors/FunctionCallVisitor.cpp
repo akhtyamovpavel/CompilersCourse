@@ -4,6 +4,7 @@
 
 #include <types/Integer.h>
 #include <iostream>
+#include <function-mechanisms/FunctionStorage.h>
 #include "FunctionCallVisitor.h"
 
 #include "elements.h"
@@ -55,7 +56,9 @@ void FunctionCallVisitor::Visit(PrintStatement *statement) {
 
 void FunctionCallVisitor::Visit(AssignmentList *assignment_list) {
   for (Statement* assignment: assignment_list->statements_) {
-    assignment->Accept(this);
+      if (!returned_) {
+          assignment->Accept(this);
+      }
   }
 }
 
@@ -85,10 +88,16 @@ void FunctionCallVisitor::Visit(Program *program) {
 }
 
 void FunctionCallVisitor::Visit(ParamList *param_list) {
-
+    int index = -1;
+    for (auto param: param_list->params_) {
+        table_.CreateVariable(Symbol(param));
+        table_.Put(Symbol(param), index);
+        --index;
+    }
 }
 
 void FunctionCallVisitor::Visit(Function *function) {
+    function->param_list_->Accept(this);
   function->statements_->Accept(this);
 }
 
@@ -105,6 +114,7 @@ void FunctionCallVisitor::SetParams(const std::vector<int> &params) {
 }
 
 void FunctionCallVisitor::Visit(FunctionCallExpression *statement) {
+  std::cerr << "Function called " << statement->name_ << std::endl;
   auto function_type = current_layer_->Get(statement->name_);
 
   std::shared_ptr<FunctionType> func_converted = std::dynamic_pointer_cast<FunctionType>(function_type);
@@ -112,6 +122,24 @@ void FunctionCallVisitor::Visit(FunctionCallExpression *statement) {
   if (func_converted == nullptr) {
     throw std::runtime_error("Function not defined");
   }
+
+  std::vector<int> params;
+
+  for (auto param : statement->param_list_->params_) {
+      params.push_back(Accept(param));
+  }
+
+  FunctionCallVisitor new_visitor(
+      tree_->GetFunctionScopeByName(statement->name_),
+      func_converted
+  );
+  new_visitor.SetParams(params);
+
+  new_visitor.GetFrame().SetParentFrame(&frame);
+  new_visitor.Visit(FunctionStorage::GetInstance().Get(Symbol(statement->name_)));
+
+
+  tos_value_ = frame.GetReturnValue();
 }
 
 void FunctionCallVisitor::Visit(FunctionList *function_list) {
@@ -123,5 +151,17 @@ void FunctionCallVisitor::Visit(ParamValueList *value_list) {
 }
 
 void FunctionCallVisitor::Visit(ReturnStatement *return_statement) {
+    if (frame.HasParent()) {
+        frame.SetParentReturnValue(Accept(return_statement->return_expression_));
+    }
+    returned_ = true;
+}
 
+void FunctionCallVisitor::SetTree(ScopeLayerTree *tree) {
+    tree_ = tree;
+
+}
+
+Frame &FunctionCallVisitor::GetFrame() {
+    return frame;
 }
