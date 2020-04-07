@@ -59,6 +59,13 @@
     COMMA ","
     FUNC "func"
     RETURN "return"
+    IF "if"
+    ELSE "else"
+    AND "and"
+    OR "or"
+    NOT "not"
+    LT "<"
+    GT ">"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -120,18 +127,26 @@ statement:
     | "var" "identifier" ";" { $$ = new VarDecl($2); }
     | "{" statements "}" { $$ = new ScopeAssignmentList($2); }
     | "return" exp ";" { $$ = new ReturnStatement($2); }
+    | "if" "(" exp ")" "{" statement "}" "else" "{" statement "}" { $$ = new IfStatement($3, $6, $10); }
     ;
 
+%left "and" "or";
+%left "<" ">";
 %left "+" "-";
 %left "*" "/";
 
 exp:
     "number" {$$ = new NumberExpression($1); }
     | "identifier" {$$ = new IdentExpression($1); }
+    | exp "and" exp {$$ = new AndExpression($1, $3);}
+    | exp "or" exp {$$ = new OrExpression($1, $3); }
+    | exp "<" exp {$$ = new LtExpression($1, $3); }
+    | exp ">" exp {$$ = new GtExpression($1, $3);}
     | exp "+" exp { $$ = new AddExpression($1, $3); }
     | exp "-" exp { $$ = new SubstractExpression($1, $3); }
     | exp "*" exp { $$ = new MulExpression($1, $3); }
     | exp "/" exp { $$ = new DivExpression($1, $3); }
+    | "not" exp  {$$ = new NotExpression($2); }
     | "identifier" "(" param_value_list ")"  {
         $$ = new FunctionCallExpression($1, $3);
     }

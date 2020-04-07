@@ -22,4 +22,10 @@ class Visitor {
     virtual void Visit(FunctionList* function_list) = 0;
     virtual void Visit(ParamValueList* value_list) = 0;
     virtual void Visit(ReturnStatement* return_statement) = 0;
+    virtual void Visit(AndExpression* and_expression) = 0;
+    virtual void Visit(OrExpression* or_expression) = 0;
+    virtual void Visit(NotExpression* not_expression) = 0;
+    virtual void Visit(IfStatement* if_statement) = 0;
+    virtual void Visit(GtExpression* gt_expression) = 0;
+    virtual void Visit(LtExpression* lt_expression) = 0;
 };

@@ -41,8 +41,14 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
     void Visit(ReturnStatement *return_statement) override;
 
   Frame& GetFrame();
+  void Visit(AndExpression *and_expression) override;
+  void Visit(OrExpression *or_expression) override;
+  void Visit(NotExpression *not_expression) override;
+  void Visit(IfStatement *if_statement) override;
+  void Visit(GtExpression *gt_expression) override;
+  void Visit(LtExpression *lt_expression) override;
 
-private:
+ private:
   ScopeLayer* root_layer;
   ScopeLayer* current_layer_;
   std::stack<int> offsets_;

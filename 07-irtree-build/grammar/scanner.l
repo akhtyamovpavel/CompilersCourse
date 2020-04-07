@@ -54,11 +54,18 @@ blank [ \t\r]
 ";"        return yy::parser::make_SEMICOLON(loc);
 "{"        return yy::parser::make_LEFTSCOPE(loc);
 "}"        return yy::parser::make_RIGHTSCOPE(loc);
+">"        return yy::parser::make_GT(loc);
+"<"        return yy::parser::make_LT(loc);
 ","        return yy::parser::make_COMMA(loc);
 "print"    return yy::parser::make_PRINT(loc);
 "var"      return yy::parser::make_VAR(loc);
 "func"     return yy::parser::make_FUNC(loc);
 "return"   return yy::parser::make_RETURN(loc);
+"if"       return yy::parser::make_IF(loc);
+"else"     return yy::parser::make_ELSE(loc);
+"and"      return yy::parser::make_AND(loc);
+"or"       return yy::parser::make_OR(loc);
+"not"      return yy::parser::make_NOT(loc);
 
 {int}      return make_NUMBER(yytext, loc);
 {id}       return yy::parser::make_IDENTIFIER(yytext, loc);

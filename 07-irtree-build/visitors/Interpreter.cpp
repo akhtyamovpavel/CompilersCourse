@@ -111,3 +111,21 @@ void Interpreter::Visit(ParamValueList *value_list) {
 void Interpreter::Visit(ReturnStatement *return_statement) {
 
 }
+void Interpreter::Visit(AndExpression *and_expression) {
+
+}
+void Interpreter::Visit(OrExpression *or_expression) {
+
+}
+void Interpreter::Visit(NotExpression *not_expression) {
+
+}
+void Interpreter::Visit(IfStatement *if_statement) {
+
+}
+void Interpreter::Visit(GtExpression *gt_expression) {
+
+}
+void Interpreter::Visit(LtExpression *lt_expression) {
+
+}

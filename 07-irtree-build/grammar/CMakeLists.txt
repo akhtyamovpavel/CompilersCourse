@@ -53,7 +53,7 @@ set(
         functions/ParamList.h
         functions/Function.cpp
         functions/Function.h
-        functions/FunctionList.cpp functions/FunctionList.h expressions/FunctionCallExpression.cpp expressions/FunctionCallExpression.h functions/ParamValueList.cpp functions/ParamValueList.h statements/ReturnStatement.cpp statements/ReturnStatement.h)
+        functions/FunctionList.cpp functions/FunctionList.h expressions/FunctionCallExpression.cpp expressions/FunctionCallExpression.h functions/ParamValueList.cpp functions/ParamValueList.h statements/ReturnStatement.cpp statements/ReturnStatement.h expressions/AndExpression.cpp expressions/AndExpression.h expressions/OrExpression.cpp expressions/OrExpression.h expressions/NotExpression.cpp expressions/NotExpression.h statements/IfStatement.cpp statements/IfStatement.h expressions/LtExpression.cpp expressions/LtExpression.h expressions/GtExpression.cpp expressions/GtExpression.h)
 
 add_library(
         ${GRAMMAR_LIB}

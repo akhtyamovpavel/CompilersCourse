@@ -133,3 +133,44 @@ void SymbolTreeVisitor::Visit(ParamValueList *value_list) {
 void SymbolTreeVisitor::Visit(ReturnStatement *return_statement) {
     return_statement->return_expression_->Accept(this);
 }
+
+void SymbolTreeVisitor::Visit(AndExpression *and_expression) {
+  and_expression->first->Accept(this);
+  and_expression->second->Accept(this);
+}
+
+void SymbolTreeVisitor::Visit(OrExpression *or_expression) {
+  or_expression->first->Accept(this);
+  or_expression->second->Accept(this);
+}
+
+void SymbolTreeVisitor::Visit(NotExpression *not_expression) {
+  not_expression->expression_->Accept(this);
+}
+
+void SymbolTreeVisitor::Visit(IfStatement *if_statement) {
+  if_statement->bool_expression_->Accept(this);
+  auto true_layer = new ScopeLayer(current_layer_);
+  current_layer_ = true_layer;
+
+  if_statement->true_statement_->Accept(this);
+
+  current_layer_ = current_layer_->GetParent();
+
+  auto false_layer = new ScopeLayer(current_layer_);
+  current_layer_ = false_layer;
+
+  if_statement->false_statement_->Accept(this);
+
+  current_layer_ = current_layer_->GetParent();
+}
+
+void SymbolTreeVisitor::Visit(GtExpression *gt_expression) {
+  gt_expression->first->Accept(this);
+  gt_expression->second->Accept(this);
+}
+
+void SymbolTreeVisitor::Visit(LtExpression *lt_expression) {
+  lt_expression->first->Accept(this);
+  lt_expression->second->Accept(this);
+}

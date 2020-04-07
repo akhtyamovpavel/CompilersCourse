@@ -189,3 +189,22 @@ void PrintVisitor::Visit(ReturnStatement *return_statement) {
     return_statement->return_expression_->Accept(this);
     --num_tabs_;
 }
+void PrintVisitor::Visit(AndExpression *and_expression) {
+
+}
+
+void PrintVisitor::Visit(OrExpression *or_expression) {
+
+}
+void PrintVisitor::Visit(NotExpression *not_expression) {
+
+}
+void PrintVisitor::Visit(IfStatement *if_statement) {
+
+}
+void PrintVisitor::Visit(GtExpression *gt_expression) {
+
+}
+void PrintVisitor::Visit(LtExpression *lt_expression) {
+
+}

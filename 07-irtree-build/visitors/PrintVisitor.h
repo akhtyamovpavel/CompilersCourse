@@ -29,8 +29,14 @@ class PrintVisitor: public Visitor {
     void Visit(ParamValueList *value_list) override;
 
     void Visit(ReturnStatement *return_statement) override;
+  void Visit(AndExpression *and_expression) override;
+  void Visit(OrExpression *or_expression) override;
+  void Visit(NotExpression *not_expression) override;
+  void Visit(IfStatement *if_statement) override;
+  void Visit(GtExpression *gt_expression) override;
+  void Visit(LtExpression *lt_expression) override;
 
-private:
+ private:
 
     void PrintTabs();
     std::ofstream stream_;
