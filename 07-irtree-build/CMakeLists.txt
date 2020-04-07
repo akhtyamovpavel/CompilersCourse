@@ -1,4 +1,4 @@
-project(FunctionCalls)
+project(07-IrTreeBuild)
 set(CURRENT_EXECUTABLE "${PROJECT_NAME}Executable")
 set(GRAMMAR_LIB "${PROJECT_NAME}GrammarLib")
 set(GRAMMAR_PROJECT "${PROJECT_NAME}GrammarProject")
