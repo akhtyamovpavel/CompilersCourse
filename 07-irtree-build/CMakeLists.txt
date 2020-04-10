@@ -64,7 +64,7 @@ set(
     function-mechanisms/FunctionTable.cpp
     function-mechanisms/FunctionTable.h
     function-mechanisms/FunctionStorage.cpp
-    function-mechanisms/FunctionStorage.h)
+    function-mechanisms/FunctionStorage.h visitors/IrtreeBuildVisitor.cpp visitors/IrtreeBuildVisitor.h)
 
 add_subdirectory(grammar)
 add_subdirectory(irtree)

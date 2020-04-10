@@ -8,7 +8,7 @@
 #include "Expression.h"
 class NotExpression : public Expression {
  public:
-  NotExpression(Expression* e1);
+  explicit NotExpression(Expression* e1);
   void Accept(Visitor *visitor) override;
 
   Expression* expression_;

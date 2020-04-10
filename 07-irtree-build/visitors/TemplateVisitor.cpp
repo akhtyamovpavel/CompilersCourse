@@ -1,3 +1,4 @@
+#include <irtree/tree_wrapper/SubtreeWrapper.h>
 #include "TemplateVisitor.h"
 
 #include "elements.h"
@@ -9,3 +10,4 @@ T TemplateVisitor<T>::Accept(BaseElement * element) {
 }
 
 template int TemplateVisitor<int>::Accept(BaseElement* element);
+template IRT::SubtreeWrapper* TemplateVisitor<IRT::SubtreeWrapper*>::Accept(BaseElement *element);

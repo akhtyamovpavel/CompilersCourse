@@ -117,7 +117,9 @@ void FunctionCallVisitor::Visit(FunctionCallExpression *statement) {
   std::cerr << "Function called " << statement->name_ << std::endl;
   auto function_type = current_layer_->Get(statement->name_);
 
-  std::shared_ptr<FunctionType> func_converted = std::dynamic_pointer_cast<FunctionType>(function_type);
+  std::shared_ptr<FunctionType> func_converted = std::dynamic_pointer_cast<FunctionType>(
+      function_type
+  );
 
   if (func_converted == nullptr) {
     throw std::runtime_error("Function not defined");
@@ -136,7 +138,9 @@ void FunctionCallVisitor::Visit(FunctionCallExpression *statement) {
   new_visitor.SetParams(params);
 
   new_visitor.GetFrame().SetParentFrame(&frame);
-  new_visitor.Visit(FunctionStorage::GetInstance().Get(Symbol(statement->name_)));
+  new_visitor.Visit(
+      FunctionStorage::GetInstance().Get(Symbol(statement->name_))
+  );
 
 
   tos_value_ = frame.GetReturnValue();

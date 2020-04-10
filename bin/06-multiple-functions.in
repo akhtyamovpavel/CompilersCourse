@@ -1,5 +1,4 @@
 func main() {
-    return 0;
     var three;
     three := 555;
     {

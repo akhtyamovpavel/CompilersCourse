@@ -5,7 +5,7 @@ namespace IRT {
 
 class BaseElement {
  public:
-  virtual ~BaseElement();
+  virtual ~BaseElement() = default;
   virtual void Accept(Visitor* visitor) = 0;
 };
 }
