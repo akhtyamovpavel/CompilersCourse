@@ -123,11 +123,12 @@ statements:
 
 statement:
     "identifier" ":=" exp ";" { $$ = new Assignment($1, $3);}
-    | "print" "(" exp ")" ";" { $$ = new PrintStatement($3); }
-    | "var" "identifier" ";" { $$ = new VarDecl($2); }
+    | "print" "(" exp ")" ";" { std::cout << "Print called" << std::endl; $$ = new PrintStatement($3); }
+    | "var" "identifier" ";" {  $$ = new VarDecl($2); }
     | "{" statements "}" { $$ = new ScopeAssignmentList($2); }
     | "return" exp ";" { $$ = new ReturnStatement($2); }
-    | "if" "(" exp ")" "{" statement "}" "else" "{" statement "}" { $$ = new IfStatement($3, $6, $10); }
+    | "if" "(" exp ")" "{" statements "}" "else" "{" statements "}" {
+    	std::cout << "if found" << std::endl; $$ = new IfStatement($3, $6, $10); }
     ;
 
 %left "and" "or";
@@ -148,6 +149,7 @@ exp:
     | exp "/" exp { $$ = new DivExpression($1, $3); }
     | "not" exp  {$$ = new NotExpression($2); }
     | "identifier" "(" param_value_list ")"  {
+    	std::cout << $1 << "function found" << std::endl;
         $$ = new FunctionCallExpression($1, $3);
     }
     | "(" exp ")" { $$ = $2; };

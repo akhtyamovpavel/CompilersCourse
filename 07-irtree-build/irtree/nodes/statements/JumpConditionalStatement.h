@@ -20,7 +20,6 @@ class JumpConditionalStatement : public Statement {
       Label label_false
       );
   void Accept(Visitor *visitor) override;
- private:
   LogicOperatorType operator_type_;
   Label label_true_;
   Label label_false_;

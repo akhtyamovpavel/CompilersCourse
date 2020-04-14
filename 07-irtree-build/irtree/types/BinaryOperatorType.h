@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <string>
 namespace IRT {
 enum class BinaryOperatorType : char {
   PLUS,
@@ -13,4 +14,6 @@ enum class BinaryOperatorType : char {
   AND,
   OR
 };
+
+std::string ToString(BinaryOperatorType type);
 }

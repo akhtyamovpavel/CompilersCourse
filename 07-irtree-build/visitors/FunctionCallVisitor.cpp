@@ -166,7 +166,7 @@ void FunctionCallVisitor::SetTree(ScopeLayerTree *tree) {
 
 }
 
-Frame &FunctionCallVisitor::GetFrame() {
+FrameEmulator &FunctionCallVisitor::GetFrame() {
     return frame;
 }
 

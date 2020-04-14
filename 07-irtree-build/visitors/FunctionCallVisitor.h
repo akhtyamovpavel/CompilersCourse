@@ -6,7 +6,7 @@
 
 #include <symbol_table/ScopeLayer.h>
 #include <stack>
-#include <function-mechanisms/Frame.h>
+#include <function-mechanisms/FrameEmulator.h>
 #include <function-mechanisms/FunctionTable.h>
 #include <symbol_table/ScopeLayerTree.h>
 #include "TemplateVisitor.h"
@@ -40,7 +40,7 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
 
     void Visit(ReturnStatement *return_statement) override;
 
-  Frame& GetFrame();
+  FrameEmulator& GetFrame();
   void Visit(AndExpression *and_expression) override;
   void Visit(OrExpression *or_expression) override;
   void Visit(NotExpression *not_expression) override;
@@ -52,7 +52,7 @@ class FunctionCallVisitor: public TemplateVisitor<int> {
   ScopeLayer* root_layer;
   ScopeLayer* current_layer_;
   std::stack<int> offsets_;
-  Frame frame;
+  FrameEmulator frame;
   FunctionTable table_;
   ScopeLayerTree* tree_;
   bool returned_ = false;

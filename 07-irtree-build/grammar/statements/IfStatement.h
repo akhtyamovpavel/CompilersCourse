@@ -6,15 +6,14 @@
 #pragma once
 
 #include "Statement.h"
-
 class IfStatement : public Statement {
  public:
-  IfStatement(Expression* bool_expression, Statement* true_statement, Statement* false_statement);
+  IfStatement(Expression* bool_expression, AssignmentList* true_statement, AssignmentList* false_statement);
   void Accept(Visitor *visitor) override;
 
   Expression* bool_expression_;
-  Statement* true_statement_;
-  Statement* false_statement_;
+  AssignmentList* true_statement_;
+  AssignmentList* false_statement_;
 
 };
 

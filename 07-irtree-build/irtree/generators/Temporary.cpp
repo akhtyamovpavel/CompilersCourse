@@ -11,5 +11,8 @@ std::string IRT::Temporary::ToString() const {
 }
 
 int IRT::Temporary::counter_ = 0;
+IRT::Temporary::Temporary(const std::string &name): name_(name) {
+
+}
 
 

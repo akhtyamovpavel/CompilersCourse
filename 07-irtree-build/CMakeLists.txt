@@ -59,12 +59,12 @@ set(
     types/FunctionType.h
     visitors/FunctionCallVisitor.cpp
     visitors/FunctionCallVisitor.h
-    function-mechanisms/Frame.cpp
-    function-mechanisms/Frame.h
+        function-mechanisms/FrameEmulator.cpp
+        function-mechanisms/FrameEmulator.h
     function-mechanisms/FunctionTable.cpp
     function-mechanisms/FunctionTable.h
     function-mechanisms/FunctionStorage.cpp
-    function-mechanisms/FunctionStorage.h visitors/IrtreeBuildVisitor.cpp visitors/IrtreeBuildVisitor.h)
+    function-mechanisms/FunctionStorage.h visitors/IrtreeBuildVisitor.cpp visitors/IrtreeBuildVisitor.h function-mechanisms/FrameTranslator.cpp function-mechanisms/FrameTranslator.h function-mechanisms/address/Address.h function-mechanisms/address/AddressInFrame.cpp function-mechanisms/address/AddressInFrame.h function-mechanisms/address/AddressInRegister.cpp function-mechanisms/address/AddressInRegister.h)
 
 add_subdirectory(grammar)
 add_subdirectory(irtree)

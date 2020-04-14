@@ -1,5 +1,6 @@
 #include <visitors/FunctionCallVisitor.h>
 #include <function-mechanisms/FunctionStorage.h>
+#include <visitors/IrtreeBuildVisitor.h>
 #include "driver.hh"
 #include "parser.hh"
 
@@ -59,11 +60,15 @@ int Driver::Evaluate() {
     function_visitor.Visit(main_function);
 
     root.PrintTree("symbol_tree.txt");
-    Interpreter interpreter(root);
-    int interpreter_result = interpreter.GetResult(program);
+
+    IrtreeBuildVisitor irt_build_visitor(&root);
+
+    irt_build_visitor.Visit(program);
+//    Interpreter interpreter(root);
+//    int interpreter_result = interpreter.GetResult(program);
 
 //    delete root;
-    return interpreter_result;
+    return 0;
 }
 
 void Driver::scan_begin() {

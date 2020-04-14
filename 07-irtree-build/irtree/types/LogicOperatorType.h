@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <string>
 namespace IRT {
 enum class LogicOperatorType : char {
   LT,
@@ -11,4 +12,6 @@ enum class LogicOperatorType : char {
   EQ,
   NE
 };
+
+std::string ToString(LogicOperatorType type);
 }

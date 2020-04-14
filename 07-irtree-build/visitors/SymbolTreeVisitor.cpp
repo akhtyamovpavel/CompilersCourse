@@ -8,16 +8,7 @@
 
 
 SymbolTreeVisitor::SymbolTreeVisitor(): tree_(new ScopeLayer) {
-
-    tree_.root_->DeclareVariable(Symbol("one"));
-    tree_.root_->DeclareVariable(Symbol("two"));
-
-//    tree_.root_->Put(Symbol("one"), std::make_shared<Integer>(1));
-//    tree_.root_->Put(Symbol("two"), std::make_shared<Integer>(2));
-
     current_layer_ = tree_.root_;
-
-//    path_.push_back(tree_.root_);
 }
 
 void SymbolTreeVisitor::Visit(NumberExpression* expression) {

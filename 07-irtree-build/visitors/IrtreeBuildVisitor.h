@@ -7,10 +7,16 @@
 
 #include <include/visitors/Visitor.h>
 #include <irtree/tree_wrapper/SubtreeWrapper.h>
+#include <unordered_map>
+#include <function-mechanisms/FrameTranslator.h>
+#include <symbol_table/ScopeLayerTree.h>
 #include "TemplateVisitor.h"
+
+using IrtMapping = std::unordered_map<std::string, IRT::Statement*>;
 
 class IrtreeBuildVisitor : public TemplateVisitor<IRT::SubtreeWrapper*> {
   public:
+  explicit IrtreeBuildVisitor(ScopeLayerTree* layer_tree);
    void Visit(NumberExpression *expression) override;
    void Visit(AddExpression *expression) override;
    void Visit(SubstractExpression *expression) override;
@@ -36,6 +42,15 @@ class IrtreeBuildVisitor : public TemplateVisitor<IRT::SubtreeWrapper*> {
    void Visit(GtExpression *gt_expression) override;
    void Visit(LtExpression *lt_expression) override;
 
- };
+   IrtMapping GetTrees();
+
+ private:
+  std::unordered_map<std::string, IRT::FrameTranslator*> frame_translator_;
+
+  IRT::FrameTranslator *current_frame_;
+  ScopeLayerTree* tree_;
+
+  IrtMapping method_trees_;
+};
 
 

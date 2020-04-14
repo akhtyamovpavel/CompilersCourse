@@ -10,8 +10,6 @@
 Interpreter::Interpreter(ScopeLayerTree root): tree_(root) {
 
     current_layer_ = tree_.root_;
-    current_layer_->Put(Symbol("one"), std::make_shared<Integer>(1));
-    current_layer_->Put(Symbol("two"), std::make_shared<Integer>(2));
     offsets_.push(0);
     tos_value_ = 0;
 }
