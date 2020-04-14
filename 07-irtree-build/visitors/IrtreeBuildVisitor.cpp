@@ -110,11 +110,13 @@ void IrtreeBuildVisitor::Visit(Assignment *assignment) {
 
 void IrtreeBuildVisitor::Visit(VarDecl *var_decl) {
   current_frame_->AddLocalVariable(var_decl->variable_);
+  tos_value_ = nullptr;
 }
 
 void IrtreeBuildVisitor::Visit(PrintStatement *statement) {
-
+  tos_value_ = nullptr;
 }
+
 void IrtreeBuildVisitor::Visit(AssignmentList *assignment_list) {
   if (assignment_list->statements_.empty()) {
     tos_value_ = nullptr;
@@ -124,11 +126,14 @@ void IrtreeBuildVisitor::Visit(AssignmentList *assignment_list) {
   if (assignment_list->statements_.size() == 1) {
     tos_value_ = Accept(assignment_list->statements_[0]);
   } else {
-    std::vector<IRT::Statement*> statements(assignment_list->statements_.size());
-    size_t index = 0;
+    std::vector<IRT::Statement*> statements;
+    statements.reserve(assignment_list->statements_.size());
+//    size_t index = 0;
     for (auto statement: assignment_list->statements_) {
-      statements[index] = Accept(statement)->ToStatement();
-      ++index;
+      auto stmt = Accept(statement);
+      if (stmt) {
+        statements.push_back(stmt->ToStatement());
+      }
     }
     IRT::Statement* suffix = statements.back();
 
@@ -176,7 +181,7 @@ void IrtreeBuildVisitor::Visit(Function *function) {
     tos_value_ = new IRT::StatementWrapper(
         new IRT::SeqStatement(
             new IRT::LabelStatement(IRT::Label(function->name_)),
-            statements_ir->ToStatement()
+            statements_ir->ToStatement() // TODO: set return value 0 by default
         )
     );
   } else {
@@ -265,28 +270,40 @@ void IrtreeBuildVisitor::Visit(IfStatement *if_statement) {
   IRT::Label label_false;
   IRT::Label label_join;
 
-  tos_value_ = new IRT::StatementWrapper(new IRT::SeqStatement(
-    if_cond_expression->ToConditional(label_true, label_false),
-    new IRT::SeqStatement(
+  IRT::Statement* suffix = new IRT::LabelStatement(label_join);
+
+  IRT::Label* result_true = &label_join;
+  IRT::Label* result_false = &label_join;
+
+  if (false_stmt) {
+    result_false = &label_false;
+    suffix = new IRT::SeqStatement(
+        new IRT::LabelStatement(label_false),
+        new IRT::SeqStatement(false_stmt->ToStatement(), suffix)
+    );
+
+    if (true_stmt) {
+      suffix = new IRT::SeqStatement(
+        new IRT::JumpStatement(label_join),
+        suffix
+      );
+    }
+  }
+
+  if (true_stmt) {
+    result_true = &label_true;
+    suffix = new IRT::SeqStatement(
       new IRT::LabelStatement(label_true),
-      new IRT::SeqStatement(
-        true_stmt->ToStatement(),
-        new IRT::SeqStatement(
-          new IRT::JumpStatement(label_join),
-          new IRT::SeqStatement(
-            new IRT::LabelStatement(label_false),
-            new IRT::SeqStatement(
-              false_stmt->ToStatement(),
-              new IRT::SeqStatement(
-                new IRT::JumpStatement(label_join),
-                new IRT::LabelStatement(label_join)
-              )
-            )
-          )
-        )
-      )
+      new IRT::SeqStatement(true_stmt->ToStatement(), suffix)
+    );
+  }
+
+  tos_value_ = new IRT::StatementWrapper(
+    new IRT::SeqStatement(
+      if_cond_expression->ToConditional(*result_true, *result_false),
+      suffix
     )
-  ));
+  );
 
 }
 void IrtreeBuildVisitor::Visit(GtExpression *gt_expression) {

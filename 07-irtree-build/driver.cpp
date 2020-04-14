@@ -1,6 +1,7 @@
 #include <visitors/FunctionCallVisitor.h>
 #include <function-mechanisms/FunctionStorage.h>
 #include <visitors/IrtreeBuildVisitor.h>
+#include <irtree/visitors/PrintVisitor.h>
 #include "driver.hh"
 #include "parser.hh"
 
@@ -64,6 +65,13 @@ int Driver::Evaluate() {
     IrtreeBuildVisitor irt_build_visitor(&root);
 
     irt_build_visitor.Visit(program);
+
+    IrtMapping methods = irt_build_visitor.GetTrees();
+
+    for (auto func_view = methods.begin(); func_view != methods.end(); ++func_view) {
+      IRT::PrintVisitor print_visitor_irt(func_view->first + "_irt.txt");
+      methods[func_view->first]->Accept(&print_visitor_irt);
+    }
 //    Interpreter interpreter(root);
 //    int interpreter_result = interpreter.GetResult(program);
 
