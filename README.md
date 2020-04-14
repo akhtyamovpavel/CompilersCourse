@@ -14,6 +14,8 @@
     - [04. Интерпретатор через Visitor](/04-visitors)
     - [05. Таблицы символов](/05-variable-scopes)
     - [06. Механизмы вызова функций](/06-function-calls)
+    - [07. Построение дерева IR](/07-irtree-build)
+    - [08. Оптимизация дерева IR](/08-irtree-optimizations)
 * Список чекпоинтов
     - [01. Наивный интерпретатор](/milestones/01-naive-interpreter.md)
     - [02. AST-дерево](/milestones/02-ast-tree.md)
