@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-    auto layer = new ScopeLayer();
+    std::shared_ptr<ScopeLayer> layer = std::make_shared<ScopeLayer>();
     // ScopeLayer layer;
 
     layer->DeclareVariable(Symbol("a"));
@@ -14,7 +14,7 @@ int main() {
 
     std::cout << layer->Get(Symbol("a"))->ToInt() << std::endl;
 
-    auto layer2 = new ScopeLayer(layer);
+    auto layer2 = std::make_shared<ScopeLayer>(layer);
     layer2->AttachParent();
 
     std::cout << layer2->Get(Symbol("a"))->ToInt() << std::endl;

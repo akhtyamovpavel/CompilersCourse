@@ -1,0 +1,27 @@
+func main() {
+    var three;
+    three := 3;
+    print(three);
+
+    if (three > 2) {
+        print(three + 2);
+    } else {
+        print(222);
+        var x;
+        x := foo(1, 2, 3);
+        print(foo(1, 2, 3));
+    }
+
+    if (three + 3 < 7) {
+        print(three + 3);
+    } else {
+        print(1000);
+    }
+}
+func bar(b) {
+    return b;
+}
+
+func foo(a, b, c) {
+    return a + b + c;
+}
