@@ -263,8 +263,12 @@ void IrtreeBuildVisitor::Visit(NotExpression *not_expression) {
 }
 void IrtreeBuildVisitor::Visit(IfStatement *if_statement) {
   auto if_cond_expression = Accept(if_statement->bool_expression_);
+  current_frame_->SetupScope();
   auto true_stmt = Accept(if_statement->true_statement_);
+  current_frame_->TearDownScope();
+  current_frame_->SetupScope();
   auto false_stmt = Accept(if_statement->false_statement_);
+  current_frame_->TearDownScope();
 
   IRT::Label label_true;
   IRT::Label label_false;

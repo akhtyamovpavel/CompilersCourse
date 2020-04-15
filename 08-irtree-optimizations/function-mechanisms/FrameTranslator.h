@@ -35,11 +35,9 @@ class FrameTranslator {
   std::unordered_map<std::string, std::stack<Address*> > addresses_;
 
   std::stack<std::string> symbols_;
-  std::vector<std::string> variables_;
   int word_size_ = 4;
   std::string function_name_;
 
-  std::stack<int> scope_offsets_;
   int GetOffset();
   int max_offset_ = 0;
 };

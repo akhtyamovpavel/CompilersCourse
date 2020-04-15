@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(08-IrTreeOptimizations)
-
+project(08-IrTreeCanonization)
 if (CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin")
     execute_process(
             COMMAND brew --prefix bison

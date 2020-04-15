@@ -15,6 +15,7 @@ class JumpStatement;
 class CallExpression;
 class ExpressionList;
 class NameExpression;
+class EseqExpression;
 
 class Visitor {
  public:
@@ -33,5 +34,6 @@ class Visitor {
   virtual void Visit(CallExpression* call_expression) = 0;
   virtual void Visit(ExpressionList* expression_list) = 0;
   virtual void Visit(NameExpression* name_expression) = 0;
+  virtual void Visit(EseqExpression* eseq_expression) = 0;
 };
 };

@@ -7,12 +7,15 @@ func main() {
         print(three + 2);
     } else {
         print(222);
-        var x;
-        x := foo(1, 2, 3);
+        var three;
+        three := foo(1, 2, 3) + bar(three);
         print(foo(1, 2, 3));
     }
 
-    if (three + 3 < 7) {
+    var five;
+    five := three > 2;
+
+    if (three) {
         print(three + 3);
     } else {
         print(1000);
