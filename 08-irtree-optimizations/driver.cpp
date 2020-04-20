@@ -2,6 +2,7 @@
 #include <function-mechanisms/FunctionStorage.h>
 #include <visitors/IrtreeBuildVisitor.h>
 #include <irtree/visitors/PrintVisitor.h>
+#include <irtree/visitors/DoubleCallEliminateVisitor.h>
 #include "driver.hh"
 #include "parser.hh"
 
@@ -71,6 +72,15 @@ int Driver::Evaluate() {
     for (auto func_view = methods.begin(); func_view != methods.end(); ++func_view) {
       IRT::PrintVisitor print_visitor_irt(func_view->first + "_irt.txt");
       methods[func_view->first]->Accept(&print_visitor_irt);
+
+      IRT::DoubleCallEliminateVisitor call_eliminate_visitor;
+      methods[func_view->first]->Accept(&call_eliminate_visitor);
+
+      auto stmt_result = call_eliminate_visitor.GetTree();
+
+      IRT::PrintVisitor print_visitor_two(func_view->first + "_without_double_call.txt");
+      stmt_result->Accept(&print_visitor_two);
+
     }
 //    Interpreter interpreter(root);
 //    int interpreter_result = interpreter.GetResult(program);

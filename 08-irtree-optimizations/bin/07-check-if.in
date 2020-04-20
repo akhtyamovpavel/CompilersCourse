@@ -21,6 +21,7 @@ func main() {
         print(1000);
     }
 }
+
 func bar(b) {
     return b;
 }
