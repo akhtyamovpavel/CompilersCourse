@@ -22,6 +22,9 @@
     - [03. Визиторы](/milestones/03-visitors.md)
     - [04. Scope-ы и системы типов](/milestones/04-scopes.md)
     - [05. Функции](/milestones/05-functions.md)
+    - [06. Построение IR-дерева](/milestones/06-ir-builder.md)
+    - [07. Канонизация IR-дерева](/milestones/07-ir-canonization.md)
+    - [08. Построение блоков IR-дерева](/milestones/08-block-trace-formation.md)
     
 
 ### Сдача заданий
