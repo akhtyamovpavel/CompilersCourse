@@ -94,7 +94,7 @@ The syntax given below does not specify the precedence of operators. However, Mi
 * Uppercase letters are distinguished from lowercase. 
 * Integer literals: A sequence of decimal digits is an integer constant that denotes the corresponding integer value. 
 * Comments: In a Mini-Java program, a comment may appear between any two tokens. 
-* There are two forms of comments: one starts with "/*", ends with "*/", can extend over multiple lines, and may be nested. 
+* There are two forms of comments: one starts with "/\*", ends with "\*/", can extend over multiple lines, and may be nested. 
 * The other comment alternative begins with "//" and goes only to the end of the line.
 
 ## Пример программы
