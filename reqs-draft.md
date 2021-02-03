@@ -71,7 +71,7 @@ The syntax given below does not specify the precedence of operators. However, Mi
 
 <method invocation> ::=	<expr> "." <identifier> "(" [ <expr> ("," <expr>)* ] ")"
 
-<lvalue> ::=	<identifier> | <identifier> "[" <expr> "]"
+<lvalue> ::=	<identifier> | <identifier> "[" <expr> "]" | this "." <identifier> | this "." <identifier> "[" <expr> "]"
 
 <expr> ::=	<expr> <binary operator> <expr>  | 
             <expr> "[" <expr> "]"  | 
