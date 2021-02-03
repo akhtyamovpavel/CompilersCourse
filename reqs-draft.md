@@ -71,7 +71,9 @@ The syntax given below does not specify the precedence of operators. However, Mi
 
 <method invocation> ::=	<expr> "." <identifier> "(" [ <expr> ("," <expr>)* ] ")"
 
-<lvalue> ::=	<identifier> | <identifier> "[" <expr> "]" | this "." <identifier> | this "." <identifier> "[" <expr> "]"
+<field invocation>  ::= this "." <identifier> | this "." <identifier> "[" <expr> "]"
+
+<lvalue> ::=	<identifier> | <identifier> "[" <expr> "]" | <field invocation>
 
 <expr> ::=	<expr> <binary operator> <expr>  | 
             <expr> "[" <expr> "]"  | 
@@ -82,7 +84,7 @@ The syntax given below does not specify the precedence of operators. However, Mi
             "(" <expr> ")"  | 
             <identifier>  | <integer literal>  | 
             this  | true  | false  | 
-            <method invocation>
+            <method invocation>    | <field invocation>
 
 
 <binary operator> ::=	"&&"   |  "||"   |  "<"   | ">"   |  "=="   | "+"   |  "-"   | "*"  | "/"  | "%"
