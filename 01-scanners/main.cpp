@@ -5,6 +5,13 @@
 #include "Commands.h"
 
 
+void PrintHelp() {
+  std::cout << "Help" << std::endl;
+  for (auto const& [key, value]: TOKEN_MAP) {
+    std::cout << value << std::endl;
+  }
+}
+
 int main() {
     Lexer lexer;
 	while (true) {
@@ -12,6 +19,8 @@ int main() {
 		if (token == TOKEN_EXIT) {
 			std::cout << "Good bye" << std::endl;
 			return 0;
+		} else if (token == TOKEN_HELP) {
+		  PrintHelp();
 		}
 		std::cout << token << std::endl;
 	}
