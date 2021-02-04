@@ -17,4 +17,5 @@ class Scanner: public yyFlexLexer {
 	virtual ~Scanner() {}
 	virtual yy::parser::symbol_type ScanToken();
     Driver &driver;
+    void UpdateLocation();
 };

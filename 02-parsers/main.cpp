@@ -10,6 +10,8 @@ int main(int argc, char** argv) {
             driver.trace_parsing = true;
         } else if (argv[i] == std::string("-s")) {
             driver.trace_scanning = true;
+        } else if (argv[i] == std::string("-l")) {
+            driver.location_debug = true;
         } else if (!driver.parse(argv[i])) {
             std::cout << driver.result << std::endl;
         } else {

@@ -14,6 +14,7 @@ void PrintHelp() {
 
 int main() {
     Lexer lexer;
+    lexer.set_debug(true);
 	while (true) {
 		int token = lexer.ScanToken();
 		if (token == TOKEN_EXIT) {

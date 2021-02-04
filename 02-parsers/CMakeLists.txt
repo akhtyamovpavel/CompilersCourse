@@ -9,6 +9,7 @@ BISON_TARGET(
     MyParser
     parser.y
     ${ParserExample_SOURCE_DIR}/parser.cpp
+    COMPILE_FLAGS --graph
     DEFINES_FILE ${ParserExample_SOURCE_DIR}/parser.hh
 )
 
@@ -21,13 +22,13 @@ FLEX_TARGET(
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 add_executable(
-    ParserExample
+    02-ParserExample
     main.cpp
     driver.cpp
     ${BISON_MyParser_OUTPUTS}
     ${FLEX_MyScanner_OUTPUTS}
 )
-target_include_directories(ParserExample PRIVATE ${ParserExample_SOURCE_DIR})
+target_include_directories(02-ParserExample PRIVATE ${ParserExample_SOURCE_DIR})
 
 
 

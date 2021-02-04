@@ -27,8 +27,6 @@ int   [0-9]+
 blank [ \t\r]
 
 %{
-  // Code run each time a pattern is matched.
-  # define YY_USER_ACTION  loc.columns (yyleng);
 %}
 %%
 %{

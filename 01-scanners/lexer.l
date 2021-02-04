@@ -18,12 +18,12 @@
 %%
 [ \t\r\n]+ {}
 
-[h|help] { return TOKEN_HELP; }
-[u|up] { std::cout << "up" << std::endl; return TOKEN_UP; }
-[d|down] { std::cout << "down" << std::endl; return TOKEN_DOWN; }
-[l|left] { std::cout << "left" << std::endl; return TOKEN_LEFT; }
-[r|right] { std::cout << "right" << std::endl; return TOKEN_RIGHT; }
-[e|exit] { return TOKEN_EXIT; }
+h|help { return TOKEN_HELP; }
+up|u { std::cout << "up" << std::endl; return TOKEN_UP; }
+down|d { std::cout << "down" << std::endl; return TOKEN_DOWN; }
+left|l { std::cout << "left" << std::endl; return TOKEN_LEFT; }
+right|r { std::cout << "right" << std::endl; return TOKEN_RIGHT; }
+exit|e { return TOKEN_EXIT; }
 
 .* { std::cout << "ERROR " << yytext << std::endl; return TOKEN_ERROR; }
 

@@ -1,0 +1,4 @@
+three := 3 ;
+seven := two * three + one;
+five := 5;
+seven * seven;

@@ -8,11 +8,11 @@
 
 %code requires {
     #include <string>
+    /* Forward declaration of classes in order to disable cyclic dependencies */
     class Scanner;
     class Driver;
 }
 
-// %param { Driver &drv }
 
 %define parse.trace
 %define parse.error verbose
@@ -21,6 +21,7 @@
     #include "driver.hh"
     #include "location.hh"
 
+    /* Redefine parser to use our function from scanner */
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
         return scanner.ScanToken();
     }
@@ -34,7 +35,7 @@
 %locations
 
 %define api.token.prefix {TOK_}
-
+// token name in variable
 %token
     END 0 "end of file"
     ASSIGN ":="
@@ -44,30 +45,41 @@
     SLASH "/"
     LPAREN "("
     RPAREN ")"
+    SEMICOLON ";"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <int> exp
 
+// Prints output in parsing option for debugging location terminal
 %printer { yyo << $$; } <*>;
 
 %%
+%left "+" "-";
+%left "*" "/";
+
 %start unit;
-unit: assignments exp { driver.result = $2; };
+unit: assignments exp ";" { driver.result = $2; };
 
 assignments:
     %empty {}
     | assignments assignment {};
 
 assignment:
-    "identifier" ":=" exp {
+    "identifier" ":=" exp ";" {
         driver.variables[$1] = $3;
-        // std::cout << drv.location.begin.line << "-" << drv.location.end.line << std::endl;
+        if (driver.location_debug) {
+            std::cerr << driver.location << std::endl;
+        }
+    }
+    | error ";" {
+    	// Hint for compilation error, resuming producing messages
+    	std::cerr << "You should provide assignment in the form: variable := expression ; " << std::endl;
+    	yyerrok;
     };
 
-%left "+" "-";
-%left "*" "/";
+
 
 exp:
     "number"

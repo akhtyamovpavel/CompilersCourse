@@ -15,11 +15,20 @@
 %option yyclass="Scanner"
 
 %{
+  // Code definitions at the end of scanner.cpp
+
   // A number symbol corresponding to the value in S.
   yy::parser::symbol_type make_NUMBER(
     const std::string &s,
     const yy::parser::location_type& loc
   );
+
+  void Scanner::UpdateLocation() {
+    if (driver.location_debug) {
+        std::cerr << "Action called " << driver.location << std::endl;
+    }
+    driver.location.columns(yyleng);
+  }
 %}
 
 id    [a-zA-Z][a-zA-Z_0-9]*
@@ -28,21 +37,40 @@ blank [ \t\r]
 
 %{
   // Code run each time a pattern is matched.
-  # define YY_USER_ACTION  loc.columns (yyleng);
+  #define YY_USER_ACTION UpdateLocation();
 %}
+
 %%
+
+
 %{
   // A handy shortcut to the location held by the driver.
   yy::location& loc = driver.location;
+  if (driver.location_debug) {
   // Code run each time yylex is called.
-  loc.step();
+    std::cerr << "BEFORE " << loc << std::endl;
+  }
+  // loc.step();
+  if (driver.location_debug) {
+    std::cerr << "AFTER " <<  loc << std::endl;
+  }
 %}
 
-{blank}+   loc.step ();
-\n+        loc.lines (yyleng); loc.step ();
+{blank}+   {
+    if (driver.location_debug) {
+        std::cerr << "Blank matched" << std::endl;
+    }
+    // loc.step();
+}
+\n+        {
+    if (driver.location_debug) {
+        std::cerr << "EOL called" << std::endl;
+    }
+    loc.lines(yyleng);
+    loc.step();
+}
 
 "-"        {
-              std::cout << loc.begin.line << " " << loc.end.line << std::endl;
               return yy::parser::make_MINUS  (loc);
            }
 "+"        return yy::parser::make_PLUS   (loc);
@@ -51,9 +79,15 @@ blank [ \t\r]
 "("        return yy::parser::make_LPAREN (loc);
 ")"        return yy::parser::make_RPAREN (loc);
 ":="       return yy::parser::make_ASSIGN (loc);
+";"        return yy::parser::make_SEMICOLON(loc);
 
 {int}      return make_NUMBER(yytext, loc);
-{id}       return yy::parser::make_IDENTIFIER(yytext, loc);
+{id}       {
+                if (driver.location_debug) {
+                    std::cerr << "ID found " << yytext << std::endl;
+                }
+                return yy::parser::make_IDENTIFIER(yytext, loc);
+           }
 .          {
                 throw yy::parser::syntax_error(loc, "invalid character: " + std::string(yytext));
            }
