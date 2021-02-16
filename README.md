@@ -17,14 +17,8 @@
     - [07. Построение дерева IR](/07-irtree-build)
     - [08. Оптимизация дерева IR](/08-irtree-optimizations)
 * Список чекпоинтов
-    - [01. Наивный интерпретатор](/milestones/01-naive-interpreter.md)
-    - [02. AST-дерево](/milestones/02-ast-tree.md)
-    - [03. Визиторы](/milestones/03-visitors.md)
-    - [04. Scope-ы и системы типов](/milestones/04-scopes.md)
-    - [05. Функции](/milestones/05-functions.md)
-    - [06. Построение IR-дерева](/milestones/06-ir-builder.md)
-    - [07. Канонизация IR-дерева](/milestones/07-ir-canonization.md)
-    - [08. Построение блоков IR-дерева](/milestones/08-block-trace-formation.md)
+    - [01. Одиночный. AST](/milestones/milestones-2021/01-ast.md)
+    - [01. Парный. AST + locations](/milestones/milestones-2021/01-ast-locations.md)
     
 
 ### Сдача заданий
