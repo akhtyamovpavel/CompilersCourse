@@ -22,13 +22,13 @@
     #include "location.hh"
 
     /* Redefine parser to use our function from scanner */
-    static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
+    static yy::parser::symbol_type yylex(Scanner &scanner) {
         return scanner.ScanToken();
     }
 }
 
 %lex-param { Scanner &scanner }
-%lex-param { Driver &driver }
+
 %parse-param { Scanner &scanner }
 %parse-param { Driver &driver }
 
@@ -76,7 +76,6 @@ assignment:
     | error ";" {
     	// Hint for compilation error, resuming producing messages
     	std::cerr << "You should provide assignment in the form: variable := expression ; " << std::endl;
-    	yyerrok;
     };
 
 

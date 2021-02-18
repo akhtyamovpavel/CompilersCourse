@@ -62,7 +62,7 @@ blank [ \t\r]
     }
     // loc.step();
 }
-\n+        {
+\n+ {
     if (driver.location_debug) {
         std::cerr << "EOL called" << std::endl;
     }

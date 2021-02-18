@@ -20,6 +20,10 @@ int Driver::parse(const std::string& f) {
     int res = parser();
 
     std::cout << program << std::endl;
+
+    for (const auto& [name, value]: variables) {
+      std::cerr << name << " " << value << std::endl;
+    }
     scan_end();
     return res;
 }

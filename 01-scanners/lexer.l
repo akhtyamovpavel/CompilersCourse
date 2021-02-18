@@ -2,6 +2,8 @@
 %option c++
 %option yyclass="Lexer"
 
+%option debug
+
 
 %{
 

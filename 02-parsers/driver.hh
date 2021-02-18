@@ -14,11 +14,12 @@ class Driver {
     int result;
     int parse(const std::string& f);
     std::string file;
-    bool trace_parsing;
+
 
     void scan_begin();
     void scan_end();
 
+    bool trace_parsing;
     bool trace_scanning;
     yy::location location;
 

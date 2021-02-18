@@ -89,7 +89,7 @@ assignments:
 assignment:
     "identifier" ":=" exp {
         $$ = new Assignment($1, $3);
-        // driver.variables[$1] = $3->eval();
+         driver.variables[$1] = $3->eval(driver);
     };
 
 %left "+" "-";

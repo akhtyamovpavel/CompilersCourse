@@ -11,5 +11,6 @@
 class Lexer: public yyFlexLexer {
  public:
 	virtual ~Lexer() {}
+//	virtual int yylex();
 	virtual int ScanToken();
 };

@@ -16,7 +16,7 @@ int main() {
     Lexer lexer;
     lexer.set_debug(true);
 	while (true) {
-		int token = lexer.ScanToken();
+		int token = lexer.yylex();
 		if (token == TOKEN_EXIT) {
 			std::cout << "Good bye" << std::endl;
 			return 0;
