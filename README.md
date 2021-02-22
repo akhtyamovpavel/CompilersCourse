@@ -19,11 +19,14 @@
 * Список чекпоинтов
     - [01. Одиночный. AST](/milestones/milestones-2021/01-ast.md)
     - [01. Парный. AST + locations](/milestones/milestones-2021/01-ast-locations.md)
+    - [02. Одиночный. Visitors](/milestones/milestones-2021/02-visitors.md)
+    - [02. Парный. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
     
 
 ### Сдача заданий
+Сдавать задание на почту: compilers2021-checkpoints@akht.pl
 
-В таблице [akht.pl/compilers2020-checkpoints](https://akht.pl/compilers2020-checkpoints) необходимо записать фамилию, имя и пометить ячейку (вставить комментарий) с соответствующим чекпоинтом.
+На почту кидаем номер checkpoint-a, ссылку на github
 
 ## Сборка Docker контейнера
 Ссылка на image - https://hub.docker.com/r/akhtyamovpavel/compilers_course_image
