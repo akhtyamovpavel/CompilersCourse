@@ -21,12 +21,23 @@
     - [01. Парный. AST + locations](/milestones/milestones-2021/01-ast-locations.md)
     - [02. Одиночный. Visitors](/milestones/milestones-2021/02-visitors.md)
     - [02. Парный. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
+    - [03. Одиночный. Подготовка семантики](/milestones/milestones-2021/03-one-symbols.md)
+    - [03. Парный. Таблица символов + система типов](/milestones/milestones-2021/03-pair-symbol-table-types.md)
     
 
 ### Сдача заданий
 Сдавать задание на почту: compilers2021-checkpoints@akht.pl
 
 На почту кидаем номер checkpoint-a, ссылку на github
+
+### Flow работы в проекте
+
+* В ветке main/master находится работающая версия кода, в нее будут сливать изменения кураторы
+* Для разработки проекта создается ветка dev, в которой выполняется разработка
+* После того, как вы считаете, что определенную часть задания выполнили, создаете отдельную ветку checkpoint_x (x=1,2,3) из ветки dev, создаете pull request из ветки checkpoint_x в ветку main/master, добавляете ревьюера на pull request
+* Если ревьюер попросил сделать изменения, то вы делаете изменения в ветке checkpoint_x и вливаете ее в dev, НЕ СЛИВАЯ при этом ветку в main/master
+* В описании pull request-а пишете списком (добавляете в README.md) список изменений, который произошел в новой версии проекта (от одного чекпоинта к другому)
+
 
 ## Сборка Docker контейнера
 Ссылка на image - https://hub.docker.com/r/akhtyamovpavel/compilers_course_image
