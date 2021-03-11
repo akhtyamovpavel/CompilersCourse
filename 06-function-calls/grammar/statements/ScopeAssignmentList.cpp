@@ -1,7 +1,7 @@
 #include "ScopeAssignmentList.h"
 
 
-ScopeAssignmentList::ScopeAssignmentList(AssignmentList *list):
+ScopeAssignmentList::ScopeAssignmentList(StatementList *list):
     statement_list(list) {}
 
 void ScopeAssignmentList::Accept(Visitor* visitor) {

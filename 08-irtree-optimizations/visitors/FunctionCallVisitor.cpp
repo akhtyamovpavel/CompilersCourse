@@ -54,7 +54,7 @@ void FunctionCallVisitor::Visit(PrintStatement *statement) {
   std::cout << value << std::endl;
 }
 
-void FunctionCallVisitor::Visit(AssignmentList *assignment_list) {
+void FunctionCallVisitor::Visit(StatementList *assignment_list) {
   for (Statement* assignment: assignment_list->statements_) {
       if (!returned_) {
           assignment->Accept(this);

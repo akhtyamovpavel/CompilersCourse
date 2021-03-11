@@ -1,10 +1,10 @@
 #include "AssignmentList.h"
 
 
-void AssignmentList::AddStatement(Statement* assignment) {
+void StatementList::AddStatement(Statement* assignment) {
     statements_.push_back(assignment);
 }
 
-void AssignmentList::Accept(Visitor* visitor) {
+void StatementList::Accept(Visitor* visitor) {
     visitor->Visit(this);
 }

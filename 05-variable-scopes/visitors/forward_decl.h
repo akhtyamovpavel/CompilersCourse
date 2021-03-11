@@ -13,6 +13,6 @@ class Statement;
 class PrintStatement;
 class VarDecl;
 class Assignment;
-class AssignmentList;
+class StatementList;
 class ScopeAssignmentList;
 class Program;

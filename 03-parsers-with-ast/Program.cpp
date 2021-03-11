@@ -1,6 +1,11 @@
 #include "Program.h"
+#include "../04-visitors/visitors/Visitor.h"
 
 Program::Program(
-    AssignmentList* assignments,
+    StatementList* assignments,
     Expression* expression
 ): assignments_(assignments), expression_(expression) {}
+
+void Program::Accept(Visitor *visitor) {
+  visitor->Visit(this);
+}

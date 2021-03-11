@@ -78,9 +78,9 @@ void PrintVisitor::Visit(PrintStatement* statement) {
     --num_tabs_;
 }
 
-void PrintVisitor::Visit(AssignmentList* assignment_list) {
+void PrintVisitor::Visit(StatementList* assignment_list) {
     PrintTabs();
-    stream_ << "AssignmentList: " << std::endl;
+    stream_ << "StatementList: " << std::endl;
 
     ++num_tabs_;
     for (Statement* assignment : assignment_list->statements_) {

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-class AssignmentList {
+class StatementList {
  public:
     void AddAssignment(Assignment* assignment);
  private:

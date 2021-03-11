@@ -26,7 +26,7 @@ class IrtreeBuildVisitor : public TemplateVisitor<IRT::SubtreeWrapper*> {
    void Visit(Assignment *assignment) override;
    void Visit(VarDecl *var_decl) override;
    void Visit(PrintStatement *statement) override;
-   void Visit(AssignmentList *assignment_list) override;
+   void Visit(StatementList *assignment_list) override;
    void Visit(ScopeAssignmentList *list) override;
    void Visit(Program *program) override;
    void Visit(ParamList *param_list) override;

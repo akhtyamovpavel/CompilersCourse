@@ -9,8 +9,8 @@ void IfStatement::Accept(Visitor *visitor) {
 }
 IfStatement::IfStatement(
     Expression *bool_expression,
-    AssignmentList *true_statement,
-    AssignmentList *false_statement
+    StatementList *true_statement,
+    StatementList *false_statement
     ): bool_expression_(bool_expression),
     true_statement_(true_statement),
     false_statement_(false_statement) {

@@ -19,7 +19,7 @@ class SymbolTreeVisitor: public Visitor {
     void Visit(PrintStatement* statement) override;
     void Visit(Assignment* assignment) override;
     void Visit(VarDecl* var_decl) override;
-    void Visit(AssignmentList* assignment_list) override;
+    void Visit(StatementList* assignment_list) override;
     void Visit(ScopeAssignmentList* list) override;
     void Visit(Program* program) override;
 

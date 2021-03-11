@@ -11,5 +11,5 @@ void Function::Accept(Visitor *visitor) {
 Function::Function(
     const std::string &name,
     ParamList *param_list,
-    AssignmentList *statements): name_(name), param_list_(param_list), statements_(statements){
+    StatementList *statements): name_(name), param_list_(param_list), statements_(statements){
 }

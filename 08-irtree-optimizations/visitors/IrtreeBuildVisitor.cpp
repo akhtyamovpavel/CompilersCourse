@@ -117,7 +117,7 @@ void IrtreeBuildVisitor::Visit(PrintStatement *statement) {
   tos_value_ = nullptr;
 }
 
-void IrtreeBuildVisitor::Visit(AssignmentList *assignment_list) {
+void IrtreeBuildVisitor::Visit(StatementList *assignment_list) {
   if (assignment_list->statements_.empty()) {
     tos_value_ = nullptr;
     return;

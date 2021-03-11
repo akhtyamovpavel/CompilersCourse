@@ -52,7 +52,7 @@ void Interpreter::Visit(PrintStatement* statement) {
     std::cout << value << std::endl;
 }
 
-void Interpreter::Visit(AssignmentList* assignment_list) {
+void Interpreter::Visit(StatementList* assignment_list) {
     for (Statement* assignment: assignment_list->statements_) {
         assignment->Accept(this);
     }

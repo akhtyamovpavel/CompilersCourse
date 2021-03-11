@@ -1,0 +1,14 @@
+var six;
+six := 6;
+
+func main() {
+    var three;
+    three := 3;
+    var four;
+    four := 4;
+    print(three * three);
+}
+
+func foo(a, b, c) {
+
+}

@@ -65,7 +65,7 @@ void Interpreter::Visit(Assignment* assignment) {
     UnsetTosValue();
 }
 
-void Interpreter::Visit(AssignmentList* assignment_list) {
+void Interpreter::Visit(StatementList* assignment_list) {
     for (Assignment* assignment: assignment_list->assignments_) {
         assignment->Accept(this);
     }

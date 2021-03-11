@@ -12,12 +12,12 @@
 
 class Function : public BaseElement {
  public:
-  Function(const std::string& name, ParamList* param_list, AssignmentList* statements);
+  Function(const std::string& name, ParamList* param_list, StatementList* statements);
   void Accept(Visitor *visitor) override;
 
   std::string name_;
   ParamList* param_list_;
-  AssignmentList* statements_;
+  StatementList* statements_;
 
 };
 

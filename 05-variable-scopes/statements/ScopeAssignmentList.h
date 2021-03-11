@@ -7,7 +7,7 @@
 
 class ScopeAssignmentList : public Statement {
  public:
-    explicit ScopeAssignmentList(AssignmentList* assignment_list);
+    explicit ScopeAssignmentList(StatementList* assignment_list);
     void Accept(Visitor* visitor) override;
-    AssignmentList* statement_list;
+    StatementList* statement_list;
 };

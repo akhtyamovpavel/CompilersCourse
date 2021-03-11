@@ -48,7 +48,7 @@ void SymbolTreeVisitor::Visit(PrintStatement* statement) {
     statement->expression_->Accept(this);
 }
 
-void SymbolTreeVisitor::Visit(AssignmentList* assignment_list) {
+void SymbolTreeVisitor::Visit(StatementList* assignment_list) {
     for (Statement* assignment: assignment_list->statements_) {
         assignment->Accept(this);
     }
