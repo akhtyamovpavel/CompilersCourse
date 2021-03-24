@@ -27,6 +27,8 @@
         - [01. AST + locations](/milestones/milestones-2021/01-ast.md)
         - [02. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
         - [03. Дерево scope-ов + Система Типов](/milestones/milestones-2021/03-pair-symbol-table-types.md)
+        - [04. Обработка функций + ошибок](/milestones-2021/04-pair-functions-errors.md)
+        - [05. IR-tree](/milestones/milestones-2021/05-pair-ir-builder.md)
     
 
 ### Сдача заданий
