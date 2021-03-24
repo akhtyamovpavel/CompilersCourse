@@ -16,13 +16,17 @@
     - [06. Механизмы вызова функций](/06-function-calls)
     - [07. Построение дерева IR](/07-irtree-build)
     - [08. Оптимизация дерева IR](/08-irtree-optimizations)
-* Список чекпоинтов
-    - [01. Одиночный. AST](/milestones/milestones-2021/01-ast.md)
-    - [01. Парный. AST + locations](/milestones/milestones-2021/01-ast-locations.md)
-    - [02. Одиночный. Visitors](/milestones/milestones-2021/02-visitors.md)
-    - [02. Парный. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
-    - [03. Одиночный. Подготовка семантики](/milestones/milestones-2021/03-one-symbols.md)
-    - [03. Парный. Таблица символов + система типов](/milestones/milestones-2021/03-pair-symbol-table-types.md)
+* Список чекпоинтов:
+    * Одиночные:
+        - [01. AST](/milestones/milestones-2021/01-ast.md)
+        - [02. Visitors](/milestones/milestones-2021/02-visitors.md)
+        - [03. Подготовка семантики](/milestones/milestones-2021/03-one-symbols.md)
+        - [04. Дерево scope-ов](/milestones/milestones-2021/04-scope-tree.md)
+        - [05. Система типов](/milestones/milestones-2021/05-one-type-checking.md)
+    * Парные:
+        - [01. AST + locations](/milestones/milestones-2021/01-ast.md)
+        - [02. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
+        - [03. Дерево scope-ов + Система Типов](/milestones/milestones-2021/03-pair-symbol-table-types.md)
     
 
 ### Сдача заданий
