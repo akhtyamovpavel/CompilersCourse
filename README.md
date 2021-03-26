@@ -23,6 +23,8 @@
         - [03. Подготовка семантики](/milestones/milestones-2021/03-one-symbols.md)
         - [04. Дерево scope-ов](/milestones/milestones-2021/04-scope-tree.md)
         - [05. Система типов](/milestones/milestones-2021/05-one-type-checking.md)
+        - [06. Промежуточное представление LLVM](/milestones/milestones-2021/06-one-llvm-IR.md)
+        - [07. Создание исполняемого файла](/milestones/milestones-2021/07-one-llvm-executable.md)
     * Парные:
         - [01. AST + locations](/milestones/milestones-2021/01-ast.md)
         - [02. Visitors + подготовка семантики](/milestones/milestones-2021/02-visitors-table.md)
