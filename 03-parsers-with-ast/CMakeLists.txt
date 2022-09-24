@@ -32,6 +32,7 @@ add_executable(
     expressions/SubstractExpression.cpp
     expressions/DivExpression.cpp
     expressions/IdentExpression.cpp
+    expressions/PowerExpression.cpp
     assignments/Assignment.cpp
     assignments/AssignmentList.cpp
     Program.cpp

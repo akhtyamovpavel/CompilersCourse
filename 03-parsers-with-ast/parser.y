@@ -17,8 +17,8 @@
     class DivExpression;
     class IdentExpression;
     class Assignment;
-    class AssignmentList;
-
+    class StatementList;
+    class PowerExpression;
     class Program;
 }
 
@@ -37,6 +37,7 @@
     #include "expressions/DivExpression.h"
     #include "expressions/SubstractExpression.h"
     #include "expressions/IdentExpression.h"
+    #include "expressions/PowerExpression.h"
     #include "assignments/Assignment.h"
     #include "assignments/AssignmentList.h"
     #include "Program.h"
@@ -64,13 +65,14 @@
     SLASH "/"
     LPAREN "("
     RPAREN ")"
+    POW "**"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <Expression*> exp
 %nterm <Assignment*> assignment
-%nterm <AssignmentList*> assignments
+%nterm <StatementList*> assignments
 %nterm <Program*> unit
 
 // %printer { yyo << $$; } <*>;
@@ -78,22 +80,27 @@
 %%
 %start unit;
 
-unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
+unit: assignments exp {
+        $$ = new Program($1, $2);
+        driver.program = $$;
+    };
 
 assignments:
-    %empty { $$ = new AssignmentList(); /* A -> eps */}
+    %empty { $$ = new StatementList(); /* A -> eps */}
     | assignments assignment {
-        $1->AddAssignment($2); $$ = $1;
+        $1->AddAssignment($2);
+        $$ = $1;
     };
 
 assignment:
     "identifier" ":=" exp {
         $$ = new Assignment($1, $3);
-         driver.variables[$1] = $3->eval(driver);
+        driver.variables[$1] = $3->eval(driver);
     };
 
 %left "+" "-";
 %left "*" "/";
+%right "**";
 
 exp:
     "number" {$$ = new NumberExpression($1); }
@@ -102,7 +109,9 @@ exp:
     | exp "-" exp { $$ = new SubstractExpression($1, $3); }
     | exp "*" exp { $$ = new MulExpression($1, $3); }
     | exp "/" exp { $$ = new DivExpression($1, $3); }
-    | "(" exp ")" { $$ = $2; };
+    | "(" exp ")" { $$ = $2; }
+    | exp "**" exp { $$ = new PowerExpression($1, $3); }
+    ;
 
 %%
 

@@ -7,8 +7,8 @@ Driver::Driver() :
     trace_parsing(false),
     trace_scanning(false),
     scanner(*this), parser(scanner, *this) {
-    variables["one"] = 1;
-    variables["two"] = 2;
+    // variables["one"] = 1;
+    // variables["two"] = 2;
 }
 
 
@@ -20,6 +20,7 @@ int Driver::parse(const std::string& f) {
     int res = parser();
 
     std::cout << program << std::endl;
+    result = program->eval(*this);
 
     for (const auto& [name, value]: variables) {
       std::cerr << name << " " << value << std::endl;

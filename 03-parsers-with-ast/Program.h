@@ -6,6 +6,7 @@
 class Program {
  public:
     Program(StatementList* assignments, Expression* expression);
+    int eval(Driver& driver);
  private:
     StatementList* assignments_;
     Expression* expression_;
