@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(Lexer)
 
-find_package(FLEX REQUIRED)
-
+set(CMAKE_CXX_STANDARD 17)
 FLEX_TARGET(MyScanner lexer.l ${Lexer_SOURCE_DIR}/lexer.cpp)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})

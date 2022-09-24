@@ -41,7 +41,7 @@ void EseqEliminateVisitor::Visit(MemExpression *mem_expression) {
   if (eseq_expr) {
     tos_value_.expression_ = new EseqExpression(
       eseq_expr->statement_,
-      new MemExpression(eseq_expr->expression_),
+      new MemExpression(eseq_expr->expression_)
     );
   } else {
     tos_value_.expression_ = new MemExpression(expression);

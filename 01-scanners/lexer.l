@@ -28,5 +28,4 @@ right|r { std::cout << "right" << std::endl; return TOKEN_RIGHT; }
 exit|e { return TOKEN_EXIT; }
 
 .* { std::cout << "ERROR " << yytext << std::endl; return TOKEN_ERROR; }
-
 %%

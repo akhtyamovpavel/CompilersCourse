@@ -15,16 +15,16 @@ void PrintHelp() {
 int main() {
     Lexer lexer;
     lexer.set_debug(true);
-	while (true) {
-		int token = lexer.yylex();
-		if (token == TOKEN_EXIT) {
-			std::cout << "Good bye" << std::endl;
-			return 0;
-		} else if (token == TOKEN_HELP) {
-		  PrintHelp();
-		}
-		std::cout << token << std::endl;
-	}
-	return 0;
+    while (true) {
+        int token = lexer.ScanToken();
+        if (token == TOKEN_EXIT) {
+            std::cout << "Good bye" << std::endl;
+            return 0;
+        } else if (token == TOKEN_HELP) {
+	    PrintHelp();
+        }
+        std::cout << token << std::endl;
+    }
+    return 0;
 }
 
