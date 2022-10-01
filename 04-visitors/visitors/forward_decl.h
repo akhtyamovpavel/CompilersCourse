@@ -8,5 +8,5 @@ class MulExpression;
 class DivExpression;
 class IdentExpression;
 class Assignment;
-class StatementList;
+class AssignmentList;
 class Program;

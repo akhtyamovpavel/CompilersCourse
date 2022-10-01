@@ -5,7 +5,7 @@
 
 class Program {
  public:
-    Program(StatementList* assignments, Expression* expression);
-  StatementList* assignments_;
+    Program(AssignmentList* assignments, Expression* expression);
+  AssignmentList* assignments_;
     Expression* expression_;
 };

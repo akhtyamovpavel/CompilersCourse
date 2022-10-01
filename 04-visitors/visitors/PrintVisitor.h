@@ -16,7 +16,7 @@ class SymbolTreeVisitor: public Visitor {
     void Visit(DivExpression* expression) override;
     void Visit(IdentExpression* expression) override;
     void Visit(Assignment* assignment) override;
-    void Visit(StatementList* assignment_list) override;
+    void Visit(AssignmentList* assignment_list) override;
     void Visit(Program* program) override;
  private:
 

@@ -65,9 +65,9 @@ void SymbolTreeVisitor::Visit(Assignment* assignment) {
     --num_tabs_;
 }
 
-void SymbolTreeVisitor::Visit(StatementList* assignment_list) {
+void SymbolTreeVisitor::Visit(AssignmentList* assignment_list) {
     PrintTabs();
-    stream_ << "StatementList: " << std::endl;
+    stream_ << "AssignmentList: " << std::endl;
 
     ++num_tabs_;
     for (Assignment* assignment : assignment_list->assignments_) {
