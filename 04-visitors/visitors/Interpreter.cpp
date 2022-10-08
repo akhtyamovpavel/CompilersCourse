@@ -92,5 +92,6 @@ void Interpreter::UnsetTosValue() {
 int Interpreter::GetResult(Program *program) {
     UnsetTosValue();
     Visit(program);
+    // program->Accept(this);
     return tos_value_;
 }
