@@ -23,6 +23,8 @@ set(
         visitors/MainInterpreter.h
         visitors/IrGeneratorVisitor.h
         visitors/IrGeneratorVisitor.cpp
+        visitors/SymbolTableVisitor.h
+        visitors/SymbolTableVisitor.cpp
         symbols/BaseSymbol.cpp symbols/BaseSymbol.h
         scopes/BaseScope.cpp scopes/BaseScope.h)
 

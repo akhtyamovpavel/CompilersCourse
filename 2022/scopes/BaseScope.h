@@ -11,9 +11,12 @@
 
 class BaseScope {
  public:
+  explicit BaseScope(BaseScope* parent = nullptr);
   std::unordered_map<std::string, BaseSymbol*> elements;
   std::vector<BaseScope*> children_;
-  BaseScope* parent_;
+  BaseScope* parent_ = nullptr;
+
+  BaseSymbol* GetVariable(const std::string& name, bool only_this = false) const;
 };
 
 

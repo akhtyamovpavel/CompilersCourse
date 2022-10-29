@@ -9,7 +9,7 @@
 //#include "visitors/Interpreter.h"
 //#include "visitors/PrintVisitor.h"
 //
-//#include "visitors/SymbolTreeVisitor.h"
+#include "visitors/SymbolTableVisitor.h"
 
 
 
@@ -40,6 +40,12 @@ int Driver::Evaluate() {
       main_function = function;
     }
   }
+
+  SymbolTableVisitor tree_visitor(this);
+
+  main_function->Accept(&tree_visitor);
+
+
 
   MainInterpreter visitor(this);
 
