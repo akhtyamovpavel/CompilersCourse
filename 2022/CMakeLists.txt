@@ -24,9 +24,7 @@ set(
         visitors/IrGeneratorVisitor.h
         visitors/IrGeneratorVisitor.cpp
         symbols/BaseSymbol.cpp symbols/BaseSymbol.h
-        symbols/StFunction.h symbols/StFunction.cpp
-        symbols/StVariable.cpp symbols/StVariable.h
-        symbols/StArgument.cpp symbols/StArgument.h scopes/BaseScope.cpp scopes/BaseScope.h visitors/SymbolTableVisitor.cpp visitors/SymbolTableVisitor.h)
+        scopes/BaseScope.cpp scopes/BaseScope.h)
 
 add_subdirectory(grammar)
 

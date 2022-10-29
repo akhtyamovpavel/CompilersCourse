@@ -3,6 +3,11 @@ func main() {
     var four;
     three := 3;
     four := 4;
+    {
+        var three;
+        three := 4;
+    }
+    
     print(three);
 }
 

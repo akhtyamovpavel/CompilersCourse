@@ -97,7 +97,9 @@ void IrGeneratorVisitor::Visit(ParamList *param_list) {}
 
 void IrGeneratorVisitor::Visit(Function *function) {
     std::cerr << "Function visited" << std::endl;
-    auto function_type = llvm::FunctionType::get(llvm::Type::getVoidTy(context_), false);
+    auto function_type = llvm::FunctionType::get(
+        llvm::Type::getVoidTy(context_), false
+    );
 
     auto function_llvm = llvm::Function::Create(
         function_type,
