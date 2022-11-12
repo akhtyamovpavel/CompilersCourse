@@ -7,7 +7,6 @@ func main() {
         var three;
         three := 4;
         four := 5;
-        main();
     }
 
     print(three);
