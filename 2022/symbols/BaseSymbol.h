@@ -10,6 +10,8 @@
 class BaseSymbol {
  public:
   std::string name;
+  std::string base_type;
+  std::string type;
   virtual ~BaseSymbol() = default;
 };
 
