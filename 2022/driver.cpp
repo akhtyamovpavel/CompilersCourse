@@ -5,6 +5,7 @@
 #include <visitors/IrGeneratorVisitor.h>
 #include "driver.hh"
 #include "parser.hh"
+#include <llvm/Support/raw_ostream.h>
 
 //#include "visitors/Interpreter.h"
 //#include "visitors/PrintVisitor.h"
