@@ -16,14 +16,18 @@ int main() {
     Lexer lexer;
     lexer.set_debug(true);
     while (true) {
-        int token = lexer.ScanToken();
-        if (token == TOKEN_EXIT) {
+        Command* token = lexer.ScanToken();
+
+        if (token->command == TOKEN_EXIT) {
             std::cout << "Good bye" << std::endl;
             return 0;
-        } else if (token == TOKEN_HELP) {
-	    PrintHelp();
+        } else if (token->command == TOKEN_HELP) {
+	          PrintHelp();
+        } else {
+          Command* new_token = lexer.ScanToken();
+          std::cout << "Steps" << new_token->steps << std::endl;
         }
-        std::cout << token << std::endl;
+        std::cout << token->command << std::endl;
     }
     return 0;
 }

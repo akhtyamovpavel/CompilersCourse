@@ -11,6 +11,7 @@ enum Token {
 	TOKEN_RIGHT,
 	TOKEN_EXIT,
 	TOKEN_ERROR,
+	TOKEN_INT
 };
 
 
