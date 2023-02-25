@@ -45,7 +45,7 @@ void Driver::scan_end()
 }
 
 void Driver::PrintTree(const std::string& filename) {
-    SymbolTreeVisitor visitor(filename);
+    PrintVisitor visitor(filename);
     visitor.Visit(program);
 }
 

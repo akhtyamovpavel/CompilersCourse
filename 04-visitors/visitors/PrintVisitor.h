@@ -5,10 +5,10 @@
 #include <fstream>
 #include <string>
 
-class SymbolTreeVisitor: public Visitor {
+class PrintVisitor: public Visitor {
  public:
-    SymbolTreeVisitor(const std::string& filename);
-    ~SymbolTreeVisitor();
+    PrintVisitor(const std::string& filename);
+    ~PrintVisitor();
     void Visit(NumberExpression* expression) override;
     void Visit(AddExpression* expression) override;
     void Visit(SubstractExpression* expression) override;
