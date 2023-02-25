@@ -12,6 +12,7 @@ class Interpreter : public Visitor {
     void Visit(DivExpression* expression) override;
     void Visit(IdentExpression* expression) override;
     void Visit(Assignment* assignment) override;
+    void Visit(PrintStatement* statement) override;
     void Visit(AssignmentList* assignment_list) override;
     void Visit(Program* program) override;
 

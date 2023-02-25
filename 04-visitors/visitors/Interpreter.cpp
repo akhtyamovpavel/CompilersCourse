@@ -5,8 +5,6 @@
 #include <iostream>
 
 Interpreter::Interpreter() {
-    variables_["one"] = 1;
-    variables_["two"] = 2;
     is_tos_expression_ = false;
     tos_value_ = 0;
 }
@@ -65,8 +63,13 @@ void Interpreter::Visit(Assignment* assignment) {
     UnsetTosValue();
 }
 
+void Interpreter::Visit(PrintStatement* statement) {
+    statement->expression_->Accept(this);
+    std::cout << tos_value_ << std::endl;
+}
+
 void Interpreter::Visit(AssignmentList* assignment_list) {
-    for (Assignment* assignment: assignment_list->assignments_) {
+    for (Statement* assignment: assignment_list->assignments_) {
         assignment->Accept(this);
     }
     UnsetTosValue();

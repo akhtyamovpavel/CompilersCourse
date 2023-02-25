@@ -51,6 +51,7 @@
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <int> exp
+/* %nterm <Expression*> exp */
 
 // Prints output in parsing option for debugging location terminal
 %printer { yyo << $$; } <*>;

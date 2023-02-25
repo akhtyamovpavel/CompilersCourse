@@ -10,6 +10,7 @@ BISON_TARGET(
     parser.y
     ${ParserExample_SOURCE_DIR}/parser.cpp
     COMPILE_FLAGS --graph
+    COMPILE_FLAGS -Wcounterexamples
     DEFINES_FILE ${ParserExample_SOURCE_DIR}/parser.hh
 )
 

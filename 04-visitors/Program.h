@@ -3,9 +3,11 @@
 #include "assignments/AssignmentList.h"
 #include "expressions/Expression.h"
 
-class Program {
+class Program: BaseElement {
  public:
     Program(AssignmentList* assignments, Expression* expression);
-  AssignmentList* assignments_;
+    AssignmentList* assignments_;
     Expression* expression_;
+
+    void Accept(Visitor* visitor) override;
 };

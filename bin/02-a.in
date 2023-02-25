@@ -1,7 +1,8 @@
-three := 3
-seven := 7
-two := 2
-one := three - two
-seven := three * two + one
-five := 5
-seven * seven
+three := 3 ;
+seven := 7 ;
+two := 2 ;
+one := three - two ;
+seven := three * two + one ;
+five := 5 ;
+three := seven - two - two ;
+three ;

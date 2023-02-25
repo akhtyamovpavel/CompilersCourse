@@ -1,13 +1,13 @@
 #pragma once
 
-#include "assignments/Assignment.h"
+#include "assignments/Statement.h"
 #include "base_elements/BaseElement.h"
 #include <vector>
 
 class AssignmentList : public BaseElement {
  public:
-    void AddAssignment(Assignment* assignment);
+    void AddAssignment(Statement* statement);
     void Accept(Visitor* visitor);
 
-    std::vector<Assignment*> assignments_;
+    std::vector<Statement*> assignments_;
 };

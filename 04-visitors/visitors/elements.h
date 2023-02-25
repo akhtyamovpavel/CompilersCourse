@@ -9,4 +9,5 @@
 
 #include "assignments/Assignment.h"
 #include "assignments/AssignmentList.h"
+#include "assignments/PrintStatement.h"
 #include "Program.h"

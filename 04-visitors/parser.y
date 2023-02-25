@@ -18,6 +18,7 @@
     class IdentExpression;
     class Assignment;
     class AssignmentList;
+    class PrintStatement;
 
     class Program;
 }
@@ -38,6 +39,7 @@
     #include "expressions/SubstractExpression.h"
     #include "expressions/IdentExpression.h"
     #include "assignments/Assignment.h"
+    #include "assignments/PrintStatement.h"
     #include "assignments/AssignmentList.h"
     #include "Program.h"
 
@@ -64,12 +66,14 @@
     SLASH "/"
     LPAREN "("
     RPAREN ")"
+    PRINT "print"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <Expression*> exp
 %nterm <Assignment*> assignment
+%nterm <PrintStatement*> print_statement
 %nterm <AssignmentList*> assignments
 %nterm <Program*> unit
 
@@ -84,6 +88,10 @@ assignments:
     %empty { $$ = new AssignmentList(); /* A -> eps */}
     | assignments assignment {
         $1->AddAssignment($2); $$ = $1;
+    }
+    | assignments print_statement {
+        $1->AddAssignment($2);
+        $$ = $1;
     };
 
 assignment:
@@ -91,6 +99,12 @@ assignment:
         $$ = new Assignment($1, $3);
         // driver.variables[$1] = $3->eval();
     };
+
+print_statement:
+    "print" "(" exp ")" {
+        $$ = new PrintStatement($3);
+    }
+    ;
 
 %left "+" "-";
 %left "*" "/";

@@ -1,7 +1,7 @@
 #include "AssignmentList.h"
 
 
-void AssignmentList::AddAssignment(Assignment* assignment) {
+void AssignmentList::AddAssignment(Statement* assignment) {
     assignments_.push_back(assignment);
 }
 

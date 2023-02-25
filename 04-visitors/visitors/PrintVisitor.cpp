@@ -71,7 +71,7 @@ void PrintVisitor::Visit(AssignmentList* assignment_list) {
     stream_ << "AssignmentList: " << std::endl;
 
     ++num_tabs_;
-    for (Assignment* assignment : assignment_list->assignments_) {
+    for (Statement* assignment : assignment_list->assignments_) {
         assignment->Accept(this);
     }
     --num_tabs_;
@@ -87,6 +87,11 @@ void PrintVisitor::Visit(Program* program) {
 
     --num_tabs_;
 }
+
+void PrintVisitor::Visit(PrintStatement* statement) {
+
+}
+
 
 void PrintVisitor::PrintTabs() {
     for (int i = 0; i < num_tabs_; ++i) {

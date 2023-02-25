@@ -35,6 +35,7 @@ add_executable(
     expressions/IdentExpression.cpp
     assignments/Assignment.cpp
     assignments/AssignmentList.cpp
+    assignments/PrintStatement.cpp
     visitors/Interpreter.cpp
     visitors/PrintVisitor.cpp
     Program.cpp

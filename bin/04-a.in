@@ -2,7 +2,10 @@ three := 3
 seven := 7  
 two := 2  
 one := three - two  
-seven := three * two + one  
+seven := three * two + one
+print(seven)
+print(two)
+print(one + two)
 five := 5  
 three := seven - two - two  
 three  

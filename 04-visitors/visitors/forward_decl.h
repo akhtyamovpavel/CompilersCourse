@@ -9,4 +9,5 @@ class DivExpression;
 class IdentExpression;
 class Assignment;
 class AssignmentList;
+class PrintStatement;
 class Program;
