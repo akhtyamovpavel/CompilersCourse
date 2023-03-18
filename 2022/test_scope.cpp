@@ -56,6 +56,8 @@ int main() {
   bar_fn.name = "Bar";
 
   auto bar_fn_scope = symbols::BaseScope(&global_scope);
+
+  bar_fn_scope.elements["x"] = &x_var;
   
   global_scope.named_children_["Bar"] = &bar_fn_scope;
 

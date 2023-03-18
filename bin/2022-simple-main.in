@@ -7,8 +7,13 @@ func main() {
         var three;
         three := 4;
         four := 5;
+        four := bar();
     }
 
     print(three);
 }
 
+func bar() {
+    var x;
+    y := 5;
+}

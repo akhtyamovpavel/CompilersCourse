@@ -8,7 +8,7 @@
 
 #pragma once
 
-class SymbolTableVisitor : public TemplateVisitor<int> {
+class SymbolTableVisitor : public TemplateVisitor<symbols::BaseScope*> {
  public:
   explicit SymbolTableVisitor(Driver* driver);
   void Visit(NumberExpression *expression) override;
