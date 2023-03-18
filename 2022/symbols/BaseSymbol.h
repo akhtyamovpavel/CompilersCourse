@@ -7,10 +7,15 @@
 
 #include <string>
 
-class BaseSymbol {
- public:
-  std::string name;
-  virtual ~BaseSymbol() = default;
-};
+namespace symbols {
+
+  class BaseSymbol {
+  public:
+    std::string name;
+    std::string base_type;
+    std::string type;
+    virtual ~BaseSymbol() = default;
+  };
+}
 
 

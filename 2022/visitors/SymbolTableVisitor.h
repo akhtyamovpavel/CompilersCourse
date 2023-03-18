@@ -30,10 +30,10 @@ class SymbolTableVisitor : public TemplateVisitor<int> {
   void Visit(ParamValueList *value_list) override;
   void Visit(ReturnStatement *return_statement) override;
  
-  BaseScope* root;
+  symbols::BaseScope* root;
  private:
   Driver* driver_;
-  BaseScope* current_scope;
+  symbols::BaseScope* current_scope;
 };
 
 

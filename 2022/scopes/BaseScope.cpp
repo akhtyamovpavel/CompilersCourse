@@ -4,6 +4,7 @@
 
 #include "BaseScope.h"
 
+namespace symbols {
 BaseScope::BaseScope(BaseScope* parent): parent_(parent) {}
 
 BaseSymbol* BaseScope::GetVariable(const std::string& name, bool only_this) const {
@@ -18,4 +19,14 @@ BaseSymbol* BaseScope::GetVariable(const std::string& name, bool only_this) cons
     } else {
         return iterator->second;
     }
+}
+
+BaseScope* BaseScope::GetNamedScope(const std::string& name) {
+    return named_children_[name];
+}
+
+BaseScope* BaseScope::GetScope(size_t index) {
+    return children_[index];
+}
+
 }

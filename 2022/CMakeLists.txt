@@ -26,6 +26,7 @@ set(
         visitors/SymbolTableVisitor.h
         visitors/SymbolTableVisitor.cpp
         symbols/BaseSymbol.cpp symbols/BaseSymbol.h
+        symbols/Function.cpp symbols/VariableSymbol.cpp
         scopes/BaseScope.cpp scopes/BaseScope.h)
 
 add_subdirectory(grammar)

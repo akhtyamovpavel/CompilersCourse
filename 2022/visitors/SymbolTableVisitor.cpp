@@ -7,7 +7,7 @@
 #include "elements.h"
 
 #include <symbols/VariableSymbol.h>
-
+#include <symbols/Function.h>
 
 
 void SymbolTableVisitor::Visit(NumberExpression *expression) {
@@ -53,12 +53,12 @@ void SymbolTableVisitor::Visit(VarDecl *var_decl) {
         throw std::runtime_error("Var already declared");
     }
 
-    auto *symbol = new VariableSymbol();
+    auto *symbol = new symbols::VariableSymbol();
     symbol->name = var_decl->variable_;
     current_scope->elements[var_decl->variable_] = symbol;
 
-
 }
+
 void SymbolTableVisitor::Visit(PrintStatement *statement) {
   Accept(statement->expression_);
 }
@@ -70,7 +70,7 @@ void SymbolTableVisitor::Visit(StatementList *assignment_list) {
 }
 
 void SymbolTableVisitor::Visit(ScopeAssignmentList *list) {
-  auto *new_scope = new BaseScope(current_scope);
+  auto *new_scope = new symbols::BaseScope(current_scope);
 
   current_scope->children_.push_back(new_scope);
 
@@ -82,8 +82,17 @@ void SymbolTableVisitor::Visit(ScopeAssignmentList *list) {
 }
 
 void SymbolTableVisitor::Visit(Program *program) {
+  for (auto function: program->function_list_->functions_) {
+    current_scope->named_children_[function->name_] = new symbols::BaseScope();
+    auto function_symbol = new symbols::Function();
+    current_scope->elements[function->name_] = function_symbol;
+  }
 
+  for (auto function: program->function_list_->functions_) {
+    Accept(function);
+  }
 }
+
 void SymbolTableVisitor::Visit(ParamList *param_list) {
 
 }
@@ -107,8 +116,8 @@ void SymbolTableVisitor::Visit(ReturnStatement *return_statement) {
 }
 
 SymbolTableVisitor::SymbolTableVisitor(Driver *driver): driver_(driver) {
-    root = new BaseScope();
-    auto *main_scope = new BaseScope(root);
+    root = new symbols::BaseScope();
+    auto *main_scope = new symbols::BaseScope(root);
     current_scope = main_scope;
     std::cerr << "CONSTRUCTOR CALLED" << std::endl;
 }
