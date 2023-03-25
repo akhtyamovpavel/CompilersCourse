@@ -49,6 +49,12 @@ add_executable(
     ${SOURCES}
 )
 
+add_executable(
+    ${CURRENT_EXECUTABLE}_types
+    test_types.cpp
+    ${SOURCES}
+)
+
 
 target_include_directories(
         ${CURRENT_EXECUTABLE} PRIVATE ${PROJECT_SOURCE_DIR}
@@ -77,7 +83,17 @@ target_include_directories(
         ${CURRENT_EXECUTABLE}_ir PRIVATE ${PROJECT_SOURCE_DIR}
 )
 
+target_include_directories(
+        ${CURRENT_EXECUTABLE}_types PRIVATE ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/grammar
+)
+
+target_include_directories(
+        ${CURRENT_EXECUTABLE}_types PRIVATE ${PROJECT_SOURCE_DIR}
+)
+
 
 target_link_libraries(${CURRENT_EXECUTABLE}_tests ${GRAMMAR_LIB} ${llvm_libs})
 
 target_link_libraries(${CURRENT_EXECUTABLE}_ir ${GRAMMAR_LIB} ${llvm_libs})
+
+target_link_libraries(${CURRENT_EXECUTABLE}_types ${GRAMMAR_LIB} ${llvm_libs})
