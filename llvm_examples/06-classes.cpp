@@ -1,3 +1,7 @@
+class A {
+ private:
+    int c_;
+};
 
 class Foo {
  public:
@@ -17,8 +21,10 @@ class Foo {
         return a + 1;
      }
  
- public:
+ private:
      int a_;
+     bool b;
+     A* d;
 };
 
 
