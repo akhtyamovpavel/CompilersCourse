@@ -1,10 +1,13 @@
 %skeleton "lalr1.cc"
 %require "3.5"
 
-%defines
+/* %defines */
 %define api.token.constructor
 %define api.value.type variant
 %define parse.assert
+%define parse.trace
+%define parse.error verbose
+%define api.token.prefix {TOK_}
 
 %code requires {
     #include <string>
@@ -13,11 +16,9 @@
     class Driver;
 }
 
-
-%define parse.trace
-%define parse.error verbose
-
+// Code as start of parser.cpp
 %code {
+    
     #include "driver.hh"
     #include "location.hh"
 
@@ -28,13 +29,16 @@
 }
 
 %lex-param { Scanner &scanner }
+/* %lex-param { int x } */
 
+// Params to parser constructor
 %parse-param { Scanner &scanner }
 %parse-param { Driver &driver }
+/* %parse-param { int x} */
 
 %locations
 
-%define api.token.prefix {TOK_}
+
 // token name in variable
 %token
     END 0 "end of file"
@@ -48,6 +52,7 @@
     SEMICOLON ";"
 ;
 
+// basic_symbol
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %nterm <int> exp

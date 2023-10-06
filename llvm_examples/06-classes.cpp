@@ -1,3 +1,4 @@
+#include <iostream>
 
 class Foo {
  public:
@@ -25,6 +26,8 @@ class Foo {
 int main() {
     int x;
     Foo foo(x);
+
+    std::cout << sizeof(Foo) << std::endl;
     int a = foo.Get();
 
     foo.Set(6);

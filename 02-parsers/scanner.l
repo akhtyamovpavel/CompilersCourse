@@ -1,3 +1,8 @@
+%option noyywrap noinput batch debug
+
+%option c++
+%option yyclass="Scanner"
+
 %{
     #include <cerrno>
     #include <climits>
@@ -7,38 +12,31 @@
     #include <iostream>
     #include "driver.hh"
     #include "parser.hh"
-%}
 
-%option noyywrap nounput noinput batch debug
-
-%option c++
-%option yyclass="Scanner"
-
-%{
   // Code definitions at the end of scanner.cpp
 
   // A number symbol corresponding to the value in S.
-  yy::parser::symbol_type make_NUMBER(
+  yy::parser::symbol_type CastToNumber(
     const std::string &s,
     const yy::parser::location_type& loc
   );
 
   void Scanner::UpdateLocation() {
+    std::cout << "Token: " << yytext << " " << yyleng << std::endl;
     if (driver.location_debug) {
         std::cerr << "Action called " << driver.location << std::endl;
     }
     driver.location.columns(yyleng);
   }
+
+  // Code run each time a pattern is matched.
+  #define YY_USER_ACTION UpdateLocation();
 %}
 
 id    [a-zA-Z][a-zA-Z_0-9]*
 int   [0-9]+
 blank [ \t\r]
 
-%{
-  // Code run each time a pattern is matched.
-  #define YY_USER_ACTION UpdateLocation();
-%}
 
 %%
 
@@ -81,7 +79,7 @@ blank [ \t\r]
 ":="       return yy::parser::make_ASSIGN (loc);
 ";"        return yy::parser::make_SEMICOLON(loc);
 
-{int}      return make_NUMBER(yytext, loc);
+{int}      return CastToNumber(yytext, loc);
 {id}       {
                 if (driver.location_debug) {
                     std::cerr << "ID found " << yytext << std::endl;
@@ -94,7 +92,7 @@ blank [ \t\r]
 <<EOF>>    return yy::parser::make_END (loc);
 %%
 
-yy::parser::symbol_type make_NUMBER(
+yy::parser::symbol_type CastToNumber(
   const std::string &s,
   const yy::parser::location_type& loc
 ) {

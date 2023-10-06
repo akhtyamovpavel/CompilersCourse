@@ -17,7 +17,10 @@ void MainInterpreter::Visit(SubstractExpression *expression) {
 
 }
 void MainInterpreter::Visit(MulExpression *expression) {
-  SetValue(Accept(expression->first) * Accept(expression->second));
+  SetValue(
+    Accept(expression->first) *
+    Accept(expression->second)
+  );
 }
 void MainInterpreter::Visit(DivExpression *expression) {
 

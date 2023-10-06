@@ -51,9 +51,13 @@ int main() {
 
   auto string_value = builder_.CreateStore(fmt, string_alloca);
 
-  auto formatted_string = builder_.CreateBitCast(string_alloca, builder_.getInt8PtrTy());
+  auto formatted_string = builder_.CreateBitCast(
+    string_alloca, builder_.getInt8PtrTy()
+  );
   
-  auto result = builder_.CreateCall(printf_function, {formatted_string});
+  // auto result = builder_.CreateCall(
+  //   printf_function, {formatted_string}
+  // );
 
 
   
@@ -70,7 +74,8 @@ int main() {
   auto b_alloca = builder_.CreateAlloca(int_type);
 
   auto a_value = builder_.CreateStore(
-    llvm::ConstantInt::get(context_, llvm::APInt(/*nbits*/32, 2, /*bool*/true)),
+    llvm::ConstantInt::get(
+      context_, llvm::APInt(/*nbits*/32, 2, /*bool*/true)),
     a_alloca
   );
 
@@ -87,11 +92,12 @@ int main() {
     ),
     true_entry, false_entry
   );
-
+  // true branch
   builder_.SetInsertPoint(true_entry);
   auto result2 = builder_.CreateCall(printf_function, {formatted_string});
   builder_.CreateBr(end_entry);
 
+  // false branch
   builder_.SetInsertPoint(false_entry);
 
   builder_.CreateBr(end_entry);

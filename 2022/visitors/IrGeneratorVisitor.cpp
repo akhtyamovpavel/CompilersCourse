@@ -23,17 +23,18 @@ void IrGeneratorVisitor::Visit(MulExpression *expression) {}
 void IrGeneratorVisitor::Visit(DivExpression *expression) {}
 
 void IrGeneratorVisitor::Visit(IdentExpression *expression) {
-    SetValue(named_values_[expression->ident_]);
+    auto value = named_values_[expression->ident_];
+    SetValue(builder_.CreateLoad(builder_.getInt32Ty(), value));
 }
 
 void IrGeneratorVisitor::Visit(Assignment *assignment) {
     auto pointer = Accept(assignment->expression_);
 
-    auto value = builder_.CreateLoad(builder_.getInt32Ty(), pointer);
+    // auto value = builder_.CreateLoad(builder_.getInt32Ty(), pointer);
 
     auto variable = named_values_[assignment->variable_];
 
-    builder_.CreateStore(value, variable);
+    builder_.CreateStore(value, pointer);
 }
 
 void IrGeneratorVisitor::Visit(VarDecl *var_decl) {
