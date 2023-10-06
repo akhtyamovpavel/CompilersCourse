@@ -14,6 +14,7 @@ int main(int argc, char** argv) {
 
             driver.parse(argv[i]);
             std::cout << driver.Evaluate() << std::endl;
+            std::cout << "Completed" << std::endl;
 
             driver.PrintTree(argv[i + 1]);
             ++i;

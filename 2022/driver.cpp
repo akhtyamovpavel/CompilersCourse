@@ -43,7 +43,7 @@ int Driver::Evaluate() {
 
   SymbolTableVisitor tree_visitor(this);
 
-  main_function->Accept(&tree_visitor);
+  program->Accept(&tree_visitor);
 
 
 

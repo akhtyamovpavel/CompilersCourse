@@ -7,7 +7,7 @@
 #include "elements.h"
 
 #include <symbols/VariableSymbol.h>
-
+#include <symbols/Function.h>
 
 
 void SymbolTableVisitor::Visit(NumberExpression *expression) {
@@ -33,6 +33,7 @@ void SymbolTableVisitor::Visit(DivExpression *expression) {
     Accept(expression->first);
     Accept(expression->second);
 }
+
 void SymbolTableVisitor::Visit(IdentExpression *expression) {
   if (!current_scope->GetVariable(expression->ident_)) {
     throw std::runtime_error("Variable not declared");
@@ -48,17 +49,17 @@ void SymbolTableVisitor::Visit(Assignment *assignment) {
 }
 
 void SymbolTableVisitor::Visit(VarDecl *var_decl) {
-    std::cerr << "VAR DECL" << std::endl;
-    if (current_scope->GetVariable(var_decl->variable_, true)) {
-        throw std::runtime_error("Var already declared");
-    }
+  std::cerr << "VAR DECL" << std::endl;
+  if (current_scope->GetVariable(var_decl->variable_, true)) {
+    throw std::runtime_error("Var already declared");
+  }
 
-    auto *symbol = new VariableSymbol();
-    symbol->name = var_decl->variable_;
-    current_scope->elements[var_decl->variable_] = symbol;
-
+  auto *symbol = new symbols::VariableSymbol();
+  symbol->name = var_decl->variable_;
+  current_scope->elements[var_decl->variable_] = symbol;
 
 }
+
 void SymbolTableVisitor::Visit(PrintStatement *statement) {
   Accept(statement->expression_);
 }
@@ -70,7 +71,7 @@ void SymbolTableVisitor::Visit(StatementList *assignment_list) {
 }
 
 void SymbolTableVisitor::Visit(ScopeAssignmentList *list) {
-  auto *new_scope = new BaseScope(current_scope);
+  auto *new_scope = new symbols::BaseScope(current_scope);
 
   current_scope->children_.push_back(new_scope);
 
@@ -82,19 +83,40 @@ void SymbolTableVisitor::Visit(ScopeAssignmentList *list) {
 }
 
 void SymbolTableVisitor::Visit(Program *program) {
+  for (auto function: program->function_list_->functions_) {
+    std::cout << function->name_ << std::endl;
+    current_scope->named_children_[function->name_] = new symbols::BaseScope(current_scope);
+    auto function_symbol = new symbols::Function();
+    current_scope->elements[function->name_] = function_symbol;
+  }
 
+  for (auto function: program->function_list_->functions_) {
+    current_scope = current_scope->named_children_[function->name_];
+    Accept(function);
+    current_scope = current_scope->parent_;
+  }
 }
+
 void SymbolTableVisitor::Visit(ParamList *param_list) {
 
 }
 void SymbolTableVisitor::Visit(Function *function) {
   std::cerr << "FUNCTION" << std::endl;
+  // TODO Check function names
   function->statements_->Accept(this);
 }
 
 
 void SymbolTableVisitor::Visit(FunctionCallExpression *statement) {
+  std::cout << "Into " << statement->name_ << std::endl;
+  auto variable = current_scope->GetVariable(statement->name_);
 
+  if (!variable) {
+    std::cerr << "Function " << statement->name_ << " is not defined" << std::endl;
+    throw std::runtime_error("Function");
+  }
+  
+  Accept(statement->param_list_);
 }
 void SymbolTableVisitor::Visit(FunctionList *function_list) {
 
@@ -107,8 +129,9 @@ void SymbolTableVisitor::Visit(ReturnStatement *return_statement) {
 }
 
 SymbolTableVisitor::SymbolTableVisitor(Driver *driver): driver_(driver) {
-    root = new BaseScope();
-    auto *main_scope = new BaseScope(root);
-    current_scope = main_scope;
+    root = new symbols::BaseScope();
+    current_scope = root;
+    // auto *main_scope = new symbols::BaseScope(root);
+    // current_scope = main_scope;
     std::cerr << "CONSTRUCTOR CALLED" << std::endl;
 }

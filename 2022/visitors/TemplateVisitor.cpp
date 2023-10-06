@@ -17,7 +17,7 @@ T TemplateVisitor<T>::Accept(BaseElement *element) {
 template int TemplateVisitor<int>::Accept(BaseElement *element);
 
 template PrimitiveTypeHolder TemplateVisitor<PrimitiveTypeHolder>::Accept(BaseElement *element);
-template BaseScope* TemplateVisitor<BaseScope*>::Accept(BaseElement *element);
+template symbols::BaseScope* TemplateVisitor<symbols::BaseScope*>::Accept(BaseElement *element);
 template llvm::Value* TemplateVisitor<llvm::Value*>::Accept(BaseElement *element);
 
 template<typename T>
@@ -28,6 +28,6 @@ void TemplateVisitor<T>::SetValue(T value) {
 template void TemplateVisitor<int>::SetValue(int value);
 
 
-template void TemplateVisitor<BaseScope*>::SetValue(BaseScope* value);
+template void TemplateVisitor<symbols::BaseScope*>::SetValue(symbols::BaseScope* value);
 
 template void TemplateVisitor<llvm::Value*>::SetValue(llvm::Value* value);
