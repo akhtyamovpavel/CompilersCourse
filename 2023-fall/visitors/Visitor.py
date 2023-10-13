@@ -12,29 +12,29 @@ from nodes.expressions.SubExpression import SubExpression
 class Visitor(ABC):
 
     @abstractmethod
-    def visit_number_expression(expression: NumberExpression):
+    def visit_number_expression(self, expression: NumberExpression):
         pass
 
     @abstractmethod
-    def visit_add_expression(expression: AddExpression):
+    def visit_add_expression(self, expression: AddExpression):
         pass
 
     @abstractmethod
-    def visit_sub_expression(expression: SubExpression):
+    def visit_sub_expression(self, expression: SubExpression):
         pass
 
     @abstractmethod
-    def visit_mul_expression(expression: MulExpression):
+    def visit_mul_expression(self, expression: MulExpression):
         pass
 
     @abstractmethod
-    def visit_div_expression(expression: DivExpression):
+    def visit_div_expression(self, expression: DivExpression):
         pass
 
     @abstractmethod
-    def visit_brace_expression(expression: BraceExpression):
+    def visit_brace_expression(self, expression: BraceExpression):
         pass
 
     @abstractmethod
-    def visit_program(program: Program):
+    def visit_program(self, program: Program):
         pass

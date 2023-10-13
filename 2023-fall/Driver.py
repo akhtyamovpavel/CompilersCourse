@@ -4,6 +4,7 @@ from ExprLexer import ExprLexer
 from ExprParser import ExprParser
 from ExprVisitor import ExprVisitor
 from nodes.Program import Program
+from visitors.InterpeterVisitor import InterpreterVisitor
 
 
 def main(argv):
@@ -15,6 +16,12 @@ def main(argv):
     
     ast_tree: Program = ExprVisitor().visit(tree)
     print(ast_tree.expressions)
+
+    interpeter = InterpreterVisitor()
+
+    # ast_tree.accept(interpeter)
+
+    interpeter.visit_program(ast_tree)
 
 if __name__ == '__main__':
     main(sys.argv)
