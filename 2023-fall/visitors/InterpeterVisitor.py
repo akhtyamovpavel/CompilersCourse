@@ -26,7 +26,7 @@ class InterpreterVisitor(Visitor):
         return expression.left.accept(self) * expression.right.accept(self)
 
     def visit_div_expression(self, expression: DivExpression):
-        return expression.left.accept(self) / expression.right.accept(self)
+        return expression.left.accept(self) // expression.right.accept(self)
 
     def visit_brace_expression(self, expression: BraceExpression):
         return expression.expression.accept(self)

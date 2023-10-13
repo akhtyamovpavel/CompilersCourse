@@ -11,4 +11,4 @@ class DivExpression(Expression):
         self.right = right
 
     def accept(self, visitor):
-        return visitor.visit_add_expression(self)
+        return visitor.visit_div_expression(self)

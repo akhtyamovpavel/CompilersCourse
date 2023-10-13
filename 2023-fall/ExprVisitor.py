@@ -2,10 +2,12 @@
 from antlr4 import *
 from nodes.Program import Program
 from nodes.expressions.AddExpression import AddExpression
+from nodes.expressions.BraceExpression import BraceExpression
 from nodes.expressions.DivExpression import DivExpression
 from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
+from nodes.expressions.SubExpression import SubExpression
 if "." in __name__:
     from .ExprParser import ExprParser
 else:
@@ -29,6 +31,11 @@ class ExprVisitor(ParseTreeVisitor):
         if ctx.value is not None:
             return NumberExpression(ctx.value.text)
         
+        if ctx.exp is not None:
+            return BraceExpression(
+                self.visit(ctx.exp)
+            )
+
         if ctx.op.text == '/':
             return DivExpression(
                 self.visit(
@@ -54,6 +61,15 @@ class ExprVisitor(ParseTreeVisitor):
                 ),
                 self.visit(
                     ctx.right,
+                ),
+            )
+        elif ctx.op.text == '-':
+            return SubExpression(
+                self.visit(
+                    ctx.left,
+                ),
+                self.visit(
+                    ctx.right
                 ),
             )
 
