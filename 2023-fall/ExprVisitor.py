@@ -8,6 +8,8 @@ from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
+from nodes.statements.AssignStatement import AssignStatement
+from nodes.statements.PrintStatement import PrintStatement
 if "." in __name__:
     from .ExprParser import ExprParser
 else:
@@ -21,10 +23,18 @@ class ExprVisitor(ParseTreeVisitor):
     def visitProg(self, ctx:ExprParser.ProgContext):
         expressions = []
 
-        for expression in ctx.expr():
+        for expression in ctx.stmt():
             expressions.append(self.visit(expression))
         return Program(expressions=expressions)
 
+    def visitStmt(self, ctx:ExprParser.StmtContext):
+        if ctx.assign is not None:
+            return AssignStatement(
+                variable=ctx.IDENT.text,
+                expression=self.visit(ctx.assign)
+            )
+        else:
+            return PrintStatement(self.visit(ctx.printexp))
 
     # Visit a parse tree produced by ExprParser#expr.
     def visitExpr(self, ctx:ExprParser.ExprContext):

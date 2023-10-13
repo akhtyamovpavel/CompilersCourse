@@ -1,5 +1,8 @@
 grammar Expr;
-prog:   (expr NEWLINE)*
+prog:   (stmt NEWLINE)*
+    ;
+stmt: 'print' printexp=expr
+    | IDENT ('=') assign=expr
     ;
 expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # left - .expr(0)
     |   left=expr op=('+'|'-') right=expr // AddExpression | SubExpression
@@ -8,3 +11,5 @@ expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # lef
     ;
 NEWLINE : [\r\n]+ ;
 INT     : [0-9]+ ;
+// PRINT   : 'print ' ;
+IDENT   : [a-zA-Z]+ ;

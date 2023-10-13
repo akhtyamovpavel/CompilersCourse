@@ -1,9 +1,5 @@
 # Generated from Expr.g4 by ANTLR 4.13.0
 from antlr4 import *
-from nodes.expressions.DivExpression import DivExpression
-from nodes.expressions.MulExpression import MulExpression
-
-from nodes.expressions.NumberExpression import NumberExpression
 if "." in __name__:
     from .ExprParser import ExprParser
 else:
@@ -21,18 +17,22 @@ class ExprListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExprParser#stmt.
+    def enterStmt(self, ctx:ExprParser.StmtContext):
+        pass
+
+    # Exit a parse tree produced by ExprParser#stmt.
+    def exitStmt(self, ctx:ExprParser.StmtContext):
+        pass
+
+
     # Enter a parse tree produced by ExprParser#expr.
     def enterExpr(self, ctx:ExprParser.ExprContext):
         pass
 
     # Exit a parse tree produced by ExprParser#expr.
     def exitExpr(self, ctx:ExprParser.ExprContext):
-        if ctx.value is not None:
-            return NumberExpression(ctx.value)
-        if ctx.op == '/':
-            return DivExpression(ctx.left, ctx.right)
-        elif ctx.op == '*':
-            return MulExpression(ctx.left, ctx.right)
+        pass
 
 
 

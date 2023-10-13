@@ -8,10 +8,14 @@ from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
+from nodes.statements.AssignStatement import AssignStatement
+from nodes.statements.PrintStatement import PrintStatement
 from visitors.Visitor import Visitor
 
 
 class InterpreterVisitor(Visitor):
+    def __init__(self) -> None:
+        self.variables = {}
 
     def visit_number_expression(self, expression: NumberExpression):
         return expression.number
@@ -34,3 +38,9 @@ class InterpreterVisitor(Visitor):
     def visit_program(self, program: Program):
         for expression in program.expressions:
             print(expression.accept(self))
+
+    def visit_assign_statement(self, statement: AssignStatement):
+        self.variables[statement.variable] = statement.expression.accept(self)
+
+    def visit_print_statement(self, statement: PrintStatement):
+        print(statement.accept(self))

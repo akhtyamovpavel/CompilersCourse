@@ -7,6 +7,8 @@ from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
+from nodes.statements.AssignStatement import AssignStatement
+from nodes.statements.PrintStatement import PrintStatement
 
 
 class Visitor(ABC):
@@ -37,4 +39,12 @@ class Visitor(ABC):
 
     @abstractmethod
     def visit_program(self, program: Program):
+        pass
+
+    @abstractmethod
+    def visit_assign_statement(self, statement: AssignStatement):
+        pass
+
+    @abstractmethod
+    def visit_print_statement(self, statement: PrintStatement):
         pass
