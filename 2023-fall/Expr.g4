@@ -1,6 +1,7 @@
 grammar Expr;
-prog:   (expr NEWLINE)* ;
-expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression
+prog:   (expr NEWLINE)*
+    ;
+expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # left - .expr(0)
     |   left=expr op=('+'|'-') right=expr // AddExpression | SubExpression
     |   value=INT // NumberExpression
     |   '(' exp=expr ')' // BraceExpression

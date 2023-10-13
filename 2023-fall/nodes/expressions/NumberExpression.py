@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class NumberExpression(Expression):
 
     def __init__(self, number: str) -> None:
-        self.number = number
+        self.number = int(number)
 
     def accept(self, visitor: Visitor):
         return visitor.visit_number_expression(self)

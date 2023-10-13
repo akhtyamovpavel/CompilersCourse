@@ -1,6 +1,7 @@
 # Generated from Expr.g4 by ANTLR 4.13.0
 from antlr4 import *
 from nodes.Program import Program
+from nodes.expressions.AddExpression import AddExpression
 from nodes.expressions.DivExpression import DivExpression
 from nodes.expressions.MulExpression import MulExpression
 
@@ -22,27 +23,37 @@ class ExprVisitor(ParseTreeVisitor):
             expressions.append(self.visit(expression))
         return Program(expressions=expressions)
 
+
     # Visit a parse tree produced by ExprParser#expr.
     def visitExpr(self, ctx:ExprParser.ExprContext):
         if ctx.value is not None:
-            return NumberExpression(ctx.value.expr())
+            return NumberExpression(ctx.value.text)
         
-        if ctx.op == '/':
+        if ctx.op.text == '/':
             return DivExpression(
                 self.visit(
-                    ctx.left.expr(),
+                    ctx.left,
                 ),
                 self.visit(
-                    ctx.right.expr(),
+                    ctx.right,
                 )
             )
-        elif ctx.op == '*':
+        elif ctx.op.text == '*':
             return MulExpression(
                 self.visit(
-                    ctx.left.expr(),
+                    ctx.left,
                 ),
                 self.visit(
-                    ctx.right.expr()
+                    ctx.right
+                ),
+            )
+        elif ctx.op.text == '+':
+            return AddExpression(
+                self.visit(
+                    ctx.left,
+                ),
+                self.visit(
+                    ctx.right,
                 ),
             )
 
