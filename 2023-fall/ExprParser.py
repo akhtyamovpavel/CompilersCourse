@@ -86,13 +86,11 @@ class ExprParser ( Parser ):
         def getRuleIndex(self):
             return ExprParser.RULE_prog
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterProg" ):
-                listener.enterProg(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitProg" ):
-                listener.exitProg(self)
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProg" ):
+                return visitor.visitProg(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -131,6 +129,11 @@ class ExprParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.left = None # ExprContext
+            self.value = None # Token
+            self.exp = None # ExprContext
+            self.op = None # Token
+            self.right = None # ExprContext
 
         def INT(self):
             return self.getToken(ExprParser.INT, 0)
@@ -145,13 +148,11 @@ class ExprParser ( Parser ):
         def getRuleIndex(self):
             return ExprParser.RULE_expr
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpr" ):
-                listener.enterExpr(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpr" ):
-                listener.exitExpr(self)
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr" ):
+                return visitor.visitExpr(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -170,13 +171,13 @@ class ExprParser ( Parser ):
             token = self._input.LA(1)
             if token in [8]:
                 self.state = 13
-                self.match(ExprParser.INT)
+                localctx.value = self.match(ExprParser.INT)
                 pass
             elif token in [5]:
                 self.state = 14
                 self.match(ExprParser.T__4)
                 self.state = 15
-                self.expr(0)
+                localctx.exp = self.expr(0)
                 self.state = 16
                 self.match(ExprParser.T__5)
                 pass
@@ -197,38 +198,42 @@ class ExprParser ( Parser ):
                     la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
                     if la_ == 1:
                         localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 20
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
                         self.state = 21
+                        localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not(_la==1 or _la==2):
-                            self._errHandler.recoverInline(self)
+                            localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 22
-                        self.expr(5)
+                        localctx.right = self.expr(5)
                         pass
 
                     elif la_ == 2:
                         localctx = ExprParser.ExprContext(self, _parentctx, _parentState)
+                        localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
                         self.state = 23
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
                         self.state = 24
+                        localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
                         if not(_la==3 or _la==4):
-                            self._errHandler.recoverInline(self)
+                            localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 25
-                        self.expr(4)
+                        localctx.right = self.expr(4)
                         pass
 
              

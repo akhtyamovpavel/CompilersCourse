@@ -1,8 +1,9 @@
 import sys
 from antlr4 import *
 from ExprLexer import ExprLexer
-from ExprListener import ExprListener
 from ExprParser import ExprParser
+from ExprVisitor import ExprVisitor
+from nodes.Program import Program
 
 
 def main(argv):
@@ -11,9 +12,9 @@ def main(argv):
     stream = CommonTokenStream(lexer)
     parser = ExprParser(stream)
     tree = parser.prog()
-    listener = ExprListener()
-    walker = ParseTreeWalker()
-    walker.walk(listener, tree)
+    
+    ast_tree: Program = ExprVisitor().visit(tree)
+    print(ast_tree.expressions)
 
 if __name__ == '__main__':
     main(sys.argv)
