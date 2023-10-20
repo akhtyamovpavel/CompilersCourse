@@ -1,6 +1,7 @@
-a = 2
-print a
-a = a+2
-print a
-print b
-print a + a * a
+fun main() {
+    a = 2
+    a = 3
+    b = 4
+    print b
+}
+

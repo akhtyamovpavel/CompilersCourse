@@ -2,8 +2,15 @@ grammar Expr;
 SPACES
  : [ \t] -> skip
  ;
+FUN: ('fun'|'fun2');
+MAIN: 'main';
+NEWLINE : [\r\n]+ ;
+INT     : [0-9]+ ;
+// PRINT   : 'print ' ;
+IDENT   : [a-zA-Z]+ ;
 
-prog:   (stmt NEWLINE)*
+
+prog:  FUN MAIN '(' ')' '{' NEWLINE ((stmt NEWLINE)*) '}'
     ;
 stmt: 'print' printexp=expr
     | ident=IDENT ('=') assign=expr
@@ -14,7 +21,3 @@ expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # lef
     |   '(' exp=expr ')' // BraceExpression
     |   ident=IDENT // IdentExpression
     ;
-NEWLINE : [\r\n]+ ;
-INT     : [0-9]+ ;
-// PRINT   : 'print ' ;
-IDENT   : [a-zA-Z]+ ;
