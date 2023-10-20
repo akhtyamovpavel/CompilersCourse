@@ -4,6 +4,7 @@ from nodes.Program import Program
 from nodes.expressions.AddExpression import AddExpression
 from nodes.expressions.BraceExpression import BraceExpression
 from nodes.expressions.DivExpression import DivExpression
+from nodes.expressions.IdentExpression import IdentExpression
 from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
@@ -21,16 +22,16 @@ class ExprVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ExprParser#prog.
     def visitProg(self, ctx:ExprParser.ProgContext):
-        expressions = []
+        statements = []
 
-        for expression in ctx.stmt():
-            expressions.append(self.visit(expression))
-        return Program(expressions=expressions)
+        for statement in ctx.stmt():
+            statements.append(self.visit(statement))
+        return Program(expressions=statements)
 
     def visitStmt(self, ctx:ExprParser.StmtContext):
         if ctx.assign is not None:
             return AssignStatement(
-                variable=ctx.IDENT.text,
+                variable=ctx.ident.text,
                 expression=self.visit(ctx.assign)
             )
         else:
@@ -44,6 +45,11 @@ class ExprVisitor(ParseTreeVisitor):
         if ctx.exp is not None:
             return BraceExpression(
                 self.visit(ctx.exp)
+            )
+        
+        if ctx.ident is not None:
+            return IdentExpression(
+                ctx.ident.text
             )
 
         if ctx.op.text == '/':

@@ -4,6 +4,7 @@ from nodes.Program import Program
 from nodes.expressions.AddExpression import AddExpression
 from nodes.expressions.DivExpression import DivExpression
 from nodes.expressions.MulExpression import MulExpression
+from nodes.expressions.IdentExpression import IdentExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
@@ -47,4 +48,8 @@ class Visitor(ABC):
 
     @abstractmethod
     def visit_print_statement(self, statement: PrintStatement):
+        pass
+
+    @abstractmethod
+    def visit_ident_expression(self, expression: IdentExpression):
         pass

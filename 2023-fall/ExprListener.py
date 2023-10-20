@@ -10,29 +10,30 @@ class ExprListener(ParseTreeListener):
 
     # Enter a parse tree produced by ExprParser#prog.
     def enterProg(self, ctx:ExprParser.ProgContext):
-        pass
+        print(ctx)
 
     # Exit a parse tree produced by ExprParser#prog.
     def exitProg(self, ctx:ExprParser.ProgContext):
-        pass
+        print(ctx)
 
 
     # Enter a parse tree produced by ExprParser#stmt.
     def enterStmt(self, ctx:ExprParser.StmtContext):
-        pass
+        print(ctx)
 
     # Exit a parse tree produced by ExprParser#stmt.
     def exitStmt(self, ctx:ExprParser.StmtContext):
-        pass
+        print(ctx.printexp)
+        print(ctx.assign)
 
 
     # Enter a parse tree produced by ExprParser#expr.
     def enterExpr(self, ctx:ExprParser.ExprContext):
-        pass
+        print(ctx)
 
     # Exit a parse tree produced by ExprParser#expr.
     def exitExpr(self, ctx:ExprParser.ExprContext):
-        pass
+        print(ctx)
 
 
 

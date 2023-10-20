@@ -4,6 +4,7 @@ from nodes.Program import Program
 from nodes.expressions.AddExpression import AddExpression
 from nodes.expressions.BraceExpression import BraceExpression
 from nodes.expressions.DivExpression import DivExpression
+from nodes.expressions.IdentExpression import IdentExpression
 from nodes.expressions.MulExpression import MulExpression
 
 from nodes.expressions.NumberExpression import NumberExpression
@@ -43,4 +44,7 @@ class InterpreterVisitor(Visitor):
         self.variables[statement.variable] = statement.expression.accept(self)
 
     def visit_print_statement(self, statement: PrintStatement):
-        print(statement.accept(self))
+        print(statement.expression.accept(self))
+
+    def visit_ident_expression(self, expression: IdentExpression):
+        return self.variables[expression.name]

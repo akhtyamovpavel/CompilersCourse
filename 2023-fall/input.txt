@@ -1,1 +1,2 @@
-print2
+a=2
+print a
