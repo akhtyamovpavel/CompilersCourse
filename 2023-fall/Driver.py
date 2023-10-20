@@ -17,11 +17,15 @@ def main(argv):
     ast_tree: Program = ExprVisitor().visit(tree)
     print(ast_tree.expressions)
 
-    interpeter = InterpreterVisitor()
+    try:
+        interpeter = InterpreterVisitor()
 
-    # ast_tree.accept(interpeter)
+        # ast_tree.accept(interpeter)
 
-    interpeter.visit_program(ast_tree)
+        interpeter.visit_program(ast_tree)
+    except Exception as e:
+        print(e, file=sys.stderr)
+        sys.exit(2)
 
 if __name__ == '__main__':
     main(sys.argv)

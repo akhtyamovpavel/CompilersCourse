@@ -38,7 +38,7 @@ class InterpreterVisitor(Visitor):
 
     def visit_program(self, program: Program):
         for expression in program.expressions:
-            print(expression.accept(self))
+            expression.accept(self)
 
     def visit_assign_statement(self, statement: AssignStatement):
         self.variables[statement.variable] = statement.expression.accept(self)
@@ -47,4 +47,6 @@ class InterpreterVisitor(Visitor):
         print(statement.expression.accept(self))
 
     def visit_ident_expression(self, expression: IdentExpression):
+        if expression.name not in self.variables:
+            raise ValueError(f'Variable {expression.name} not found')
         return self.variables[expression.name]

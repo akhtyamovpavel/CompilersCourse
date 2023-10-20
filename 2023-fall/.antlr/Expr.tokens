@@ -6,9 +6,10 @@ T__4=5
 T__5=6
 T__6=7
 T__7=8
-NEWLINE=9
-INT=10
-IDENT=11
+SPACES=9
+NEWLINE=10
+INT=11
+IDENT=12
 'print'=1
 '='=2
 '*'=3
