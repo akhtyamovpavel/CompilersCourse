@@ -3,16 +3,17 @@ SPACES
  : [ \t] -> skip
  ;
 FUN: ('fun'|'fun2');
+LET: 'let';
 MAIN: 'main';
 NEWLINE : [\r\n]+ ;
 INT     : [0-9]+ ;
-// PRINT   : 'print ' ;
 IDENT   : [a-zA-Z]+ ;
 
 
 prog:  FUN MAIN '(' ')' '{' NEWLINE ((stmt NEWLINE)*) '}'
     ;
 stmt: 'print' printexp=expr
+    | let=LET var=IDENT
     | ident=IDENT ('=') assign=expr
     ;
 expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # left - .expr(0)

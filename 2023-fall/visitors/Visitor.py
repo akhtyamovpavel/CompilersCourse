@@ -10,6 +10,7 @@ from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
 from nodes.statements.AssignStatement import AssignStatement
 from nodes.statements.PrintStatement import PrintStatement
+from nodes.statements.VarDeclStatement import VarDeclStatement
 
 
 class Visitor(ABC):
@@ -52,4 +53,8 @@ class Visitor(ABC):
 
     @abstractmethod
     def visit_ident_expression(self, expression: IdentExpression):
+        pass
+
+    @abstractmethod
+    def visit_var_decl_statement(self, statement: VarDeclStatement):
         pass

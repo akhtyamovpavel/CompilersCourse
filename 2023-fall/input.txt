@@ -1,7 +1,4 @@
 fun main() {
-    a = 2
-    a = 3
-    b = 4
-    print b
+    print main
 }
 

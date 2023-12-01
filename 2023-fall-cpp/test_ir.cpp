@@ -44,17 +44,37 @@ int main() {
     module_    
   );
 
-//   
+  // a + b function
+  // int add(int a, int b) {}
+  auto add_function_type = llvm::FunctionType::get(
+    llvm::Type::getInt32Ty(context_),
+    {builder_.getInt32Ty(), builder_.getInt32Ty()},
+    false
+  );
+
+  auto add_function = llvm::Function::Create(
+    add_function_type,
+    llvm::Function::ExternalLinkage,
+    "add",
+    module_
+  );
 
   std::string hello_world = "Hello world\n";
   auto fmt = llvm::ConstantDataArray::getString(context_, hello_world);
-
   auto string_alloca = builder_.CreateAlloca(fmt->getType());
-
   auto string_value = builder_.CreateStore(fmt, string_alloca);
 
   auto formatted_string = builder_.CreateBitCast(
     string_alloca, builder_.getInt8PtrTy()
+  );
+
+  std::string int_string = "%d\n";
+  auto fmt_int = llvm::ConstantDataArray::getString(context_, int_string);
+  auto string_int_alloca = builder_.CreateAlloca(fmt_int->getType());
+  auto string_int_value = builder_.CreateStore(fmt_int, string_int_alloca);
+
+  auto formatted_int_string = builder_.CreateBitCast(
+    string_int_alloca, builder_.getInt8PtrTy()
   );
   
   // auto result = builder_.CreateCall(
@@ -105,7 +125,38 @@ int main() {
   builder_.CreateBr(end_entry);
   builder_.SetInsertPoint(end_entry);
 
+  // Call Plus function
+
+
+  auto result = builder_.CreateCall(
+    add_function, {
+      builder_.CreateLoad(int_type, a_alloca),
+      builder_.CreateLoad(int_type, b_alloca)
+    }
+  );
+
+  auto result3 = builder_.CreateCall(
+    printf_function, {formatted_int_string, result});
+
   builder_.CreateRetVoid();
+
+  // Add function start
+  auto entry_add = llvm::BasicBlock::Create(
+    context_, "entry", add_function
+    );
+
+
+  builder_.SetInsertPoint(entry_add);
+
+  auto first_arg = add_function->getArg(0);
+  auto second_arg = add_function->getArg(1);
+
+  auto sum = builder_.CreateAdd(
+    first_arg, second_arg, "added", false, true
+  );
+
+
+  builder_.CreateRet(sum);
 
   llvm::raw_fd_ostream ll("test_ir.ll", errorCode);
   module_.print(ll, nullptr);
