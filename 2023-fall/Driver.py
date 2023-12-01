@@ -4,7 +4,7 @@ from ExprLexer import ExprLexer
 from ExprParser import ExprParser
 from ExprVisitor import ExprVisitor
 from nodes.Program import Program
-from visitors.InterpeterVisitor import InterpreterVisitor
+from visitors.InterpeterNewVisitor import InterpreterNewVisitor
 
 
 def main(argv):
@@ -18,7 +18,7 @@ def main(argv):
     print(ast_tree.expressions)
 
     try:
-        interpeter = InterpreterVisitor()
+        interpeter = InterpreterNewVisitor()
 
         # ast_tree.accept(interpeter)
 

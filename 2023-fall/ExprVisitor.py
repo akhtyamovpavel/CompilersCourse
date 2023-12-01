@@ -11,6 +11,7 @@ from nodes.expressions.NumberExpression import NumberExpression
 from nodes.expressions.SubExpression import SubExpression
 from nodes.statements.AssignStatement import AssignStatement
 from nodes.statements.PrintStatement import PrintStatement
+from nodes.statements.VarDeclStatement import VarDeclStatement
 if "." in __name__:
     from .ExprParser import ExprParser
 else:
@@ -33,6 +34,10 @@ class ExprVisitor(ParseTreeVisitor):
             return AssignStatement(
                 variable=ctx.ident.text,
                 expression=self.visit(ctx.assign)
+            )
+        elif ctx.let is not None:
+            return VarDeclStatement(
+                name=ctx.var.text,
             )
         else:
             return PrintStatement(self.visit(ctx.printexp))
