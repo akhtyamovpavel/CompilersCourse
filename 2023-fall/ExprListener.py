@@ -1,6 +1,6 @@
-# Generated from Expr.g4 by ANTLR 4.13.0
+# Generated from Expr.g4 by ANTLR 4.7.2
 from antlr4 import *
-if "." in __name__:
+if __name__ is not None and "." in __name__:
     from .ExprParser import ExprParser
 else:
     from ExprParser import ExprParser
@@ -10,31 +10,28 @@ class ExprListener(ParseTreeListener):
 
     # Enter a parse tree produced by ExprParser#prog.
     def enterProg(self, ctx:ExprParser.ProgContext):
-        print(ctx)
+        pass
 
     # Exit a parse tree produced by ExprParser#prog.
     def exitProg(self, ctx:ExprParser.ProgContext):
-        print(ctx)
+        pass
 
 
     # Enter a parse tree produced by ExprParser#stmt.
     def enterStmt(self, ctx:ExprParser.StmtContext):
-        print(ctx)
+        pass
 
     # Exit a parse tree produced by ExprParser#stmt.
     def exitStmt(self, ctx:ExprParser.StmtContext):
-        print(ctx.printexp)
-        print(ctx.assign)
+        pass
 
 
     # Enter a parse tree produced by ExprParser#expr.
     def enterExpr(self, ctx:ExprParser.ExprContext):
-        print(ctx)
+        pass
 
     # Exit a parse tree produced by ExprParser#expr.
     def exitExpr(self, ctx:ExprParser.ExprContext):
-        print(ctx)
+        pass
 
 
-
-del ExprParser

@@ -38,8 +38,8 @@ blank [ \t\r]
   loc.step();
 %}
 
-{blank}+   loc.step ();
-\n+        loc.lines (yyleng); loc.step ();
+{blank}+   {loc.step ();}
+\n+        {loc.lines (yyleng); loc.step ();}
 
 "-"        {
               std::cout << loc.begin.line << " " << loc.end.line << std::endl;

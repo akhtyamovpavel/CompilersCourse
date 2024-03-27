@@ -8,16 +8,12 @@ target triple = "x86_64-pc-linux-gnu"
 
 ; Function Attrs: noinline norecurse optnone uwtable
 define dso_local i32 @main() #0 {
-  %1 = alloca i32, align 4
+  %1 = alloca i32, align 4 // a
   %2 = alloca i32, align 4
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 2, i32* %1, align 4
-  %5 = call i32 (i8*, ...) @__isoc99_scanf(
-    i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str, i64 0, i64 0), 
-    i32* %2,
-    i32* %3
-  )
+  %5 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str, i64 0, i64 0), i32* %2, i32* %3)
   %6 = load i32, i32* %1, align 4
   %7 = load i32, i32* %2, align 4
   %8 = mul nsw i32 %6, %7

@@ -30,8 +30,9 @@ int Driver::parse(const std::string& f) {
 }
 
 void Driver::scan_begin() {
-    scanner.set_debug(trace_scanning);
-  if (file.empty () || file == "-") {
+  scanner.set_debug(trace_scanning);
+  if (file.empty() || file == "-") {
+
   } else {
     stream.open(file);
     std::cout << file << std::endl;

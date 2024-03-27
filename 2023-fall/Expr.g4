@@ -16,8 +16,8 @@ stmt: 'print' printexp=expr
     | let=LET var=IDENT
     | ident=IDENT ('=') assign=expr
     ;
-expr:   left=expr op=('*'|'/') right=expr // MulExpression | DivExpression # left - .expr(0)
-    |   left=expr op=('+'|'-') right=expr // AddExpression | SubExpression
+expr:   left=expr op=('*'|'/') right=expr {print('MulExpr')}// MulExpression | DivExpression # left - .expr(0)
+    |   left=expr op=('+'|'-') right=expr {print('AddExpr')}// AddExpression | SubExpression
     |   value=INT // NumberExpression
     |   '(' exp=expr ')' // BraceExpression
     |   ident=IDENT // IdentExpression
